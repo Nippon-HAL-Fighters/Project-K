@@ -1,1 +1,7 @@
 .sass-cache 
+.class
+.jar
+.project
+.classpath
+.settings
+target
