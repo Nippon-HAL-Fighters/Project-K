@@ -6,3 +6,103 @@
 
 // Import Bootstrap for Sass
 @import "bootstrap";
+
+/* 共通スタイル */
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+nav {
+    $h1-font-size: 17px;
+    $nav-width: 210px;
+    $nav-font-color: white;
+    $nav-backcolor: #333;
+
+    float: left;
+    width: $nav-width;
+    margin-right: 20px;
+    padding-left: 7px;
+    color: $nav-font-color;
+    background: $nav-backcolor;
+    min-height: 600px;
+    height: 100%;
+    -webkit-box-shadow: 7px 0px 7px rgba(#333, 0.5);
+
+    a {
+        color: $nav-font-color;
+
+        &:hover {
+            text-decoration: none;
+            color: rgba($nav-font-color, 0.7);
+        }
+    }
+
+    header {
+        $logo-hight: 60px;
+
+        height: $logo-hight + 20px;
+        padding: 10px 0px;
+
+        img {
+            float: left;
+            height: $logo-hight;
+        }
+        h1 {
+            float: left;
+            margin: 0px;
+            margin-left: 5px;
+            line-height: $logo-hight + 5px;
+            font-size: $h1-font-size;
+            font-weight: bold;
+        }
+    }
+    form {
+        padding: 7px 0px;
+        clear: left;
+
+        select {
+            font-weight: bold;
+        }
+        div {
+            height: 30px;
+            margin-bottom: 10px;
+        }
+        .btn {
+            width: 100%;
+        }
+    }
+    ul {
+        list-style: none inside;
+        padding-left: 0px;
+        margin-left: -7px;
+
+        li {
+            padding-left: 5px;
+            border-top: 1px solid #aaa;
+            font-size: $h1-font-size - 3px;;
+            line-height: 40px;
+
+            i {
+                padding-right: 5px;
+            }
+        }
+        .fa-sitemap {
+            position: relative;
+            top: -2px;
+            left: -2px;
+            transform: rotate(-90deg);
+        }
+        .nav-last {
+            border-bottom: 1px solid #aaa;
+        }
+    }
+}// nav
+
+main {
+    float: left;
+}

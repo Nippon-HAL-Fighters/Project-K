@@ -1,0 +1,67 @@
+// ☆☆☆☆☆☆☆☆
+// Sass使い方講座
+//☆☆☆☆☆☆☆☆
+
+// ☆☆☆☆☆☆☆☆
+// 1.Sassの使い方
+// ☆☆☆☆☆☆☆☆
+
+// (1)src/main/webappでコマンドプロンプトを開く。
+
+// (2)「compass watch」と入力
+
+// すると、sassディレクトリ内の拡張子scssのファイルがコンパイルされて、
+// cssディレクトリにCSSが出力されます。
+
+// エラーがあった場合はコンソールに出力され、
+// 出力されたCSS内に詳細のエラー内容が出力されます。
+
+
+// ☆☆☆☆☆☆☆☆
+// 2.コメント
+// ☆☆☆☆☆☆☆☆
+
+// このコメントはCSSに出力されない
+
+/* このコメントはCSSに出力されます */
+
+
+// ☆☆☆☆☆☆☆☆
+// 2.変数
+// ☆☆☆☆☆☆☆☆
+
+$main-color: #FF6E7C;// 変数の宣言は「$」を付ける
+$test1-height: 100px;
+
+.test1 {
+    //変数の使用
+    background: $main-color;
+
+    width: 100px;
+    height: $test1-height + 100px;// 演算もできます
+}
+
+
+// ☆☆☆☆☆☆☆☆
+// 3.入れ子
+// ☆☆☆☆☆☆☆☆
+
+.test2 {
+    margin-top: 10px;
+    width: 200px;
+    height: 200px;
+    background: $main-color;
+
+    // 「.test2」の中の「.test3」の要素に適用される
+    .test3 {
+        width: 50px;
+        height: 50px;
+        background: yellow;
+
+        // 「&」は自分自身を表す
+        // ここでは、「.test3:hover」に適用される
+        &:hover {
+            background: black;
+        }
+    }
+}
