@@ -1,0 +1,22 @@
+@charset "UTF-8";
+/* このコメントはCSSに出力されます */
+.test1 {
+  background: #FF6E7C;
+  width: 100px;
+  height: 200px;
+}
+
+.test2 {
+  margin-top: 10px;
+  width: 200px;
+  height: 200px;
+  background: #FF6E7C;
+}
+.test2 .test3 {
+  width: 50px;
+  height: 50px;
+  background: yellow;
+}
+.test2 .test3:hover {
+  background: black;
+}
