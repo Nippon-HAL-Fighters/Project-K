@@ -17,16 +17,22 @@ body {
     height: 100%;
 }
 
+$nav-width: 210px;
+$nav-margin-right: 20px;
+$nav-padding-left: 7px;
+
+$nav-outer-width: $nav-width + $nav-margin-right + $nav-padding-left;
+
 nav {
     $h1-font-size: 17px;
-    $nav-width: 210px;
     $nav-font-color: white;
     $nav-backcolor: #333;
 
-    float: left;
+    position: fixed;
+    top: 0px;
     width: $nav-width;
-    margin-right: 20px;
-    padding-left: 7px;
+    margin-right: $nav-margin-right;
+    padding-left: $nav-padding-left;
     color: $nav-font-color;
     background: $nav-backcolor;
     min-height: 600px;
@@ -104,5 +110,5 @@ nav {
 }// nav
 
 main {
-    float: left;
+    margin-left: $nav-outer-width;
 }

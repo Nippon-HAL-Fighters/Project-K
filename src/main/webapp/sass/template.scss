@@ -1,3 +1,12 @@
+h3 {
+    font-weight: bold;
+}
+
+.font-list li {
+    margin: 10px 0px;
+}
+
+
 // ☆☆☆☆☆☆☆☆
 // Sass使い方講座
 //☆☆☆☆☆☆☆☆
@@ -31,14 +40,14 @@
 // ☆☆☆☆☆☆☆☆
 
 $main-color: #FF6E7C;// 変数の宣言は「$」を付ける
-$test1-height: 100px;
+$hensu-test-height: 100px;
 
-.test1 {
+.hensu-test {
     //変数の使用
     background: $main-color;
 
     width: 100px;
-    height: $test1-height + 100px;// 演算もできます
+    height: $hensu-test-height + 100px;// 演算もできます
 }
 
 
@@ -46,22 +55,41 @@ $test1-height: 100px;
 // 3.入れ子
 // ☆☆☆☆☆☆☆☆
 
-.test2 {
+.ireko1 {
     margin-top: 10px;
     width: 200px;
     height: 200px;
     background: $main-color;
 
-    // 「.test2」の中の「.test3」の要素に適用される
-    .test3 {
+    // 「.ireko1」の中の「.ireko2」の要素に適用される
+    .ireko2 {
         width: 50px;
         height: 50px;
         background: yellow;
 
         // 「&」は自分自身を表す
-        // ここでは、「.test3:hover」に適用される
+        // ここでは、「.ireko2:hover」に適用される
         &:hover {
             background: black;
         }
     }
+}
+
+
+// ☆☆☆☆☆☆☆☆
+// Font Awesome使い方講座
+//☆☆☆☆☆☆☆☆
+
+$fa-check-square-base-size: 30px;
+
+.fa-check-square-o {
+    font-size: $fa-check-square-base-size;
+}
+
+.big-check {
+    font-size: $fa-check-square-base-size + 15px;
+}
+
+.red-check {
+    color: red;
 }

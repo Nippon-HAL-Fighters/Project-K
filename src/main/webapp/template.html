@@ -70,13 +70,101 @@
     <!-- 共通部分ここまで -->
     <main>
         <h2>テンプレート</h2>
-
-        <h3>Sass講座(sass/template.scssを参照してください)</h3>
-
-        <div class="test test1"></div>
-
-        <div class="test test2">
-            <div class="test test3"></div>
+        <h3>Sass講座(sass/template.scssをテキストエディタで見てください)</h3>
+        <div class="test hensu-test">.hensu-test</div>
+        <div class="test ireko1">
+            .ireko1
+            <div class="test ireko2">.ireko2</div>
+        </div>
+        <h3>Font Awesome講座</h3>
+        <p>
+            Webフォントを導入すると、サーバー上にあるフォントファイルを参照するため、
+            ユーザーのPCにインストールされていないフォントを表示できるようになります。<br />
+            フォントのファイルはsrc/main/webapp/fontsの中に入ってます。
+        </p>
+        <ol class="font-list">
+            <li>
+                まずは、以下のリンクから使いたいアイコンを探します。<br />
+                <a href="http://fortawesome.github.io/Font-Awesome/icons/">http://fortawesome.github.io/Font-Awesome/icons/</a>
+            </li>
+            <li>
+                使いたいアイコンをクリックすると、以下のようなHTMLが書いてあるページに飛びます。<br />
+                &lt;i class=&quot;fa fa-bed&quot;&gt;&lt;/i&gt;<br />
+                ↑このiタグをコピー
+            </li>
+            <li>
+                コピーしたiタグをアイコンを使いたいHTML上に貼り付けると、アイコンが表示されます。
+            </li>
+            <li>
+                Webフォントは文字と同じ扱いなので、クラスやIDを付ければCSSで大きさや色が自由に変えられます<br />
+                <i class="fa fa-check-square-o"></i>
+                <i class="fa fa-check-square-o big-check"></i>
+                <i class="fa fa-check-square-o red-check"></i>
+            </li>
+        </ol><!-- /.font-list -->
+        <h3>Bootstrap講座</h3>
+        <p>
+            基本は<a href="http://getbootstrap.com/components/">公式のドキュメント</a>を参考にしてください。<br />
+            使いたいHTMLの要素にclass名を付与すると勝手に変わります。
+        </p>
+        <div class="dropdown">
+            ドロップボタン
+            <button class="btn btn-default dropdown-toggle" type="button" id="drpdownEx" data-toggle="dropdown" aria-expanded="true">
+            ドロップダウン
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownEx">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">あ</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">い</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">う</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">え</a></li>
+            </ul>
+        </div>
+        <div>
+            ボタン
+            <button type="button" class="btn btn-default">Default</button>
+            <button type="button" class="btn btn-primary">Primary</button>
+            <button type="button" class="btn btn-success">Success</button>
+            <button type="button" class="btn btn-info">Info</button>
+            <button type="button" class="btn btn-warning">Warning</button>
+            <button type="button" class="btn btn-danger">Danger</button>
+        </div>
+        <br />
+        <p>
+            フォームは、inputとかの親要素にinput-groupクラスを付けて、inputとか中の要素にform-controlクラスを付ければなんとかなります。
+            <form class="input-group">
+                <input type="text" class="form-control user-input" placeholder="ユーザ名">
+                <input type="submit" class="btn btn-warning" value="送信" />
+            </form>
+        </p>
+        <div>
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;前へ</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#">1</a>
+                </li>
+                <li>
+                    <a href="#">2</a>
+                </li>
+                <li>
+                    <a href="#">3</a>
+                </li>
+                <li>
+                    <a href="#">4</a>
+                </li>
+                <li>
+                    <a href="#">5</a>
+                </li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">次へ&raquo;</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </main>
 </body>

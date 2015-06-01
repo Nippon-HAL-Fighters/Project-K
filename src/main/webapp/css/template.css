@@ -1,22 +1,42 @@
 @charset "UTF-8";
+h3 {
+  font-weight: bold;
+}
+
+.font-list li {
+  margin: 10px 0px;
+}
+
 /* このコメントはCSSに出力されます */
-.test1 {
+.hensu-test {
   background: #FF6E7C;
   width: 100px;
   height: 200px;
 }
 
-.test2 {
+.ireko1 {
   margin-top: 10px;
   width: 200px;
   height: 200px;
   background: #FF6E7C;
 }
-.test2 .test3 {
+.ireko1 .ireko2 {
   width: 50px;
   height: 50px;
   background: yellow;
 }
-.test2 .test3:hover {
+.ireko1 .ireko2:hover {
   background: black;
+}
+
+.fa-check-square-o {
+  font-size: 30px;
+}
+
+.big-check {
+  font-size: 45px;
+}
+
+.red-check {
+  color: red;
 }
