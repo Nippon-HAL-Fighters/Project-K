@@ -1,7 +1,6 @@
-src/main/webapp/.sass-cache/
+WebContent/.sass-cache/
 .class
 .jar
 .project
 .classpath
 .settings
-target
