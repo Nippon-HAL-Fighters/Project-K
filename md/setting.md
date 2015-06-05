@@ -39,7 +39,7 @@ gem install bundler
 ```
 
 次に、Sassをコンパイルするための環境をインストールします。  
-**Gemfile**という名前のファイルがあるディレクトリ(src/main/webapp)でコマンドプロンプトを開いて、以下のコマンドを実行。
+**Gemfile**という名前のファイルがあるディレクトリ(WebContent)でコマンドプロンプトを開いて、以下のコマンドを実行。
 
 ```
 bundle install
@@ -48,7 +48,7 @@ bundle install
 
 ### Sassの使い方
 
-**config.rb**という名前のファイルがあるディレクトリ(src/main/webapp)でコマンドプロンプトを開いて、
+**config.rb**という名前のファイルがあるディレクトリ(WebContent)でコマンドプロンプトを開いて、
 以下のコマンドを実行。
 
 ```
