@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employees サンプルページ</title>
+</head>
+<body>
+
+	<form action="EmployeeServlet" method="post">
+		<table>
+
+			<tr>
+				<th>社員番号</th>
+				<td><input type="text" name="employeeId"></td>
+			</tr>
+
+			<tr>
+				<th>社員名</th>
+				<td><input type="text" name="employeeName"></td>
+			</tr>
+
+			<tr>
+				<th>雇用状態</th>
+				<td><input type="text" name="employeeStatus"></td>
+			</tr>
+
+			<tr>
+				<th>管理者権限</th>
+				<td><input type="radio" name="admin" value="0"
+					checked="checked">なし<input type="radio" name="admin"
+					value="1">あり</td>
+			</tr>
+
+			<tr>
+				<th>組織番号</th>
+				<td><input type="text" name="organaizationId"></td>
+			</tr>
+
+			<tr>
+				<th>役職</th>
+				<td><input type="text" name="postId"></td>
+			</tr>
+
+			<tr>
+				<th>電話識別番号</th>
+				<td><input type="text" name="phoneId"></td>
+			</tr>
+
+			<tr>
+				<th>会社番号</th>
+				<td><input type="text" name="companyId"></td>
+			</tr>
+
+		</table>
+		<input type="hidden" name="insert" value="1">
+		<input type="submit" value="登録">
+	</form>
+
+</body>
+</html>
