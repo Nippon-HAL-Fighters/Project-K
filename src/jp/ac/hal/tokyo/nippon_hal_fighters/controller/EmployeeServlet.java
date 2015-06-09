@@ -45,20 +45,9 @@ public class EmployeeServlet extends HttpServlet {
 		// DAO定義
 		EmployeeDao employeeDao = new EmployeeDao();
 
-		/**
-		// 変数宣言
-		int insertResult = 0;
-		String employeeId;
-		String employeeName;
-		String employeeStatus;
-		int admin;
-		String password;
-		int orgnaizationId;
-		int postId;
-		int phoneId;
-		int companyId;
-		**/
-
+		/*
+		 * 以下 Connecter＆DAO テスト用
+		 */
 		ArrayList<EmployeeBean> selectData = new ArrayList<EmployeeBean>();
 		try {
 			selectData = employeeDao.selectAllEmployees();

@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
+/**
+ * Employee テーブル用のDAO
+ *
+ * @author s.kato
+ *
+ */
 public class EmployeeDao {
 
 	private Connection con;
@@ -18,6 +24,12 @@ public class EmployeeDao {
 		con = db.getConnection();
 	}
 
+	/**
+	 * 全件取得
+	 *
+	 * @return ArrayList EmployeeList
+	 * @throws SQLException
+	 */
 	public ArrayList<EmployeeBean> selectAllEmployees() throws SQLException {
 		String selectSQL = "SELECT employee_id, employee_name, employee_status, admin, password, organaization_id, post_id, phone_id, company_id FROM employees";
 
