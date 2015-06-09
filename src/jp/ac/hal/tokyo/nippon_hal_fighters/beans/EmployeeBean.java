@@ -1,5 +1,15 @@
 package jp.ac.hal.tokyo.nippon_hal_fighters.beans;
 
+/**
+ * Employee テーブル用のBean
+ *
+ * String employeeId; String employeeName; String employeeStatus; int admin;
+ * String password; int orgnaizationId; int postId; int phoneId; int companyId;
+ *
+ * @author s.kato
+ *
+ */
+
 public class EmployeeBean {
 
 	String employeeId;
