@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="./css/styles.css" type="text/css" />
 <link rel="stylesheet" href="./css/font-awesome/font-awesome.css"
 	type="text/css" />
-<link rel="stylesheet" href="./css/seat_list.css" type="text/css" />
+<link rel="stylesheet" href="./css/seatList.css" type="text/css" />
 <script src="./js/jquery-2.1.4.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/script.js"></script>
@@ -69,7 +69,42 @@
 		</ul>
 	</nav>
 	<!-- 共通部分ここまで -->
-	<main>
+	<main> <script language="javascript">
+		function getCELL() {
+			var myTbl = document.getElementById('TBL');
+			// trをループ。rowsコレクションで,行位置取得。
+			for (var i = 0; i < myTbl.rows.length; i++) {
+				// tr内のtdをループ。cellsコレクションで行内セル位置取得。
+				for (var j = 0; j < myTbl.rows[i].cells.length; j++) {
+					var Cells = myTbl.rows[i].cells[j]; //i番行のj番列のセル "td"
+					// onclickで 'Mclk'を実行。thisはクリックしたセル"td"のオブジェクトを返す。
+					Cells.onclick = function() {
+						Mclk(this);
+					}
+				}
+			}
+		}
+
+		function Mclk(Cell) {
+			var rowINX = '行位置：' + Cell.parentNode.rowIndex;//Cellの親ノード'tr'の行位置
+			var cellINX = 'セル位置：' + Cell.cellIndex;
+			var cellVal = 'セルの内容：' + Cell.innerHTML;
+			//取得した値の書き出し
+			res = rowINX + '<br/> ' + cellINX + '<br/>' + cellVal;
+			document.getElementById('Mbox0').innerHTML = res;
+			var Ms1 = document.getElementById('Mbox1')
+			Ms1.innerText = Cell.innerHTML;
+			Ms1.textContent = Cell.innerHTML;
+		}
+		// try ～ catch 例外処理、エラー処理
+		// イベントリスナーaddEventListener,attachEventメソッド
+		try {
+			window.addEventListener("load", getCELL, false);
+		} catch (e) {
+			window.attachEvent("onload", getCELL);
+		}
+	</script>
+
 	<div class="header_box">
 		<h2>座席表一覧</h2>
 		<a class="btn btn-primary headerbtn">編集</a> <a
@@ -78,7 +113,7 @@
 
 	</div>
 	<div class="main_box">
-		<table>
+		<table id="TBL">
 			<tbody>
 				<tr>
 					<th width="50%">タイトル</th>
@@ -107,6 +142,12 @@
 				</tr>
 			</tbody>
 		</table>
+
+		<div id="Div">
+			<p id="Mbox0">セルをクリックしたらここに書き出します。</p>
+			<p id="Mbox1">インデックス値は '0'から始まります。</p>
+		</div>
+
 	</div>
 
 
