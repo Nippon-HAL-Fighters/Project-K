@@ -81,14 +81,14 @@
 		
 		<div class="header">
 			<div id="header_left">
-				<select name="sort">
+				<select name="sort" class="form-control" id="test">
 					<option value="1">条件1?</option>
 					<option value="2">条件2?</option>
 					<option value="3">条件3?</option>
 				</select>
 			</div>
 			<div id="header_right">
-				<input type="text" name="text" />
+				<input type="text" name="text" class="form-control" />
 				<input type="submit" value="検索" />
 			</div>
 		</div>
