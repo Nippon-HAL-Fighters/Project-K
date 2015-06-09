@@ -95,30 +95,22 @@
 		
 		<!-- とりあえず仮置きでテーブルにて出力 -->
 		<table border="1">
-
-		<tr><th>社員番号</th><th>氏名</th><th>部署</th><th>役職</th><th>内線番号</th><th>外線番号</th><th>所属会社</th><th>在籍状態</th></tr>		
-		
-		<%
-			for(EmployeeBean emp : recode){
-				out.print("<tr>"+
-						"<td>"+emp.getEmployeeId()+"</td>"
-						+"<td>"+emp.getEmployeeName()+"</td>"
-						+"<td>"+emp.getEmployeeStatus()+"</td>"
-						+"<td>"+emp.getAdmin()+"</td>"
-						+"<td>"+emp.getPhoneId()+"</td>"
-						+"<td></td>"
-						+"<td>"+emp.getCompanyId()+"</td>"
-						+"<td></td>"
-						+"<td><input type=\"submit\" value=\"編集\" class=\"chengebutton\" style=\"width:100%\" /></td>"
-						+"</tr>");
-			}
-		%>
-				
-			<tr><th>社員番号</th><th>氏名</th><th>部署</th><th>役職</th><th>内線番号</th><th>外線番号</th><th>所属会社</th><th>在籍状態</th></tr>		
-			<tr><td>999999</td><td>XXXXXXXX</td><td>XXXX</td><td>XXXX</td><td>9999</td><td>9999999999</td><td>XXXX</td><td>XXXX</td><td><input type="submit" value="編集" class="chengebutton" style="width:100%" /></td></tr>
-			<tr><td>999999</td><td>XXXXXXXX</td><td>XXXX</td><td>XXXX</td><td>9999</td><td>9999999999</td><td>XXXX</td><td>XXXX</td><td><input type="submit" value="編集" class="chengebutton" style="width:100%" /></td></tr>
-			<tr><td>999999</td><td>XXXXXXXX</td><td>XXXX</td><td>XXXX</td><td>9999</td><td>9999999999</td><td>XXXX</td><td>XXXX</td><td><input type="submit" value="編集" class="chengebutton" style="width:100%" /></td></tr>
-			<tr><td>999999</td><td>XXXXXXXX</td><td>XXXX</td><td>XXXX</td><td>9999</td><td>9999999999</td><td>XXXX</td><td>XXXX</td><td><input type="submit" value="編集" class="chengebutton" style="width:100%" /></td></tr>		
+			<tr><th>社員番号</th><th>氏名</th><th>雇用状態</th><th>役職</th><th>組織</th><th>内線番号</th><th>外線番号</th><th>所属会社</th></tr>			
+			<%
+				for(EmployeeBean emp : recode){
+					out.print("<tr>"+
+							"<td>"+emp.getEmployeeId()+"</td>"				//社員番号
+							+"<td>"+emp.getEmployeeName()+"</td>"			//氏名
+							+"<td>"+emp.getEmployeeStatus()+"</td>"			//雇用状態
+							+"<td>"+emp.getPostName()+"</td>"				//役職
+							+"<td>"+emp.getOrgnaizationName()+"</td>"		//組織
+							+"<td>"+emp.getPhoneInside()+"</td>"			//内線番号
+							+"<td>"+emp.getPhoneOutside()+"</td>"			//外線番号
+							+"<td>"+emp.getCompanayName()+"</td>"			//所属会社
+							+"<td><input type=\"submit\" value=\"編集\" class=\"chengebutton\" style=\"width:100%\" /></td>"
+							+"</tr>");
+				}
+			%>
 		</table>
     </main>
 </body>
