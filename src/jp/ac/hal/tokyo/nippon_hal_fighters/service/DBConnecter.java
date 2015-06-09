@@ -10,15 +10,6 @@ import javax.sql.DataSource;
 /**
  * データベースのコネクションを取得するクラス
  *
- * 使用する場合は、Server.xmlの該当プロジェクトContext部分に
- * 以下のものを追記してください。
- *
- * <Resource auth="Container"
- * defaultAutoCommit="false" driverClassName="com.mysql.jdbc.Driver"
- * maxActive="4" maxIdle="4" name="jdbc/ham" password="" removeAbandoned="true"
- * type="javax.sql.DataSource" url="jdbc:mysql://localhost/ham" username="root"
- * />
- *
  * @author s.kato
  */
 public class DBConnecter {
