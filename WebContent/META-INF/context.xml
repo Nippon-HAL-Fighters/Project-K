@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Context docBase="Project-K" path="/Project-K" reloadable="true"
-	source="org.eclipse.jst.jee.server:Project-K">
-	<Resource auth="Container" defaultAutoCommit="false"
-		driverClassName="com.mysql.jdbc.Driver" maxActive="4" maxIdle="4"
-		name="jdbc/ham" password="" removeAbandoned="true" type="javax.sql.DataSource"
-		url="jdbc:mysql://localhost/ham" username="root" />
+    source="org.eclipse.jst.jee.server:Project-K">
+    <Resource auth="Container" defaultAutoCommit="false"
+        driverClassName="com.mysql.jdbc.Driver" maxActive="4" maxIdle="4"
+        name="jdbc/ham" password="" removeAbandoned="true" type="javax.sql.DataSource"
+        url="jdbc:mysql://localhost/ham" username="root" />
 </Context>
