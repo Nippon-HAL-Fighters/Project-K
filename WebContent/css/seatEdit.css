@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+h3 {
+	font-weight: bold;
+}
+
+.font-list li {
+	margin: 10px 0px;
+}
+
+/* このコメントはCSSに出力されます */
+.header_box {
+	background: #FFF;
+	width: 1100px;
+	height: 100px;
+}
+
+.headerbtn {
+	margin: 0px 10px 5px 10px;
+	padding: 15px 0px 15px 0px;
+	width: 10%;
+	float: right;
+}
+
+.main_box {
+	margin-top: 10px;
+	width: 900px;
+	height: 550px;
+	background-color: #FFF;
+	float: left;
+	overflow: scroll;
+	border: #111 solid 2px;
+	box-shadow: 5px 5px 10px #000;
+	-webkit-box-shadow: 5px 5px 10px #000;
+	-moz-box-shadow: 5px 5px 10px #000;
+}
+
+.sub_box {
+	margin-top: 10px;
+	float: left;
+	height: 550px;
+	background-color: #f1eff0;
+	width: 200px;
+	overflow: auto;
+	border: #111 solid 2px;
+	box-shadow: 5px 5px 10px #000;
+	-webkit-box-shadow: 5px 5px 10px #000;
+	-moz-box-shadow: 5px 5px 10px #000;
+}
+
+.user-input {
+	margin: 10px 10px 0px 10px;
+	width: 90%;
+}
+
+.btn-success {
+	margin: 0px 10px 10px 10px;
+	width: 90%;
+}
+
+.name {
+	margin: 0px 10px 5px 10px;
+	padding: 15px 0px 15px 0px;
+	width: 90%;
+}
