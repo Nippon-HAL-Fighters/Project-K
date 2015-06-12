@@ -10,6 +10,7 @@
 <script src="./js/jquery-2.1.4.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/script.js"></script>
+<script src="./js/list.js"></script>
 </head>
 <body>
 	<!-- 共通部分 -->
@@ -69,7 +70,7 @@
 		</ul>
 	</nav>
 	<!-- 共通部分ここまで -->
-	<main> <script language="javascript">
+	<main> <!-- <script language="javascript">
 		function getCELL() {
 			var myTbl = document.getElementById('TBL');
 			// trをループ。rowsコレクションで,行位置取得。
@@ -104,13 +105,20 @@
 			window.attachEvent("onload", getCELL);
 		}
 	</script>
+	-->
 
 	<div class="header_box">
 		<h2>座席表一覧</h2>
-		<a class="btn btn-primary headerbtn">編集</a> <a
-			class="btn btn-primary headerbtn">削除</a> <a
-			class="btn btn-primary headerbtn">印刷</a>
+		<form action="seatList" name="form" method="post">
 
+			<input type="hidden" id="cell" name="cell" value="" />
+
+			<button type="submit" class="btn btn-primary headerbtn" value="編集"
+				name="choices">編集</button> <button type="submit"
+				class="btn btn-primary headerbtn" value="削除" name="choices">削除</button>
+			<button type="submit" class="btn btn-primary headerbtn" value="印刷"
+				name="choices">印刷</button>
+		</form>
 	</div>
 	<div class="main_box">
 		<table id="TBL">
