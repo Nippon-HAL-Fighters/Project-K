@@ -33,6 +33,7 @@ public class OrganaizationDao {
 	}
 	
 	
+	
 	/**
 	 * 全件取得
 	 *
