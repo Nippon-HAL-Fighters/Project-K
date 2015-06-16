@@ -63,12 +63,6 @@ public class EmployeeDao {
 	 * @author kikuhara
 	 */
 	public ArrayList<EmployeeBean> selectListAllEmployees() throws SQLException {
-
-		/*
-		String selectSQL = "SELECT emp.employee_id, emp.employee_name, emp.employee_status, emp.admin, emp.password, org.organaization_name, pos.post_name , phone.phone_inside, phone.phone_outside, comp.compnay_name"
-						  +"FROM employees AS emp JOIN organaiations AS org ON emp.organaization_id = org.organaization_id JOIN phones AS phone ON emp.phone_id = phone.phone_id"
-                          +"JOIN posts AS pos ON emp.post_id = pos.post_id JOIN companies AS comp ON emp.company_id = comp.company_id";
-		*/
 		
 		String selectSQL = "SELECT emp.employee_id, emp.employee_name, emp.employee_status, emp.admin, emp.password, org.organaization_name, pos.post_name , phone.phone_inside, phone.phone_outside, comp.compnay_name FROM employees AS emp JOIN organaiations AS org ON emp.organaization_id = org.organaization_id JOIN phones AS phone ON emp.phone_id = phone.phone_id JOIN posts AS pos ON emp.post_id = pos.post_id JOIN companies AS comp ON emp.company_id = comp.company_id";
 		

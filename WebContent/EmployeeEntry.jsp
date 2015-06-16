@@ -1,3 +1,8 @@
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean"%>
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -70,6 +75,9 @@
     </nav>
     <!-- 共通部分ここまで -->
     <main>
+        <%
+        	ArrayList<PostBean> postrecode = (ArrayList<PostBean>)request.getAttribute("postlist");
+    	%>
     	<div id="main-form">
 	        <h2>社員情報登録</h2>
 	        <form action="AddEmployeedata" method="post">
@@ -96,6 +104,7 @@
 				<div class="forms">
 				役職:<select name="koyo" class="form-control">
 						<option value="">選択してください</option>
+						<!-- 
 						<option value="0">代表取締役会長</option>
 						<option value="1">代表取締役社長</option>
 						<option value="2">専務取締役</option>
@@ -110,6 +119,13 @@
 						<option value="11">主任</option>
 						<option value="12">リーダー</option>
 						<option value="13">メンバー</option>
+						-->
+						<% 
+							for(PostBean post : postrecode){
+								out.print("<option value="+post.getPostId()+">"+post.getPostName()+"</option>");
+							}
+						
+						%>
 					</select>
 					<br>
 				</div>
