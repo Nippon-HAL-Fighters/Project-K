@@ -1,3 +1,5 @@
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean"%>
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaiationBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,7 +8,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>テンプレート</title>
+    <title>社員情報登録</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./css/styles.css" type="text/css" />
     <link rel="stylesheet" href="./css/font-awesome/font-awesome.css" type="text/css" />
@@ -77,111 +79,91 @@
     <main>
         <%
         	ArrayList<PostBean> postrecode = (ArrayList<PostBean>)request.getAttribute("postlist");
-    	%>
+        	ArrayList<OrganaiationBean> orgrecode = (ArrayList<OrganaiationBean>)request.getAttribute("orglist");
+        	ArrayList<CompanieBean> comprecode = (ArrayList<CompanieBean>)request.getAttribute("complist");
+			int phoneid = (Integer)request.getAttribute("phoneid");
+        %>
     	<div id="main-form">
 	        <h2>社員情報登録</h2>
-	        <form action="AddEmployeedata" method="post">
+	       <form action="InsertEmployeeData" method="post">
 	        	<div class="forms">
-	        		社員番号:<input type="text" class="form-control" placeholder="社員番号を入力してください" />
+	        		社員番号:<input type="text" name="employeeid" class="form-control" placeholder="社員番号を入力してください" />
 	        		<br>
 	        	</div>
 	        	
 	        	<div class="forms">
-	        		氏名:<input type="text" class="form-control" placeholder="氏名を入力してください" />
+	        		氏名:<input type="text" name="employeename" class="form-control" placeholder="氏名を入力してください" />
 	        		<br>
 	        	</div>
 	        	
 	        	<div class="forms">
 	        	雇用状態:<select name="koyo" class="form-control">
-						<option value="0">選択してください</option>
-						<option value="1">社員</option>
-						<option value="2">協力会社</option>
-						<option value="3">派遣</option>
+						<option value="none">選択してください</option>
+						<option value="社員">社員</option>
+						<option value="協力会社">協力会社</option>
+						<option value="派遣">派遣</option>
+					</select>
+					<br>
+				</div>
+				
+		      	<div class="forms">
+	        	管理者権限:<select name="admin" class="form-control">
+						<option value="none">選択してください</option>
+						<option value="0">なし</option>
+						<option value="1">あり</option>
 					</select>
 					<br>
 				</div>
 				
 				<div class="forms">
-				役職:<select name="koyo" class="form-control">
-						<option value="">選択してください</option>
-						<!-- 
-						<option value="0">代表取締役会長</option>
-						<option value="1">代表取締役社長</option>
-						<option value="2">専務取締役</option>
-						<option value="3">常務取締役</option>
-						<option value="4">監査役</option>
-						<option value="5">本部長</option>
-						<option value="6">事業部長</option>
-						<option value="7">部長</option>
-						<option value="8">次長</option>
-						<option value="9">係長</option>
-						<option value="10">課長</option>
-						<option value="11">主任</option>
-						<option value="12">リーダー</option>
-						<option value="13">メンバー</option>
-						-->
+				役職:<select name="posts" class="form-control">
+						<option value="none">選択してください</option>
 						<% 
 							for(PostBean post : postrecode){
 								out.print("<option value="+post.getPostId()+">"+post.getPostName()+"</option>");
 							}
-						
 						%>
 					</select>
 					<br>
 				</div>
 				
 				<div class="forms">
-				部署:<select name="koyo" class="form-control">
-						<option value="">選択してください</option>
-						<option value="0000">取締役会</option>
-						<option value="0001">代表取締役社長</option>
-						<option value="1000">事業統括部</option>
-						<option value="1100">事業管理部</option>
-						<option value="1101">事業管理</option>
-						<option value="1102">人事管理</option>
-						<option value="2000">経理事業部</option>
-						<option value="2100">東京経理サービス部</option>
-						<option value="2101">食肉東京</option>
-						<option value="2102">東日本加工事業</option>
-						<option value="2103">東日本営業</option>
-						<option value="2104">東京経理サービス部長付</option>
-						<option value="2200">大阪経理サービス部</option>
-						<option value="2201">本社・食肉大阪</option>
-						<option value="2202">西日本加工事業</option>
-						<option value="2203">西日本営業・資金</option>
-						<option value="3000">ITサービス事業部</option>
-						<option value="3001">海外支援</option>
-						<option value="3100">システム企画部</option>
-						<option value="3101">加工企画</option>
-						<option value="3101">システム企画</option>
-						<option value="3200">システム開発部</option>
-						<option value="3201">食肉事業</option>
-						<option value="3202">加工開発</option>
-						<option value="3203">加工運用</option>
+				部署:<select name="org" class="form-control">
+						<option value="none">選択してください</option>
+						<% 
+							for(OrganaiationBean org : orgrecode){
+								out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");
+							}
+						%>
 					</select>
 					<br>
 				</div>
 				
 				<div class="forms">
-	        		内線番号:<input type="text" class="form-control" placeholder="内線番号を入力してください" />
+	        		内線番号:<input type="text" name="foneinside" class="form-control" placeholder="内線番号を入力してください" />
 	        		<br>
 	        	</div>
 	        	
 	        	<div class="forms">
-	        		外線番号:<input type="text" class="form-control" placeholder="外線番号を入力してください" />
+	        		外線番号:<input type="text" name="foneout" class="form-control" placeholder="外線番号を入力してください" />
 	        		<br>
 	        	</div>
 	        	
 	        	<div class="form">
-	        	所属会社:<select name="koyo" class="form-control">
-						<option value="0">選択してください</option>
-						<option value="1">日本ハムビジネスエキスパート株式会社 大阪本社</option>
-						<option value="2">日本ハムビジネスエキスパート株式会社 東京事業所</option>
-						<option value="3">協力会社</option>
+	        	所属会社:<select name="comp" class="form-control">
+						<option value="none">選択してください</option>
+						<% 
+							for(CompanieBean comp : comprecode){
+								out.print("<option value="+comp.getCompanyId()+">"+comp.getCompanyName()+"</option>");
+							}
+						%>
 					</select>
 					<br>
 				</div>
+				<input type="hidden" name="phoneid" value= "<%= phoneid %>" />
+				<input type="hidden" name="pass" value="0000" />
 	        	<input type="submit" value="登録" class="btn btn-default" />
+	        	
 	        </form>
         </div>
     </main>

@@ -6,57 +6,51 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
-/**
- * Posts テーブル用のDao
- * 
- * @author a.kikuhara
- */
-
-public class PostDao {
-
+public class CompanieDao {
+	
 	private Connection con = null;
 	
 	/**
 	 * コンストラクタ
-	 * @param Connection
+	 * @param Connrction
 	 **/
-	public PostDao (Connection con) {
+	public CompanieDao(Connection con) {
 		this.con = con;
 	}
-
+	
 	/**
 	 * コンストラクタ
+	 * @param Connrction
 	 **/
-	public PostDao() {
+	public CompanieDao() {
 		if(con == null){
 			DBConnecter db = new DBConnecter();
 			con = db.getConnection();
 		}
 	}
-
+	
 	/**
-	 * 　全件取得 　@return ArrayList PostList
-	 * 
+	 *　全件取得 　@return ArrayList CompanieList
 	 * @throws SQLException
 	 **/
-	public ArrayList<PostBean> selectAllPosts() throws SQLException {
-		String selectSQL = "SELECT post_id,post_name FROM posts";
+	public ArrayList<CompanieBean> selectAllCompanie() throws SQLException {
+		String selectSQL = "SELECT company_id,compnay_name FROM companies";
 		PreparedStatement select = con.prepareStatement(selectSQL);
 		ResultSet selectResult = select.executeQuery();
-		ArrayList<PostBean> PostList = new ArrayList<PostBean>();
+		ArrayList<CompanieBean> CompList = new ArrayList<CompanieBean>();
 
 		while (selectResult.next()) {
-			PostBean postBean = new PostBean();
-			postBean.setPostId(selectResult.getInt("post_id"));
-			postBean.setPostName(selectResult.getString("post_name"));
-
-			PostList.add(postBean);
+			CompanieBean compBean = new CompanieBean();
+			compBean.setCompanyId(selectResult.getInt("company_id"));
+			compBean.setCompanyName(selectResult.getString("compnay_name"));
+			CompList.add(compBean);
 		}
-		return PostList;
-	}
+		return CompList;
+	}	
 	
 	/**
 	 * コミット
@@ -81,6 +75,4 @@ public class PostDao {
 	public void close() throws SQLException {
 		con.close();
 	}
-	
-
 }
