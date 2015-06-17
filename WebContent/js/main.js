@@ -1,28 +1,69 @@
+var url;
+var graph;
+var paper;
+var defaultPosition = "x : 100, y : 30";
+var rect;
+var circle
+var line;
+
 (function() {
-  "use strict"
+	"use strict"
 
-  $(function(){
-    var graph = new joint.dia.Graph;
-    var paper = new joint.dia.Paper({
-      el: $('#left'),
-      width: 1000,
-      height: 1000,
-      model: graph
-    });
+	$(function() {
+		graph = new joint.dia.Graph;
+		paper = new joint.dia.Paper({
+			el : $('#myholder'),
+			width : 600,
+			height : 400,
+			gridSize: 10,
+			model : graph
+		});
 
-    var rect = new joint.shapes.basic.Rect({
-      position: { x: 100, y: 30 },
-      size: { width: 100, height: 30 },
-      attrs: { rect: { fill: 'blue' }, text: { text: 'my box', fill: 'white' } }
-    });
+		url = "/Test";
 
-    var rect2 = rect.clone();
-    rect2.translate(300);
-
-    var link = new joint.dia.Link({
-      source: { id: rect.id },
-      target: { id: rect2.id }
-    });
-    graph.addCells([rect, rect2, link]);
-  });
+	});
 })();
+
+/**  ボタン押下で四角形の作成 **/
+function createRect() {
+
+	rect = new joint.shapes.basic.Rect({
+		position : defaultPosition ,
+		size : { width : 100, height : 80 },
+		attrs : { rect : { fill : 'blue' },
+		text : { text : '机', fill : 'white' }}
+	}).addTo(graph);
+}
+
+
+function createCircle() {
+
+	circle = new joint.shapes.basic.Circle({
+		position: defaultPosition,
+		size: { width: 100, height: 100 },
+		attrs: { text: { text: '丸' }, circle: { fill: '#2ECC71' } }
+    }).addTo(graph);
+}
+
+function createLine() {
+
+	line = new joint.shapes.basic.Rect({
+		position : defaultPosition,
+		size : { width : 100, height : 2 },
+		attrs : { rect : { fill : 'blue' }}
+	}).addTo(graph);
+}
+
+function save() {
+	Backbone.Model.extend({
+		urlRoot: '/test.html'
+	})
+
+	var myModel = new myodel();
+
+	myModel.save({
+		name: 'Hoge'
+	});
+
+	document.location = "/Test";
+}
