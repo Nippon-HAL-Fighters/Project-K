@@ -109,17 +109,19 @@
 
 	<div class="header_box">
 		<h2>座席表一覧</h2>
-		<form action="seatList" name="form" method="post">
+		<form action="BackupServlet" name="form" method="post">
 
 			<input type="hidden" id="cell" name="cell" value="" />
 
 			<button type="submit" class="btn btn-primary headerbtn" value="編集"
-				name="choices">編集</button> <button type="submit"
-				class="btn btn-primary headerbtn" value="削除" name="choices">削除</button>
+				name="choices">編集</button>
+			<button type="submit" class="btn btn-primary headerbtn" value="削除"
+				name="choices">削除</button>
 			<button type="submit" class="btn btn-primary headerbtn" value="印刷"
 				name="choices">印刷</button>
 		</form>
 	</div>
+
 	<div class="main_box">
 		<table id="TBL">
 			<tbody>
@@ -128,23 +130,24 @@
 					<th width="25%">最終変更日</th>
 					<th width="25">変更者</th>
 				</tr>
-				<tr>
-					<td>ほげほげふぁいる</td>
+
+				<tr id="tr1" onclick="sentaku(1)">
+					<td><a style="display: none">,1,</a>ほげほげふぁいる</td>
 					<td>2015/6/1</td>
 					<td>ほげ～</td>
 				</tr>
-				<tr>
-					<td>ほげほげふぁいる</td>
+				<tr id="tr2" onclick="sentaku(2)">
+					<td><a style="display: none">,2,</a>ほげほげふぁいる</td>
 					<td>2015/6/1</td>
 					<td>ほげ～</td>
 				</tr>
-				<tr>
-					<td>ほげほげふぁいる</td>
+				<tr id="tr3" onclick="sentaku(3)">
+					<td><a style="display: none">,3,</a>ほげほげふぁいる</td>
 					<td>2015/6/1</td>
 					<td>ほげ～</td>
 				</tr>
-				<tr>
-					<td>ほげほげふぁいる</td>
+				<tr id="tr4" onclick="sentaku(4)">
+					<td><a style="display: none">,4,</a>ほげほげふぁいる</td>
 					<td>2015/6/1</td>
 					<td>ほげ～</td>
 				</tr>

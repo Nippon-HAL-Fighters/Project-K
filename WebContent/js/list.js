@@ -2,14 +2,13 @@ function getCELL() {
 	var myTbl = document.getElementById('TBL');
 	// trをループ。rowsコレクションで,行位置取得。
 	for (var i = 0; i < myTbl.rows.length; i++) {
-		// tr内のtdをループ。cellsコレクションで行内セル位置取得。
-		for (var j = 0; j < myTbl.rows[i].cells.length; j++) {
-			var Cells = myTbl.rows[i].cells[j]; // i番行のj番列のセル "td"
-			// onclickで 'Mclk'を実行。thisはクリックしたセル"td"のオブジェクトを返す。
-			Cells.onclick = function() {
-				Mclk(this);
-			}
+
+		var Cells = myTbl.rows[i].cells[0]; // i番行のj番列のセル "td"
+		// onclickで 'Mclk'を実行。thisはクリックしたセル"td"のオブジェクトを返す。
+		Cells.onclick = function() {
+			Mclk(this);
 		}
+
 	}
 }
 
@@ -27,6 +26,36 @@ function Mclk(Cell) {
 
 	document.form.cell.value = Cell.innerHTML;
 
+}
+function sentaku(pos) {
+	switch (pos) {
+	case 1:
+		document.getElementById("tr1").style.backgroundColor = "#B7F1FC";
+		document.getElementById("tr2").style.backgroundColor = "white";
+		document.getElementById("tr3").style.backgroundColor = "white";
+		document.getElementById("tr4").style.backgroundColor = "white";
+		break;
+	case 2:
+		document.getElementById("tr2").style.backgroundColor = "#B7F1FC";
+		document.getElementById("tr1").style.backgroundColor = "white";
+		document.getElementById("tr3").style.backgroundColor = "white";
+		document.getElementById("tr4").style.backgroundColor = "white";
+		break;
+
+	case 3:
+		document.getElementById("tr3").style.backgroundColor = "#B7F1FC";
+		document.getElementById("tr1").style.backgroundColor = "white";
+		document.getElementById("tr2").style.backgroundColor = "white";
+		document.getElementById("tr4").style.backgroundColor = "white";
+		break;
+
+	case 4:
+		document.getElementById("tr4").style.backgroundColor = "#B7F1FC";
+		document.getElementById("tr1").style.backgroundColor = "white";
+		document.getElementById("tr2").style.backgroundColor = "white";
+		document.getElementById("tr3").style.backgroundColor = "white";
+		break;
+	}
 }
 
 // try ～ catch 例外処理、エラー処理

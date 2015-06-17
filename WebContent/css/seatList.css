@@ -76,9 +76,6 @@ table tr td:last-child {
 table tr {
   background: #fff;
 }
-table tr:nth-child(2n+1) {
-  background: #f1f6fc;
-}
 table tr:last-child td {
   box-shadow: 2px 2px 1px rgba(0,0,0,0.1);
 }
