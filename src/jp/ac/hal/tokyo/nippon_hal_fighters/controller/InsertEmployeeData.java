@@ -49,9 +49,9 @@ public class InsertEmployeeData extends HttpServlet {
 		DBConnecter connecter = new DBConnecter();
 		Connection con = connecter.getConnection();
 		EmployeeBean insertBean = new EmployeeBean();
-		EmployeeDao employeeDao = new EmployeeDao();
-		PhoneDao phoneDao = new PhoneDao(con);
 		PhoneBean phoneBean = new PhoneBean();
+		EmployeeDao employeeDao = new EmployeeDao(con);
+		PhoneDao phoneDao = new PhoneDao(con);
 		
 		String employeeId = request.getParameter("employeeid");
 		String employeeName = request.getParameter("employeename"); 
@@ -60,27 +60,29 @@ public class InsertEmployeeData extends HttpServlet {
 		String password = request.getParameter("pass");
 		int posts = Integer.parseInt(request.getParameter("posts"));
 		int org = Integer.parseInt(request.getParameter("org"));
-		int phoneId = Integer.parseInt(request.getParameter("phoneid"));
 		int comp = Integer.parseInt(request.getParameter("comp"));
-		String phoneinside = request.getParameter("foneinside");
-		String phoneout = request.getParameter("foneout");		
-		
-		insertBean.setEmployeeId(employeeId);
-		insertBean.setEmployeeName(employeeName);
-		insertBean.setEmployeeStatus(koyo);
-		insertBean.setAdmin(admin);
-		insertBean.setPassword(password);
-		insertBean.setPostId(posts);
-		insertBean.setOrgnaizationId(org);
-		insertBean.setPhoneId(phoneId);
-		insertBean.setPhoneInside(phoneinside);
-		insertBean.setPhoneOutside(phoneout);
-		insertBean.setCompanyId(comp);
-		phoneBean.setPhoneId(phoneId);
-		phoneBean.setPhoneInside(phoneinside);
-		phoneBean.setPhoneOutside(phoneout);
+		String phoneinside = request.getParameter("phoneinside");
+		String phoneout = request.getParameter("phoneout");	
+		int phoneId;
 		
 		try {
+			phoneId = phoneDao.datacount();
+			
+			insertBean.setEmployeeId(employeeId);
+			insertBean.setEmployeeName(employeeName);
+			insertBean.setEmployeeStatus(koyo);
+			insertBean.setAdmin(admin);
+			insertBean.setPassword(password);
+			insertBean.setPostId(posts);
+			insertBean.setOrgnaizationId(org);
+			insertBean.setPhoneId(phoneId);
+			insertBean.setPhoneInside(phoneinside);
+			insertBean.setPhoneOutside(phoneout);
+			insertBean.setCompanyId(comp);
+			phoneBean.setPhoneId(phoneId);
+			phoneBean.setPhoneInside(phoneinside);
+			phoneBean.setPhoneOutside(phoneout);
+			
 			employeeDao.insertEmployee(insertBean);
 			phoneDao.insertPhone(phoneBean);			
 			employeeDao.commit();
@@ -90,8 +92,7 @@ public class InsertEmployeeData extends HttpServlet {
 			e.printStackTrace();
 		}finally{
 			try {
-				employeeDao.close();
-				phoneDao.close();
+				con.close();
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();

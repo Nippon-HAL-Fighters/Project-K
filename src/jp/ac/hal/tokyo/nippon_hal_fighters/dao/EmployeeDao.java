@@ -18,10 +18,16 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 public class EmployeeDao {
 
 	private Connection con;
+	
+	public EmployeeDao(Connection con) {
+		this.con = con;
+	}
 
 	public EmployeeDao() {
-		DBConnecter db = new DBConnecter();
-		con = db.getConnection();
+		if(con == null){
+			DBConnecter db = new DBConnecter();
+			con = db.getConnection();
+		}
 	}
 
 	/**

@@ -54,25 +54,22 @@ public class GetEntryData extends HttpServlet {
 		PostDao postDao = new PostDao(con);
 		OrganaizationDao orgDao = new OrganaizationDao(con);
 		CompanieDao compDao = new CompanieDao(con);
-		PhoneDao phoneDao = new PhoneDao(con);
 		ArrayList<PostBean> getPost = new ArrayList<PostBean>();
 		ArrayList<OrganaiationBean> getOrg = new ArrayList<OrganaiationBean>();
 		ArrayList<CompanieBean> getComp = new ArrayList<CompanieBean>();	
-		int phonecount = 0;
 		
 		try{
 			getPost = postDao.selectAllPosts();
 			getOrg = orgDao.selectAllOrganaiation();	
 			getComp = compDao.selectAllCompanie();
-			phonecount = phoneDao.datacount();
 		} catch (SQLException e){
 			e.printStackTrace();
 		} finally{
 			try {
-				postDao.close();
-				orgDao.close();
-				compDao.close();
-				phoneDao.close();			
+				//postDao.close();
+				//orgDao.close();
+				//compDao.close();
+				con.close();
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
@@ -83,7 +80,6 @@ public class GetEntryData extends HttpServlet {
 		request.setAttribute("postlist", getPost);
 		request.setAttribute("orglist", getOrg);
 		request.setAttribute("complist", getComp);
-		request.setAttribute("phoneid", phonecount);
 		//データを取得してから社員情報登録へ遷移
 		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeEntry.jsp");
 		dispatcher.forward(request, response);
