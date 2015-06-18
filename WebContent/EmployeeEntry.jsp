@@ -78,17 +78,14 @@
     </nav>
     <!-- 共通部分ここまで -->
     <main>
-        <%
-	       	ArrayList<PostBean> postrecode = null;
-	       	ArrayList<OrganaiationBean> orgrecode = null;
-	       	ArrayList<CompanieBean> comprecode = null;
-			
-	       	postrecode = (ArrayList<PostBean>)request.getAttribute("postlist");
-	       	orgrecode = (ArrayList<OrganaiationBean>)request.getAttribute("orglist");
-	       	comprecode = (ArrayList<CompanieBean>)request.getAttribute("complist");
+        <%			
+	       	ArrayList<PostBean> postrecode = (ArrayList<PostBean>)request.getAttribute("postlist");
+	    	ArrayList<OrganaiationBean> orgrecode = (ArrayList<OrganaiationBean>)request.getAttribute("orglist");
+	    	ArrayList<CompanieBean> comprecode = (ArrayList<CompanieBean>)request.getAttribute("complist");
 	       	
 			if(postrecode == null||orgrecode == null|| comprecode == null){
-				response.sendRedirect("GetEmployeeData");
+				response.sendRedirect("GetEntryData");
+				return;
 			}
 				
         %>

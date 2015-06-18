@@ -41,24 +41,25 @@ public class GetEntryData extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html");
+		response.setCharacterEncoding("utf-8");
 		
-		DBConnecter connecter = new DBConnecter();
-		Connection con = connecter.getConnection();
-		PostDao postDao = new PostDao(con);
-		OrganaizationDao orgDao = new OrganaizationDao(con);
-		CompanieDao compDao = new CompanieDao(con);
+		DBConnecter connecter = null;
+		Connection con = null;
+		PostDao postDao = null;
+		OrganaizationDao orgDao = null;
+		CompanieDao compDao = null;
 		ArrayList<PostBean> getPost = new ArrayList<PostBean>();
 		ArrayList<OrganaiationBean> getOrg = new ArrayList<OrganaiationBean>();
 		ArrayList<CompanieBean> getComp = new ArrayList<CompanieBean>();	
 		
 		try{
+			connecter = new DBConnecter();
+			con = connecter.getConnection();
+			postDao = new PostDao(con);
+			orgDao = new OrganaizationDao(con);
+			compDao = new CompanieDao(con);
 			getPost = postDao.selectAllPosts();
 			getOrg = orgDao.selectAllOrganaiation();	
 			getComp = compDao.selectAllCompanie();
@@ -66,10 +67,9 @@ public class GetEntryData extends HttpServlet {
 			e.printStackTrace();
 		} finally{
 			try {
-				//postDao.close();
-				//orgDao.close();
-				//compDao.close();
-				con.close();
+				if(con !=null){
+					con.close();
+				}
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
@@ -83,6 +83,13 @@ public class GetEntryData extends HttpServlet {
 		//データを取得してから社員情報登録へ遷移
 		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeEntry.jsp");
 		dispatcher.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 	}
 
 }

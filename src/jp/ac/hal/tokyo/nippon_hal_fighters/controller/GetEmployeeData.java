@@ -34,13 +34,6 @@ public class GetEmployeeData extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		request.setCharacterEncoding("utf-8");
 		
@@ -48,15 +41,12 @@ public class GetEmployeeData extends HttpServlet {
 		 *	DBから一覧データを取得？
 		 **/
 		
-		System.out.println("helo=1");
-		
 		EmployeeDao employeeDao = new EmployeeDao();
 		
 		ArrayList<EmployeeBean> getData = new ArrayList<EmployeeBean>();
 		
 		try {
 			getData = employeeDao.selectListAllEmployees();
-			System.out.println("要素数" + getData.size());
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -71,8 +61,16 @@ public class GetEmployeeData extends HttpServlet {
 		
 		request.setAttribute("recode", getData);
 		//データを取得してから一覧へ遷移
-		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList_new.jsp");
 		dispatcher.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 	}
 
 }
