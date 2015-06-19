@@ -2,6 +2,8 @@ $(function() {
     /* スタイル調整 */
     $('.box-text').css('border-radius', '0px 4px 4px 0px');
 
+    /* 組織図メニュー */
+
     var boxSubmit = {
         status: false,
         el: $('.box-submit'),
@@ -61,15 +63,21 @@ $(function() {
         height: function() {return $sosikizu.innerHeight();}
     };
 
-    /* 初期化 */
-
     var cells = [];
 
     var graph = new joint.dia.Graph;
 
+    graph.url = function() {
+        return '/Project-K/OrgChartController';
+    };
+
     graph.on('remove', function(cell) {
         var rmIdx = _.indexOf(cells, cell);
         cells.splice(rmIdx, 1);
+    });
+
+    graph.on('change', function(cell) {
+        isSaved = false;
     });
 
     var graphLayout = new joint.layout.TreeLayout({
@@ -101,11 +109,10 @@ $(function() {
     var snaplines = new joint.ui.Snaplines({ paper: paper });
     snaplines.startListening();
 
-    /* Functions */
-
     var addBox = {
         add: function() {
             graph.addCells(cells);
+            isSaved = false;
         },
         vertical: function(val) {
             var valArray = val.split('');
@@ -117,8 +124,7 @@ $(function() {
             cells.push(new joint.shapes.basic.Rect({
                 position: { x: 15, y: 20 },
                 size: { width: 18, height: val.length * 16 },
-                attrs: { rect: { fill: 'blue' }, text: { text: dispText, fill: 'white', 'ref-y': .6, 'ref-x': .6 } },
-                rankDir: 'R'
+                attrs: { rect: { fill: 'blue' }, text: { text: dispText, fill: 'white', 'ref-y': .6, 'ref-x': .6 } }
             }));
 
             this.add();
@@ -133,6 +139,41 @@ $(function() {
             this.add();
         }
     };
+
+    /* 永続化 */
+
+    /**
+     * Graph内のオブジェクトの変更が保存されていない場合はFalse、保存されている場合はTrue
+     * @type Boolean
+     */
+    var isSaved = true;
+
+    $('.save-btn').click(function() {
+        var res = graph.save(null, {
+            dataType: 'text',
+            success: function() {
+                alert('保存しました');
+                isSaved = true;
+            },
+            error: function() {
+                alert('保存に失敗しました');
+            }
+        });
+    });
+
+    /* 終了処理 */
+
+    /**
+     * 保存せずにページを離れようとした場合には警告を出す
+     * @returns {String}
+     */
+    window.onbeforeunload = function() {
+        if (!isSaved) {
+            return 'このページから離れたり、再読み込みすると、保存していない作業データは失われます。\n本当によろしいですか？';
+        }
+    };
+
+    /* Debug */
 
     $('.jinin').click(function() {
         graphLayout.prepare();

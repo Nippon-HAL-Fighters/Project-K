@@ -25,6 +25,8 @@ main {
 }
 
 .sosikizu-menu {
+    width: 100%;
+
     .box-type {
         float: left;
 
@@ -40,6 +42,9 @@ main {
     .box-submit {
         float: left;
         margin-left: 10px;
+    }
+    .save-btn {
+        float: right;
     }
 }
 

@@ -21,6 +21,9 @@ main {
   background: #ccc;
 }
 
+.sosikizu-menu {
+  width: 100%;
+}
 .sosikizu-menu .box-type {
   float: left;
 }
@@ -35,6 +38,9 @@ main {
 .sosikizu-menu .box-submit {
   float: left;
   margin-left: 10px;
+}
+.sosikizu-menu .save-btn {
+  float: right;
 }
 
 /* JointJS */
