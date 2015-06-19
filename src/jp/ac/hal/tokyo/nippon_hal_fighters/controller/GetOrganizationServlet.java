@@ -18,13 +18,13 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.dao.OrganaizationDao;
  * Servlet implementation class EmployeeServlet
  */
 @WebServlet("/OrganizationServlet")
-public class OrganizationServlet extends HttpServlet {
+public class GetOrganizationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public OrganizationServlet() {
+	public GetOrganizationServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,8 +35,6 @@ public class OrganizationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("GET");
-
 		request.setCharacterEncoding("utf-8");
 
 		// DAO定義
@@ -57,7 +55,7 @@ public class OrganizationServlet extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
 				organizationDao.close();
 			} catch (Exception e2) {
@@ -72,27 +70,6 @@ public class OrganizationServlet extends HttpServlet {
 				.getRequestDispatcher("master.jsp");
 		dispatcher.forward(request, response);
 
-		// 登録情報取得
-		// OrganizationId = request.getParameter("OrganizationId");
-		// OrganizationName = request.getParameter("OrganizationName");
-
-		// System.out.println(employeeId);
-		// System.out.println(employeeName);
-
-		/**
-		 * // Bean 作成 & データセット EmployeeBean insertData = new EmployeeBean();
-		 * 
-		 * insertData.setEmployeeId(employeeId);
-		 * insertData.setEmployeeName(employeeName);
-		 * 
-		 * // 情報登録実行 try { insertResult =
-		 * insertOrganizationDao.insertOrganization(insertData);
-		 * insertEmployeeDao.commit(); } catch (SQLException e) { //
-		 * INSERTエラー発生時実行 try { insertEmployeeDao.rollback(); } catch
-		 * (SQLException e1) { e1.printStackTrace(); } e.printStackTrace(); }
-		 * finally { // Daoクローズ try { insertEmployeeDao.close(); } catch
-		 * (SQLException e) { e.printStackTrace(); } }
-		 **/
 	}
 
 	/**
@@ -122,7 +99,7 @@ public class OrganizationServlet extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
 				organizationDao.close();
 			} catch (Exception e2) {

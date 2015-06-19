@@ -67,16 +67,16 @@ public class OrganaizationDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	/*public int insert(OrganaizationBean organaiationBean) throws SQLException {
+	public int insert(OrganaizationBean organaiationBean) throws SQLException {
 
 		String InsertSQL = "INSERT INTO organaizations VALUES(?,?)";
 		PreparedStatement prst = con.prepareStatement(InsertSQL);
 		prst.setString(1, organaiationBean.getOrganaizationId());
 		prst.setString(2, organaiationBean.getOrganaizationName());
-		int insertRows = prst.executeUpdate();
-		return insertRows;
+		return prst.executeUpdate();
 	}
-
+	
+	/*
 	public ArrayList<OrganaizationBean> ChaneOrganaizations() throws SQLException {
 		String hanbetu = Request.getParameter("category");
 		
