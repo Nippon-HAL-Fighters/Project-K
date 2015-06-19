@@ -61,8 +61,8 @@ public class GetEmployeeData extends HttpServlet {
 		
 		request.setAttribute("recode", getData);
 		//データを取得してから一覧へ遷移
-		//RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList_new.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList_new.jsp");
 		dispatcher.forward(request, response);
 	}
 

@@ -17,7 +17,8 @@
 	<link rel="stylesheet" href="./css/jquery.dataTables.css" />
 	<script>
 	$(document).ready(function(){
-	    $('#myTable').DataTable();
+	    $('#myTable').DataTable({ "language": {
+	    	   "url": "//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Japanese.json"},});
 	});
 	</script>
 </head>
@@ -118,8 +119,10 @@
 					<th>内線番号</th>
 					<th>外線番号</th>
 					<th>所属会社</th>
+					<th></th>
 				</tr>	
 			</thead>
+			<tbody>
 			<%
 				for(EmployeeBean emp : recode){
 					out.print("<tr>"+
