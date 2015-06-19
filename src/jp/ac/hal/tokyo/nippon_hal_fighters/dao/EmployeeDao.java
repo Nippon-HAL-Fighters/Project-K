@@ -18,10 +18,16 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 public class EmployeeDao {
 
 	private Connection con;
+	
+	public EmployeeDao(Connection con) {
+		this.con = con;
+	}
 
 	public EmployeeDao() {
-		DBConnecter db = new DBConnecter();
-		con = db.getConnection();
+		if(con == null){
+			DBConnecter db = new DBConnecter();
+			con = db.getConnection();
+		}
 	}
 
 	/**
@@ -55,6 +61,41 @@ public class EmployeeDao {
 		return EmployeeList;
 	}
 
+	/**
+	 * 全件取得 一覧取得用
+	 *
+	 * @return ArrayList EmployeeList
+	 * @throws SQLException
+	 * @author kikuhara
+	 */
+	public ArrayList<EmployeeBean> selectListAllEmployees() throws SQLException {
+		
+		String selectSQL = "SELECT emp.employee_id, emp.employee_name, emp.employee_status, emp.admin, emp.password, org.organaization_name, pos.post_name , phone.phone_inside, phone.phone_outside, comp.compnay_name FROM employees AS emp JOIN organaiations AS org ON emp.organaization_id = org.organaization_id JOIN phones AS phone ON emp.phone_id = phone.phone_id JOIN posts AS pos ON emp.post_id = pos.post_id JOIN companies AS comp ON emp.company_id = comp.company_id";
+		
+		PreparedStatement select = con.prepareStatement(selectSQL);
+
+		ResultSet selectResult = select.executeQuery();
+
+		ArrayList<EmployeeBean> EmployeeList = new ArrayList<EmployeeBean>();
+		while (selectResult.next()) {
+			EmployeeBean employeeBean = new EmployeeBean();
+			employeeBean.setEmployeeId(selectResult.getString("emp.employee_id"));
+			employeeBean.setEmployeeName(selectResult.getString("emp.employee_name"));
+			employeeBean.setEmployeeStatus(selectResult.getString("emp.employee_status"));
+			employeeBean.setAdmin(selectResult.getInt("emp.admin"));
+			employeeBean.setPassword(selectResult.getString("emp.password"));
+			employeeBean.setOrgnaizationName(selectResult.getString("org.organaization_name"));
+			employeeBean.setPostName(selectResult.getString("pos.post_name"));
+			employeeBean.setPhoneInside(selectResult.getString("phone.phone_inside"));
+			employeeBean.setPhoneOutside(selectResult.getString("phone.phone_outside"));
+			employeeBean.setCompanayName(selectResult.getString("comp.compnay_name"));
+
+			EmployeeList.add(employeeBean);
+		}
+		return EmployeeList;
+	}
+	
+	
 	/**
 	 * 社員情報追加
 	 *
