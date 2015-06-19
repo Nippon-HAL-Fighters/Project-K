@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,17 +30,12 @@ public class OrganizationServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("GET");
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
 
 		request.setCharacterEncoding("utf-8");
 
@@ -61,43 +57,107 @@ public class OrganizationServlet extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
+		}finally{
+			try {
+				organizationDao.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
 		}
 
+		request.setAttribute("recode", selectData);
+		// データを取得してから一覧へ遷移
+		RequestDispatcher dispatcher = request
+				.getRequestDispatcher("master.jsp");
+		dispatcher.forward(request, response);
 
 		// 登録情報取得
-		//OrganizationId = request.getParameter("OrganizationId");
-		//OrganizationName = request.getParameter("OrganizationName");
+		// OrganizationId = request.getParameter("OrganizationId");
+		// OrganizationName = request.getParameter("OrganizationName");
 
-
-		//System.out.println(employeeId);
-		//System.out.println(employeeName);
+		// System.out.println(employeeId);
+		// System.out.println(employeeName);
 
 		/**
-		// Bean 作成 & データセット
-		EmployeeBean insertData = new EmployeeBean();
+		 * // Bean 作成 & データセット EmployeeBean insertData = new EmployeeBean();
+		 * 
+		 * insertData.setEmployeeId(employeeId);
+		 * insertData.setEmployeeName(employeeName);
+		 * 
+		 * // 情報登録実行 try { insertResult =
+		 * insertOrganizationDao.insertOrganization(insertData);
+		 * insertEmployeeDao.commit(); } catch (SQLException e) { //
+		 * INSERTエラー発生時実行 try { insertEmployeeDao.rollback(); } catch
+		 * (SQLException e1) { e1.printStackTrace(); } e.printStackTrace(); }
+		 * finally { // Daoクローズ try { insertEmployeeDao.close(); } catch
+		 * (SQLException e) { e.printStackTrace(); } }
+		 **/
+	}
 
-		insertData.setEmployeeId(employeeId);
-		insertData.setEmployeeName(employeeName);
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 
-		// 情報登録実行
+		request.setCharacterEncoding("utf-8");
+
+		// DAO定義
+		OrganaizationDao organizationDao = new OrganaizationDao();
+
+		/*
+		 * 以下 Connecter＆DAO テスト用
+		 */
+		ArrayList<OrganaizationBean> selectData = new ArrayList<OrganaizationBean>();
 		try {
-			insertResult = insertOrganizationDao.insertOrganization(insertData);
-			insertEmployeeDao.commit();
-		} catch (SQLException e) {	// INSERTエラー発生時実行
-			try {
-				insertEmployeeDao.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+			selectData = organizationDao.selectAllOrganaiation();
+			System.out.println("要素数" + selectData.size());
+
+			for (int i = 0; i < selectData.size(); i++) {
+				System.out.println(selectData.get(i).getOrganaizationId());
+				System.out.println(selectData.get(i).getOrganaizationName());
 			}
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
-		} finally { // Daoクローズ
+		}finally{
 			try {
-				insertEmployeeDao.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+				organizationDao.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
 			}
 		}
-		**/
+
+		request.setAttribute("recode", selectData);
+		// データを取得してから一覧へ遷移
+		RequestDispatcher dispatcher = request
+				.getRequestDispatcher("master.jsp");
+		dispatcher.forward(request, response);
+
+		// 登録情報取得
+		// OrganizationId = request.getParameter("OrganizationId");
+		// OrganizationName = request.getParameter("OrganizationName");
+
+		// System.out.println(employeeId);
+		// System.out.println(employeeName);
+
+		/**
+		 * // Bean 作成 & データセット EmployeeBean insertData = new EmployeeBean();
+		 * 
+		 * insertData.setEmployeeId(employeeId);
+		 * insertData.setEmployeeName(employeeName);
+		 * 
+		 * // 情報登録実行 try { insertResult =
+		 * insertOrganizationDao.insertOrganization(insertData);
+		 * insertEmployeeDao.commit(); } catch (SQLException e) { //
+		 * INSERTエラー発生時実行 try { insertEmployeeDao.rollback(); } catch
+		 * (SQLException e1) { e1.printStackTrace(); } e.printStackTrace(); }
+		 * finally { // Daoクローズ try { insertEmployeeDao.close(); } catch
+		 * (SQLException e) { e.printStackTrace(); } }
+		 **/
 
 	}
 
