@@ -3,6 +3,7 @@ package jp.ac.hal.tokyo.nippon_hal_fighters.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,23 +12,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaiationBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.CompanieDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.EmployeeDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.OrganaizationDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PhoneDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PostDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
 /**
- * Servlet implementation class InsertEmployeeData
+ * Servlet implementation class UpdateEmployeeData
  */
-@WebServlet("/InsertEmployeeData")
-public class InsertEmployeeData extends HttpServlet {
+@WebServlet("/UpdateEmployeeData")
+public class UpdateEmployeeData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertEmployeeData() {
+    public UpdateEmployeeData() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,7 +55,7 @@ public class InsertEmployeeData extends HttpServlet {
 		
 		DBConnecter connecter = new DBConnecter();
 		Connection con = connecter.getConnection();
-		EmployeeBean insertBean = new EmployeeBean();
+		EmployeeBean updateBean = new EmployeeBean();
 		PhoneBean phoneBean = new PhoneBean();
 		EmployeeDao employeeDao = new EmployeeDao(con);
 		PhoneDao phoneDao = new PhoneDao(con);
@@ -67,28 +74,24 @@ public class InsertEmployeeData extends HttpServlet {
 		
 		try {
 			phoneId = phoneDao.datacount();
-			phoneId = phoneId + 1;
 			
-			insertBean.setEmployeeId(employeeId);
-			insertBean.setEmployeeName(employeeName);
-			insertBean.setEmployeeStatus(koyo);
-			insertBean.setAdmin(admin);
-			insertBean.setPassword(password);
-			insertBean.setPostId(posts);
-			insertBean.setOrgnaizationId(org);
-			insertBean.setPhoneId(phoneId);
-			insertBean.setPhoneInside(phoneinside);
-			insertBean.setPhoneOutside(phoneout);
-			insertBean.setCompanyId(comp);
-			
+			updateBean.setEmployeeId(employeeId);
+			updateBean.setEmployeeName(employeeName);
+			updateBean.setEmployeeStatus(koyo);
+			updateBean.setAdmin(admin);
+			updateBean.setPassword(password);
+			updateBean.setPostId(posts);
+			updateBean.setOrgnaizationId(org);
+			updateBean.setPhoneId(phoneId);
+			updateBean.setPhoneInside(phoneinside);
+			updateBean.setPhoneOutside(phoneout);
+			updateBean.setCompanyId(comp);
 			phoneBean.setPhoneId(phoneId);
 			phoneBean.setPhoneInside(phoneinside);
 			phoneBean.setPhoneOutside(phoneout);
 			
-			System.out.println(phoneId);
-			
-			employeeDao.insertEmployee(insertBean);
-			phoneDao.insertPhone(phoneBean);			
+			employeeDao.updateEmployee(updateBean);
+			phoneDao.upodatePhone(phoneBean);			
 			employeeDao.commit();
 			phoneDao.commit();
 			System.out.print("OK!");
@@ -103,7 +106,7 @@ public class InsertEmployeeData extends HttpServlet {
 			}
 		}
 		
-		//データを登録したら一覧へ遷移する。
+		//データを更新したら一覧へ遷移する。
 		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
 		dispatcher.forward(request, response);
 	}

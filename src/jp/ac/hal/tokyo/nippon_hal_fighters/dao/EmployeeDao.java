@@ -62,7 +62,7 @@ public class EmployeeDao {
 	}
 
 	/**
-	 * 全件取得 一覧取得用
+	 * 全件取得 一覧取得用SQL
 	 *
 	 * @return ArrayList EmployeeList
 	 * @throws SQLException
@@ -70,7 +70,7 @@ public class EmployeeDao {
 	 */
 	public ArrayList<EmployeeBean> selectListAllEmployees() throws SQLException {
 		
-		String selectSQL = "SELECT emp.employee_id, emp.employee_name, emp.employee_status, emp.admin, emp.password, org.organaization_name, pos.post_name , phone.phone_inside, phone.phone_outside, comp.compnay_name FROM employees AS emp JOIN organaizations AS org ON emp.organaization_id = org.organaization_id JOIN phones AS phone ON emp.phone_id = phone.phone_id JOIN posts AS pos ON emp.post_id = pos.post_id JOIN companies AS comp ON emp.company_id = comp.company_id";
+		String selectSQL = "SELECT emp.employee_id, emp.employee_name, emp.employee_status, emp.admin, emp.password, emp.organaization_id, org.organaization_name, pos.post_name , phone.phone_inside, phone.phone_outside, emp.company_id, comp.compnay_name FROM employees AS emp JOIN organaizations AS org ON emp.organaization_id = org.organaization_id JOIN phones AS phone ON emp.phone_id = phone.phone_id JOIN posts AS pos ON emp.post_id = pos.post_id JOIN companies AS comp ON emp.company_id = comp.company_id";
 		
 		PreparedStatement select = con.prepareStatement(selectSQL);
 
@@ -84,15 +84,55 @@ public class EmployeeDao {
 			employeeBean.setEmployeeStatus(selectResult.getString("emp.employee_status"));
 			employeeBean.setAdmin(selectResult.getInt("emp.admin"));
 			employeeBean.setPassword(selectResult.getString("emp.password"));
+			employeeBean.setOrgnaizationId(selectResult.getInt("organaization_id"));
 			employeeBean.setOrgnaizationName(selectResult.getString("org.organaization_name"));
 			employeeBean.setPostName(selectResult.getString("pos.post_name"));
 			employeeBean.setPhoneInside(selectResult.getString("phone.phone_inside"));
 			employeeBean.setPhoneOutside(selectResult.getString("phone.phone_outside"));
+			employeeBean.setCompanyId(selectResult.getInt("emp.company_id"));
 			employeeBean.setCompanayName(selectResult.getString("comp.compnay_name"));
 
 			EmployeeList.add(employeeBean);
 		}
 		return EmployeeList;
+	}
+	
+	/**
+	 * 特定社員情報取得用SQL
+	 *
+	 * @return ArrayList EmployeeList
+	 * @throws SQLException
+	 * @author kikuhara
+	 */
+	public EmployeeBean selectListEmployees(String empid) throws SQLException {
+		
+		String selectSQL = "SELECT emp.employee_id, emp.employee_name, emp.employee_status, emp.admin, emp.password, emp.organaization_id, org.organaization_name, pos.post_name , phone.phone_inside, phone.phone_outside,emp.company_id ,comp.compnay_name "
+				+ "FROM employees AS emp JOIN organaizations AS org ON emp.organaization_id = org.organaization_id JOIN phones AS phone ON emp.phone_id = phone.phone_id JOIN posts AS pos ON emp.post_id = pos.post_id JOIN companies AS comp ON emp.company_id = comp.company_id "
+				+ "WHERE employee_id = ?";
+		
+		PreparedStatement select = con.prepareStatement(selectSQL);
+		select.setString(1, empid);
+
+		ResultSet selectResult = select.executeQuery();
+
+		EmployeeBean employeeBean = new EmployeeBean();
+		while (selectResult.next()) {
+			//EmployeeBean employeeBean = new EmployeeBean();
+			employeeBean.setEmployeeId(selectResult.getString("emp.employee_id"));
+			employeeBean.setEmployeeName(selectResult.getString("emp.employee_name"));
+			employeeBean.setEmployeeStatus(selectResult.getString("emp.employee_status"));
+			employeeBean.setAdmin(selectResult.getInt("emp.admin"));
+			employeeBean.setPassword(selectResult.getString("emp.password"));
+			employeeBean.setOrgnaizationId(selectResult.getInt("organaization_id"));
+			employeeBean.setOrgnaizationName(selectResult.getString("org.organaization_name"));
+			employeeBean.setPostName(selectResult.getString("pos.post_name"));
+			employeeBean.setPhoneInside(selectResult.getString("phone.phone_inside"));
+			employeeBean.setPhoneOutside(selectResult.getString("phone.phone_outside"));
+			employeeBean.setCompanyId(selectResult.getInt("emp.company_id"));
+			employeeBean.setCompanayName(selectResult.getString("comp.compnay_name"));
+			
+		}
+		return employeeBean;
 	}
 	
 	
@@ -129,6 +169,38 @@ public class EmployeeDao {
 		insert.setInt(9, insertData.getCompanyId());
 
 		return insert.executeUpdate();
+	}
+	
+	
+	/**
+	 * 社員情報更新
+	 *
+	 * @param EmployeeBean 更新データ
+	 * @return insertResult 情報追加成功数 1なら成功
+	 * @throws SQLException
+	 */
+	public int updateEmployee(EmployeeBean updateData) throws SQLException {
+
+		String updateSQL = "UPDATE employees SET " 
+				+"employee_id=?,employee_name=?,employee_status=?,admin=?,password=?,organaization_id= ? ,post_id = ? ,phone_id= ? ,company_id = ? "
+				+"WHERE employee_id = ?";
+
+		PreparedStatement update = con.prepareStatement(updateSQL);
+
+		update.setString(1, updateData.getEmployeeId());
+		update.setString(2, updateData.getEmployeeName());
+		update.setString(3, updateData.getEmployeeStatus());
+		update.setInt(4, updateData.getAdmin());
+		update.setString(5, updateData.getPassword());
+		update.setInt(6, updateData.getOrgnaizationId());
+		update.setInt(7, updateData.getPostId());
+		update.setInt(8, updateData.getPhoneId());
+		update.setInt(9, updateData.getCompanyId());
+		update.setString(10, updateData.getEmployeeId());
+		
+		System.out.println(update);
+
+		return update.executeUpdate();
 	}
 
 	public void commit() throws SQLException {

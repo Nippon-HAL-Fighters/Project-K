@@ -36,12 +36,12 @@ public class PhoneDao {
 	 * @throws SQLException	 
 	 */
 	public int datacount() throws SQLException{
-		String countsql = "SELECT count(*) FROM phones";
+		String countsql = "SELECT phone_id FROM phones";
 		PreparedStatement count = con.prepareStatement(countsql);
 		ResultSet countResult = count.executeQuery();
 		int datacount = 0;
 		while(countResult.next()){
-			datacount = countResult.getInt("count(*)")+1;
+			datacount = countResult.getInt("phone_id");
 		}
 		return datacount;
 	}
@@ -63,6 +63,27 @@ public class PhoneDao {
 		insert.setString(3, insertphone.getPhoneOutside());
 		
 		return insert.executeUpdate();
+	}
+	
+	/**
+	 * アップデート
+	 * @param PhoneBean
+	 * @throws SQLException	
+	 */
+	public int upodatePhone(PhoneBean updatephone) throws SQLException{
+		String updateSQL = "UPDATE phones SET "
+				+"phone_inside = ?,phone_outside = ?"
+				+"WHERE phone_id = ?";
+		
+		PreparedStatement update = con.prepareStatement(updateSQL);
+		
+		update.setString(1, updatephone.getPhoneInside());
+		update.setString(2, updatephone.getPhoneOutside());
+		update.setInt(3, updatephone.getPhoneId());
+		
+		System.out.println(updateSQL);
+		
+		return update.executeUpdate();
 	}
 	
 	/**
