@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean;
-import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaiationBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.CompanieDao;

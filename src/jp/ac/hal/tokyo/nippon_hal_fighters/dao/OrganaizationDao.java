@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean;
-import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaiationBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
 public class OrganaizationDao {
@@ -39,17 +39,17 @@ public class OrganaizationDao {
 	 * @return ArrayList OrganazationList
 	 * @throws SQLException
 	 */
-	public ArrayList<OrganaiationBean> selectAllOrganaiation() throws SQLException {
+	public ArrayList<OrganaizationBean> selectAllOrganaiation() throws SQLException {
 		String selectSQL = "SELECT organaization_id,organaization_name FROM organaizations";
 
 		PreparedStatement select = con.prepareStatement(selectSQL);
 
 		ResultSet selectResult = select.executeQuery();
 
-		ArrayList<OrganaiationBean> organaizationList = new ArrayList<OrganaiationBean>();
+		ArrayList<OrganaizationBean> organaizationList = new ArrayList<OrganaizationBean>();
 		while (selectResult.next()) {
 			//EmployeeBean employeeBean = new EmployeeBean();
-			OrganaiationBean organaiationBean = new OrganaiationBean();
+			OrganaizationBean organaiationBean = new OrganaizationBean();
 			organaiationBean.setOrganaizationId(selectResult.getString("organaization_id"));
 			organaiationBean.setOrganaizationName(selectResult.getString("organaization_name"));	
 			organaizationList.add(organaiationBean);

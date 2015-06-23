@@ -1,15 +1,17 @@
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean"%>
-<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaiationBean"%>
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%	
+<%
 	EmployeeBean emprecode = (EmployeeBean)request.getAttribute("empData");
 	ArrayList<PostBean> postrecode = (ArrayList<PostBean>)request.getAttribute("postlist");
-	ArrayList<OrganaiationBean> orgrecode = (ArrayList<OrganaiationBean>)request.getAttribute("orglist");
-	ArrayList<CompanieBean> comprecode = (ArrayList<CompanieBean>)request.getAttribute("complist");				
+	ArrayList<OrganaizationBean> orgrecode = (ArrayList<OrganaizationBean>)request.getAttribute("orglist");
+	ArrayList<CompanieBean> comprecode = (ArrayList<CompanieBean>)request.getAttribute("complist");
+	String admin = (String)request.getAttribute("admin");
+	System.out.println(admin);
 %>
 <!DOCTYPE html>
 <html>
@@ -24,19 +26,21 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/EmployeeEntryCheck.js"></script>
-    
-    <script type="text/javascript">
-    var koyoselect = document.getElementById('koyo').options;
-    for(var i = 0; i < koyoselect.length; i++){
-    	console.log("aaa");
-    	if(koyoselect[i].text === '<%= emprecode.getEmployeeStatus() %>'){
-    		console.log(koyoselect[i].text+":"+<%= emprecode.getEmployeeStatus() %>);
-    		koyoselect[i].selected = true;
-    		break;
-    	};
-    }
-	</script>
-   </head>
+    <script>
+    $(function(){
+    	$('#koyo option').filter(function(index){
+			return $(this).text() === '<%= emprecode.getEmployeeStatus() %>';
+		}).prop('selected', true);
+	
+    	$('#admin option').filter(function(index){
+    		if ($(this).val() === '<%= admin %>') {
+    			$(this).prop('selected', true);	
+    		}
+		});
+    	
+    });
+    </script>
+   	</head>
 <body>
     <!-- 共通部分 -->
     <nav>
@@ -101,13 +105,13 @@
 	       <form action="UpdateEmployeeData" method="post">
 	        	<div class="forms">
 	        		社員番号:<label id="errid" style="display:none;color:red;"></label>
-	        		<input type="text" name="employeeid" class="form-control" value="<%= emprecode.getEmployeeId() %>" />
+	        		<input type="text" name="employeeid" class="form-control" value="<%=emprecode.getEmployeeId()%>" />
 	        		<br/>
 	        	</div>
 	        	
 	        	<div class="forms">
 	        		氏名:<label id="errname" style="display:none;color:red;"></label>
-	        		<input type="text" name="employeename" class="form-control" value="<%= emprecode.getEmployeeName() %>" />
+	        		<input type="text" name="employeename" class="form-control" value="<%=emprecode.getEmployeeName()%>" />
 	        		<br>
 	        	</div>
 	        	
@@ -126,7 +130,7 @@
 				
 		      	<div class="forms">
 	        	管理者権限:<label id="erradmin" style="display:none;color:red;"></label>
-	        		<select name="admin" class="form-control">
+	        		<select name="admin" id="admin" class="form-control">
 						<option value="none">選択してください</option>
 						<option value="0">なし</option>
 						<option value="1">あり</option>
@@ -138,15 +142,14 @@
 				役職:<label id="errpost" style="display:none;color:red;"></label>
 					<select name="posts" class="form-control">
 						<option value="none">選択してください</option>
-						<% 
+						<%
 							for(PostBean post : postrecode){
-								if(post.getPostId() == emprecode.getPostId()){		//postIDと更新前postIDが一致していた場合
-									out.print("<option value="+post.getPostId()+" selected >"+post.getPostName()+"</option>");
-									System.out.println(post.getPostId()+":"+emprecode.getPostId());
-								}else{
-									out.print("<option value="+post.getPostId()+">"+post.getPostName()+"</option>");
-								}
-							}
+												if(post.getPostId() == emprecode.getPostId()){		//postIDと更新前postIDが一致していた場合
+													out.print("<option value="+post.getPostId()+" selected >"+post.getPostName()+"</option>");
+												}else{
+													out.print("<option value="+post.getPostId()+">"+post.getPostName()+"</option>");
+												}
+											}
 						%>
 					</select>
 					<br>
@@ -156,14 +159,14 @@
 				部署:<label id="errorg" style="display:none;color:red;"></label>
 					<select name="org" class="form-control">
 						<option value="none">選択してください</option>
-						<% 
-							for(OrganaiationBean org : orgrecode){
-								if(org.getOrganaizationId().equals(emprecode.getOrgnaizationId())){
-									out.print("<option value="+org.getOrganaizationId()+" selected >"+org.getOrganaizationName()+"</option>");
-								}else{
-									out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");	
-								}						
-							}
+						<%
+							for(OrganaizationBean org : orgrecode){
+												if(org.getOrganaizationId().equals(emprecode.getOrgnaizationId())){
+													out.print("<option value="+org.getOrganaizationId()+" selected >"+org.getOrganaizationName()+"</option>");
+												}else{
+													out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");	
+												}						
+											}
 						%>
 					</select>
 					<br>

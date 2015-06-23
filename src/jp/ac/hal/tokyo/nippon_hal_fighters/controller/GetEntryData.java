@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean;
-import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaiationBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.CompanieDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.OrganaizationDao;
@@ -51,7 +51,7 @@ public class GetEntryData extends HttpServlet {
 		OrganaizationDao orgDao = null;
 		CompanieDao compDao = null;
 		ArrayList<PostBean> getPost = new ArrayList<PostBean>();
-		ArrayList<OrganaiationBean> getOrg = new ArrayList<OrganaiationBean>();
+		ArrayList<OrganaizationBean> getOrg = new ArrayList<OrganaizationBean>();
 		ArrayList<CompanieBean> getComp = new ArrayList<CompanieBean>();	
 		
 		try{

@@ -1,5 +1,5 @@
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean"%>
-<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaiationBean"%>
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -78,16 +78,15 @@
     </nav>
     <!-- 共通部分ここまで -->
     <main>
-        <%			
-	       	ArrayList<PostBean> postrecode = (ArrayList<PostBean>)request.getAttribute("postlist");
-	    	ArrayList<OrganaiationBean> orgrecode = (ArrayList<OrganaiationBean>)request.getAttribute("orglist");
-	    	ArrayList<CompanieBean> comprecode = (ArrayList<CompanieBean>)request.getAttribute("complist");
-	       	
-			if(postrecode == null||orgrecode == null|| comprecode == null){
-				response.sendRedirect("GetEntryData");
-				return;
-			}
-				
+        <%
+        	ArrayList<PostBean> postrecode = (ArrayList<PostBean>)request.getAttribute("postlist");
+        	    	ArrayList<OrganaizationBean> orgrecode = (ArrayList<OrganaizationBean>)request.getAttribute("orglist");
+        	    	ArrayList<CompanieBean> comprecode = (ArrayList<CompanieBean>)request.getAttribute("complist");
+        	       	
+        	if(postrecode == null||orgrecode == null|| comprecode == null){
+        		response.sendRedirect("GetEntryData");
+        		return;
+        	}
         %>
     	<div id="main-form">
 	        <h2>社員情報登録</h2>
@@ -129,10 +128,10 @@
 				役職:<label id="errpost" style="display:none;color:red;"></label>
 					<select name="posts" class="form-control">
 						<option value="none">選択してください</option>
-						<% 
+						<%
 							for(PostBean post : postrecode){
-								out.print("<option value="+post.getPostId()+">"+post.getPostName()+"</option>");
-							}
+												out.print("<option value="+post.getPostId()+">"+post.getPostName()+"</option>");
+											}
 						%>
 					</select>
 					<br>
@@ -142,10 +141,10 @@
 				部署:<label id="errorg" style="display:none;color:red;"></label>
 					<select name="org" class="form-control">
 						<option value="none">選択してください</option>
-						<% 
-							for(OrganaiationBean org : orgrecode){
-								out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");
-							}
+						<%
+							for(OrganaizationBean org : orgrecode){
+												out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");
+											}
 						%>
 					</select>
 					<br>

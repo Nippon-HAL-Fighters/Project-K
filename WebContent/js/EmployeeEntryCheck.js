@@ -69,8 +69,8 @@ $(function(){
 			document.getElementById("errphonein").innerText = '内線番号が入力されていません';
 			document.getElementById("errphonein").style.display="block";
 			errflug = 1;
-		}else if(!phonein.val().match(/^[0-9]+$/)){
-			document.getElementById("errphonein").innerText = '内線番号は数字で入力してください';
+		}else if(!phonein.val().match(/(^#\d{3}$)|(^\d{4}$)/)){
+			document.getElementById("errphonein").innerText = '内線番号は数字4桁で入力してください';
 			document.getElementById("errphonein").style.display="block";
 			errflug = 1;
 		}
@@ -80,8 +80,8 @@ $(function(){
 			document.getElementById("errphoneout").innerText = '外線番号が入力されていません';
 			document.getElementById("errphoneout").style.display="block";
 			errflug = 1;
-		}else if(!phoneout.val().match(/^[0-9]+$/)){
-			document.getElementById("errphoneout").innerText = '外線番号が入力されていません';
+		}else if(!phoneout.val().match(/(^\d{10}$)|(^\d{11}$)/)){
+			document.getElementById("errphoneout").innerText = '外線番号は数字10桁または11桁で入力してください';
 			document.getElementById("errphoneout").style.display="block";
 			errflug = 1;
 		}
