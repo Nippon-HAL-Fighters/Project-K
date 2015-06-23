@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
@@ -15,7 +16,7 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
  * @author s.kageyama
  */
 
-public class PhoneDao {
+public class CompanyDao {
 
 	private Connection con = null;
 	
@@ -23,42 +24,42 @@ public class PhoneDao {
 	 * コンストラクタ
 	 * @param Connection
 	 **/
-	public PhoneDao (Connection con) {
+	public CompanyDao (Connection con) {
 		this.con = con;
 	}
 
 	/**
 	 * コンストラクタ
 	 **/
-	public PhoneDao() {
+	public CompanyDao() {
 		if(con == null){
 			DBConnecter db = new DBConnecter();
 			con = db.getConnection();
 		}
 	}
 
+	
 	/**
-	 * 　全件取得 　@return ArrayList PhoneList
-	 * 
+	 * 全件取得
+	 * @return Arraylist CompanyList
 	 * @throws SQLException
 	 **/
-	public ArrayList<PhoneBean> selectAll() throws SQLException {
+	public ArrayList<CompanieBean> selectAll() throws SQLException {
 
-		String selectSQL = "SELECT phone_id,phone_inside,phone_outside FROM phones";
+		String selectSQL = "SELECT company_id,compnay_name FROM companies";
 
 		PreparedStatement select = con.prepareStatement(selectSQL);
 
 		ResultSet selectResult = select.executeQuery();
-		ArrayList<PhoneBean> phoneList = new ArrayList<PhoneBean>();
+		ArrayList<CompanieBean> CompanyList = new ArrayList<CompanieBean>();
 
 		while (selectResult.next()) {
-			PhoneBean phoneBean = new PhoneBean();
-			phoneBean.setPhoneId(selectResult.getInt("phone_id"));
-			phoneBean.setPhoneInside(selectResult.getString("phone_inside"));
-			phoneBean.setPhoneOutside(selectResult.getString("phone_outside"));
-			phoneList.add(phoneBean);
+			CompanieBean companieBean = new CompanieBean();			
+			companieBean.setCompanyId(selectResult.getInt("company_id"));
+			companieBean.setCompanyName(selectResult.getString("compnay_name"));
+			CompanyList.add(companieBean);
 		}
-		return phoneList;
+		return CompanyList;
 	}
 	
 	/**

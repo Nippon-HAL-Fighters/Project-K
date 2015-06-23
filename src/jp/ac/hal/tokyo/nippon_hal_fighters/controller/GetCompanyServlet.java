@@ -1,6 +1,7 @@
 package jp.ac.hal.tokyo.nippon_hal_fighters.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,20 +12,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.CompanyDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.OrganaizationDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PhoneDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
 /**
- * Servlet implementation class EmployeeServlet
+ * Servlet implementation class GetPhoneInsideServlet
  */
-@WebServlet("/GetOrganizationServlet")
-public class GetOrganizationServlet extends HttpServlet {
+@WebServlet("/GetCompanyServlet")
+public class GetCompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetOrganizationServlet() {
+	public GetCompanyServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,45 +41,48 @@ public class GetOrganizationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		
-		//表示するための条件
-		int num = 1;
 
-		// DAO定義
-		OrganaizationDao organizationDao = new OrganaizationDao();
+		// 表示するための条件
+		int num = 5;
+
+		// コンストラクタ取得
+		DBConnecter connecter = new DBConnecter();
+		Connection con = null;
 
 		/*
 		 * 以下 Connecter＆DAO テスト用
 		 */
-		ArrayList<OrganaizationBean> selectData = new ArrayList<OrganaizationBean>();
+		ArrayList<CompanieBean> selectData = new ArrayList<CompanieBean>();
 		try {
-			selectData = organizationDao.selectAllOrganaiation();
-			/*System.out.println("要素数" + selectData.size());
+			con = connecter.getConnection();
+			CompanyDao companyDao = new CompanyDao(con);
+			selectData = companyDao.selectAll();
 
-			for (int i = 0; i < selectData.size(); i++) {
-				System.out.println(selectData.get(i).getOrganaizationId());
-				System.out.println(selectData.get(i).getOrganaizationName());
-			}*/
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		} finally {
 			try {
-				organizationDao.close();
+				if (con != null) {
+					con.close();
+				}
 			} catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();
 			}
 		}
 
+		for (int i = 0; i <= selectData.size(); i++) {
+			System.out.println(selectData);
+		}
 		request.setAttribute("recode", selectData);
 		request.setAttribute("num", num);
 		// データを取得してから一覧へ遷移
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("master.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 	/**
@@ -82,68 +91,49 @@ public class GetOrganizationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 
 		request.setCharacterEncoding("utf-8");
-		
-		//表示するための条件
-		int num = 1;
 
-		// DAO定義
-		OrganaizationDao organizationDao = new OrganaizationDao();
+		// 表示するための条件
+		int num = 5;
+
+		// コンストラクタ取得
+		DBConnecter connecter = new DBConnecter();
+		Connection con = null;
 
 		/*
 		 * 以下 Connecter＆DAO テスト用
 		 */
-		ArrayList<OrganaizationBean> selectData = new ArrayList<OrganaizationBean>();
+		ArrayList<CompanieBean> selectData = new ArrayList<CompanieBean>();
 		try {
-			selectData = organizationDao.selectAllOrganaiation();
-			System.out.println("要素数" + selectData.size());
+			con = connecter.getConnection();
+			CompanyDao companyDao = new CompanyDao(con);
+			selectData = companyDao.selectAll();
 
-			for (int i = 0; i < selectData.size(); i++) {
-				System.out.println(selectData.get(i).getOrganaizationId());
-				System.out.println(selectData.get(i).getOrganaizationName());
-			}
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		} finally {
 			try {
-				organizationDao.close();
+				if (con != null) {
+					con.close();
+				}
 			} catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();
 			}
 		}
 
+		for (int i = 0; i <= selectData.size(); i++) {
+			System.out.println(selectData);
+		}
 		request.setAttribute("recode", selectData);
 		request.setAttribute("num", num);
 		// データを取得してから一覧へ遷移
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("master.jsp");
 		dispatcher.forward(request, response);
-
-		// 登録情報取得
-		// OrganizationId = request.getParameter("OrganizationId");
-		// OrganizationName = request.getParameter("OrganizationName");
-
-		// System.out.println(employeeId);
-		// System.out.println(employeeName);
-
-		/**
-		 * // Bean 作成 & データセット EmployeeBean insertData = new EmployeeBean();
-		 * 
-		 * insertData.setEmployeeId(employeeId);
-		 * insertData.setEmployeeName(employeeName);
-		 * 
-		 * // 情報登録実行 try { insertResult =
-		 * insertOrganizationDao.insertOrganization(insertData);
-		 * insertEmployeeDao.commit(); } catch (SQLException e) { //
-		 * INSERTエラー発生時実行 try { insertEmployeeDao.rollback(); } catch
-		 * (SQLException e1) { e1.printStackTrace(); } e.printStackTrace(); }
-		 * finally { // Daoクローズ try { insertEmployeeDao.close(); } catch
-		 * (SQLException e) { e.printStackTrace(); } }
-		 **/
-
 	}
 
 }

@@ -1,3 +1,4 @@
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean"%>
 <%@page
@@ -120,10 +121,13 @@
    		    ArrayList<PostBean> Postrecode = (ArrayList<PostBean>)request.getAttribute("recode");
    		    PostBean postBean = new PostBean();
    		    
-   			//Phone(inside)の中身を取得
-   		    ArrayList<PhoneBean> PhoneInsiderecode = (ArrayList<PhoneBean>)request.getAttribute("recode");
+   			//Phoneの中身を取得
+   		    ArrayList<PhoneBean> phoneRecode = (ArrayList<PhoneBean>)request.getAttribute("recode");
    		    PhoneBean phoneBean = new PhoneBean();
-
+   		    
+   			//companyの中身を取得
+   		    ArrayList<CompanieBean> companyRecode = (ArrayList<CompanieBean>)request.getAttribute("recode");
+   		    CompanieBean companieBean = new CompanieBean();
  %>
 	<h1>マスタ情報</h1>
 
@@ -193,17 +197,42 @@
 							}
 					break;
 					
-					//役職の場合
+					//電話番号の場合その１
 					case 3:
-					for(PhoneBean phoneInside : PhoneInsiderecode){
+					for(PhoneBean phoneInside : phoneRecode){
 					out.print(
 								"<tr>"
-								+"<td>"+phoneInside.getPhoneInside()+"</td>"//部署名
+								+"<td>"+phoneInside.getPhoneInside()+"</td>"//内線番号
 								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
 								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
 								+"</tr>");
 							}
 					break;
+					
+					//電話番号の場合その2
+					case 4:
+					for(PhoneBean phoneOutside : phoneRecode){
+					out.print(
+								"<tr>"
+								+"<td>"+phoneOutside.getPhoneOutside()+"</td>"//内線番号
+								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
+								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"</tr>");
+							}
+					break;
+					
+					//所属会社の場合
+					case 5:
+					for(CompanieBean company : companyRecode){
+					out.print(
+								"<tr>"
+								+"<td>"+company.getCompanyName()+"</td>"//会社名
+								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
+								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"</tr>");
+							}
+					break;
+					
 				}//switch文終了
 			%>
 		</tbody>

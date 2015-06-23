@@ -100,12 +100,6 @@ public class GetPostServlet extends HttpServlet {
 		ArrayList<PostBean> selectData = new ArrayList<PostBean>();
 		try {
 			selectData = postDao.selectAllPosts();
-			/*System.out.println("要素数" + selectData.size());
-
-			for (int i = 0; i < selectData.size(); i++) {
-				System.out.println(selectData.get(i).getPostId());
-				System.out.println(selectData.get(i).getPostName());
-			}*/
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -124,13 +118,6 @@ public class GetPostServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("master.jsp");
 		dispatcher.forward(request, response);
-
-		// 登録情報取得
-		// OrganizationId = request.getParameter("OrganizationId");
-		// OrganizationName = request.getParameter("OrganizationName");
-
-		// System.out.println(employeeId);
-		// System.out.println(employeeName);
 
 		/**
 		 * // Bean 作成 & データセット EmployeeBean insertData = new EmployeeBean();

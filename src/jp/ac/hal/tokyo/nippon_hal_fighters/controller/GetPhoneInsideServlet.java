@@ -1,6 +1,7 @@
 package jp.ac.hal.tokyo.nippon_hal_fighters.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.OrganaizationDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PhoneDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
 /**
  * Servlet implementation class GetPhoneInsideServlet
@@ -42,26 +44,26 @@ request.setCharacterEncoding("utf-8");
 		int num = 3;
 
 		// DAO定義
-		PhoneDao phoneDao = new PhoneDao();
-		
+		DBConnecter connecter = new DBConnecter();
+		Connection con = null;
+
 		/*
 		 * 以下 Connecter＆DAO テスト用
 		 */
 		ArrayList<PhoneBean> selectData = new ArrayList<PhoneBean>();
 		try {
-			selectData = phoneDao.selectAllInsidePhone();
-			/*System.out.println("要素数" + selectData.size());
+			con = connecter.getConnection();
+			PhoneDao phoneDao = new PhoneDao(con);
+			selectData = phoneDao.selectAll();
 
-			for (int i = 0; i < selectData.size(); i++) {
-				System.out.println(selectData.get(i).getOrganaizationId());
-				System.out.println(selectData.get(i).getOrganaizationName());
-			}*/
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		} finally {
 			try {
-				phoneDao.close();
+				if(con != null){
+					con.close();
+				}
 			} catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();

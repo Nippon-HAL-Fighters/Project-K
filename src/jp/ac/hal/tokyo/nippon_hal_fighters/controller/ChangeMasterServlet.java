@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.CompanyDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.OrganaizationDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PhoneDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PostDao;
@@ -66,16 +68,17 @@ public class ChangeMasterServlet extends HttpServlet {
 		PostDao postDao = new PostDao(con);
 		ArrayList<PostBean> postList = new ArrayList<PostBean>();
 
-		//PhoneDaoインスタンス化
+		// PhoneDaoインスタンス化
 		PhoneDao phoneDao = new PhoneDao(con);
-		
+		// 内線番号用リスト
 		ArrayList<PhoneBean> phoneInsideList = new ArrayList<PhoneBean>();
-		//
+		// 外線番号用リスト
 		ArrayList<PhoneBean> phoneOutsideList = new ArrayList<PhoneBean>();
 
-		//
-		
-		
+		// CompanyDaoインスタンス化
+		CompanyDao companyDao = new CompanyDao(con);
+		ArrayList<CompanieBean> companyList = new ArrayList<CompanieBean>();
+
 		// 判別用の数字
 		int num;
 
@@ -129,7 +132,7 @@ public class ChangeMasterServlet extends HttpServlet {
 		case "phoneInside":
 			num = 3;
 			try {
-				phoneInsideList = phoneDao.selectAllInsidePhone();
+				phoneInsideList = phoneDao.selectAll();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -144,12 +147,12 @@ public class ChangeMasterServlet extends HttpServlet {
 			request.setAttribute("num", num);
 			request.setAttribute("recode", phoneInsideList);
 			break;
-			
+
 		// 外線電話の場合ここから
 		case "phoneOutside":
 			num = 4;
 			try {
-				phoneOutsideList = phoneDao.selectAllOutsidePhone();
+				phoneOutsideList = phoneDao.selectAll();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -164,14 +167,24 @@ public class ChangeMasterServlet extends HttpServlet {
 			request.setAttribute("num", num);
 			request.setAttribute("recode", phoneOutsideList);
 			break;
-		/**
-		 * // 会社の場合ここから case "company": try { orglist =
-		 * organaizationDao.selectAllOrganaiation(); } catch (SQLException e) {
-		 * // TODO Auto-generated catch block e.printStackTrace(); } finally {
-		 * try { con.close(); } catch (SQLException e) { // TODO Auto-generated
-		 * catch block e.printStackTrace(); } } request.setAttribute("orglist",
-		 * orglist); break;
-		 **/
+
+		// 会社の場合ここから
+		case "company":
+			num = 5;
+			try {
+				companyList = companyDao.selectAll();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block e.printStackTrace(); }
+				// finally {
+				try {
+					con.close();
+				} catch (SQLException e1) { // TODO Auto-generated
+					e1.printStackTrace();
+				}
+			}
+			request.setAttribute("num", num);
+			request.setAttribute("recode", companyList);
+			break;
 		}// switch　終了
 		RequestDispatcher disp = request.getRequestDispatcher("master.jsp");
 		disp.forward(request, response);
