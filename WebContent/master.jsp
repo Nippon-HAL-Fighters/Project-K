@@ -1,3 +1,5 @@
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean"%>
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean"%>
 <%@page
 	import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -26,26 +28,28 @@
 </script>-->
 
 <script>
-	$(document).ready(function(){
-	    $('#myTable').DataTable({ "language": {
-	    	  "emptyTable" : "データが登録されていません。",
-	    	  "info" : "_TOTAL_ 件中 _START_ 件から _END_ 件までを表示",
-	    	  "infoEmpty" : "",
-	    	  "infoFiltered" : "(_MAX_ 件からの絞り込み表示)",
-	    	  "infoPostFix" : "",
-	    	  "thousands" : ",",
-	    	  "lengthMenu" : "1ページあたりの表示件数: _MENU_",
-	    	  "loadingRecords" : "ロード中",
-	    	  "processing" : "処理中...",
-	    	  "search" : "検索",
-	    	  "zeroRecords" : "該当するデータが見つかりませんでした。",
-	    	  "paginate" : {
-	    	    "first" : "先頭",
-	    	    "previous" : "前へ",
-	    	    "next" : "次へ",
-	    	    "last" : "末尾"
-	    	  }
-	    	},});
+	$(document).ready(function() {
+		$('#myTable').DataTable({
+			"language" : {
+				"emptyTable" : "データが登録されていません。",
+				"info" : "_TOTAL_ 件中 _START_ 件から _END_ 件までを表示",
+				"infoEmpty" : "",
+				"infoFiltered" : "(_MAX_ 件からの絞り込み表示)",
+				"infoPostFix" : "",
+				"thousands" : ",",
+				"lengthMenu" : "1ページあたりの表示件数: _MENU_",
+				"loadingRecords" : "ロード中",
+				"processing" : "処理中...",
+				"search" : "検索",
+				"zeroRecords" : "該当するデータが見つかりませんでした。",
+				"paginate" : {
+					"first" : "先頭",
+					"previous" : "前へ",
+					"next" : "次へ",
+					"last" : "末尾"
+				}
+			},
+		});
 	});
 </script>
 </head>
@@ -107,11 +111,20 @@
 		</ul>
 	</nav>
 	<!-- 共通部分ここまで -->
-	<main> 
-	<%
- 		ArrayList<OrganaizationBean> recode = (ArrayList<OrganaizationBean>)request.getAttribute("recode");
-        OrganaizationBean organaizationBean = new OrganaizationBean();
- 	%>
+	<main> <% 		
+   			//Organaiationの中身を取得
+  		 	ArrayList<OrganaizationBean> Organaizationrecode = (ArrayList<OrganaizationBean>)request.getAttribute("recode");
+   	        OrganaizationBean organaizationBean = new OrganaizationBean();
+   		
+   			//Postの中身を取得
+   		    ArrayList<PostBean> Postrecode = (ArrayList<PostBean>)request.getAttribute("recode");
+   		    PostBean postBean = new PostBean();
+   		    
+   			//Phone(inside)の中身を取得
+   		    ArrayList<PhoneBean> PhoneInsiderecode = (ArrayList<PhoneBean>)request.getAttribute("recode");
+   		    PhoneBean phoneBean = new PhoneBean();
+
+ %>
 	<h1>マスタ情報</h1>
 
 
@@ -126,7 +139,7 @@
 						class="btn btn-info"></td>
 				</form>
 
-				<form action="#" method="post">
+				<form action="ChangeMasterServlet" method="post">
 					<td id="right"><select name="category" class="form-control">
 							<option value="organaization">部署</option>
 							<option value="post">役職</option>
@@ -141,7 +154,8 @@
 		</table>
 	</div>
 
-	<table cellpadding="0" cellspacing="0" border="1" class="display" id="myTable">
+	<table cellpadding="0" cellspacing="0" border="1" class="display"
+		id="myTable">
 		<thead>
 			<tr>
 				<th>部署名</th>
@@ -151,14 +165,46 @@
 		</thead>
 		<tbody>
 			<%
-				for(OrganaizationBean org : recode){
+			//表示内容を判定するwordを取得
+     		int num=(Integer)request.getAttribute("num");
+   			System.out.print(num);
+				switch(num){
+					//組織の場合
+					case 1:
+					for(OrganaizationBean org : Organaizationrecode){
 						out.print(
-							"<tr>"
-							+"<td>"+org.getOrganaizationName()+"</td>"//部署名
-							+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
-							+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
-							+"</tr>");
-						}
+								"<tr>"
+								+"<td>"+org.getOrganaizationName()+"</td>"//部署名
+								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
+								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"</tr>");
+							}
+					break;
+					
+					//役職の場合
+					case 2:
+					for(PostBean post : Postrecode){
+					out.print(
+								"<tr>"
+								+"<td>"+post.getPostName()+"</td>"//部署名
+								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
+								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"</tr>");
+							}
+					break;
+					
+					//役職の場合
+					case 3:
+					for(PhoneBean phoneInside : PhoneInsiderecode){
+					out.print(
+								"<tr>"
+								+"<td>"+phoneInside.getPhoneInside()+"</td>"//部署名
+								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
+								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"</tr>");
+							}
+					break;
+				}//switch文終了
 			%>
 		</tbody>
 	</table>

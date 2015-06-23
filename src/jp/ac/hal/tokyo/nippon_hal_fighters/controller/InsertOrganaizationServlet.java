@@ -1,11 +1,22 @@
 package jp.ac.hal.tokyo.nippon_hal_fighters.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.OrganaizationDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PostDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
 /**
  * Servlet implementation class InsertOrganaizationServlet
@@ -34,6 +45,32 @@ public class InsertOrganaizationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		/*DBConnecter connecter = new DBConnecter();
+		Connection con = connecter.getConnection();
+		OrganaizationDao organaizationDao = new OrganaizationDao(con);
+		ArrayList<OrganaizationBean> insertOrganaization = new ArrayList<OrganaizationBean>();
+		
+		
+		try{
+			insertOrganaization = organaizationDao.insertOrganaiation();
+			System.out.print(insertOrganaization.size());
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally{
+			try {
+				organaizationDao.close();
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		}
+		
+		
+		request.setAttribute("postlist", getPost);
+		//データを取得してから社員情報登録へ遷移
+		RequestDispatcher dispatcher = request.getRequestDispatcher("master.jsp");
+		dispatcher.forward(request, response);*/
 		
 		
 		

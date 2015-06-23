@@ -6,13 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
 /**
  * Posts テーブル用のDao
  * 
- * @author a.kikuhara
+ * @author s.kageyama
  */
 
 public class PhoneDao {
@@ -42,23 +43,47 @@ public class PhoneDao {
 	 * 
 	 * @throws SQLException
 	 **/
-	public ArrayList<PostBean> selectAllPosts() throws SQLException {
+	public ArrayList<PhoneBean> selectAllInsidePhone() throws SQLException {
 
-		String selectSQL = "SELECT post_id,post_name FROM posts";
+		String selectSQL = "SELECT phone_id,phone_inside FROM phones";
 
 		PreparedStatement select = con.prepareStatement(selectSQL);
 
 		ResultSet selectResult = select.executeQuery();
-		ArrayList<PostBean> PostList = new ArrayList<PostBean>();
+		ArrayList<PhoneBean> PhoneInsideList = new ArrayList<PhoneBean>();
 
 		while (selectResult.next()) {
-			PostBean postBean = new PostBean();
-			postBean.setPostId(selectResult.getInt("post_id"));
-			postBean.setPostName(selectResult.getString("post_name"));
+			PhoneBean phoneBean = new PhoneBean();
+			phoneBean.setPhoneId(selectResult.getInt("phone_id"));
+			phoneBean.setPhoneInside(selectResult.getString("phone_inside"));
 
-			PostList.add(postBean);
+			PhoneInsideList.add(phoneBean);
 		}
-		return PostList;
+		return PhoneInsideList;
+	}
+	
+	/**
+	 * 　全件取得 　@return ArrayList PostList
+	 * 
+	 * @throws SQLException
+	 **/
+	public ArrayList<PhoneBean> selectAllOutsidePhone() throws SQLException {
+
+		String selectSQL = "SELECT phone_id,phone_outside FROM phones";
+
+		PreparedStatement select = con.prepareStatement(selectSQL);
+
+		ResultSet selectResult = select.executeQuery();
+		ArrayList<PhoneBean> PhoneInsideList = new ArrayList<PhoneBean>();
+
+		while (selectResult.next()) {
+			PhoneBean phoneBean = new PhoneBean();
+			phoneBean.setPhoneId(selectResult.getInt("phone_id"));
+			phoneBean.setPhoneOutside(selectResult.getString("phone_outside"));
+
+			PhoneInsideList.add(phoneBean);
+		}
+		return PhoneInsideList;
 	}
 	
 	/**

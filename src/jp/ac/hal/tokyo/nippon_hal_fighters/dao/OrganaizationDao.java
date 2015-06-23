@@ -67,7 +67,7 @@ public class OrganaizationDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int insert(OrganaizationBean organaiationBean) throws SQLException {
+	public int insertOrganaiation(OrganaizationBean organaiationBean) throws SQLException {
 
 		String InsertSQL = "INSERT INTO organaizations VALUES(?,?)";
 		PreparedStatement prst = con.prepareStatement(InsertSQL);

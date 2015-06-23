@@ -12,19 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.OrganaizationDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PostDao;
 
 /**
  * Servlet implementation class EmployeeServlet
  */
-@WebServlet("/OrganizationServlet")
-public class GetOrganizationServlet extends HttpServlet {
+@WebServlet("/PostServlet")
+public class GetPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetOrganizationServlet() {
+	public GetPostServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,31 +38,31 @@ public class GetOrganizationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
-		//表示するための条件
-		int num = 1;
+
+		// 表示するための条件
+		int num = 2;
 
 		// DAO定義
-		OrganaizationDao organizationDao = new OrganaizationDao();
+		PostDao postDao = new PostDao();
 
 		/*
 		 * 以下 Connecter＆DAO テスト用
 		 */
-		ArrayList<OrganaizationBean> selectData = new ArrayList<OrganaizationBean>();
+		ArrayList<PostBean> selectData = new ArrayList<PostBean>();
 		try {
-			selectData = organizationDao.selectAllOrganaiation();
+			selectData = postDao.selectAllPosts();
 			/*System.out.println("要素数" + selectData.size());
 
 			for (int i = 0; i < selectData.size(); i++) {
-				System.out.println(selectData.get(i).getOrganaizationId());
-				System.out.println(selectData.get(i).getOrganaizationName());
+				System.out.println(selectData.get(i).getPostId());
+				System.out.println(selectData.get(i).getPostName());
 			}*/
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		} finally {
 			try {
-				organizationDao.close();
+				postDao.close();
 			} catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();
@@ -69,6 +71,7 @@ public class GetOrganizationServlet extends HttpServlet {
 
 		request.setAttribute("recode", selectData);
 		request.setAttribute("num", num);
+		System.out.println(num);
 		// データを取得してから一覧へ遷移
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("master.jsp");
@@ -84,31 +87,31 @@ public class GetOrganizationServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
-		
-		//表示するための条件
-		int num = 1;
+
+		// 表示するための条件
+		int num = 2;
 
 		// DAO定義
-		OrganaizationDao organizationDao = new OrganaizationDao();
+		PostDao postDao = new PostDao();
 
 		/*
 		 * 以下 Connecter＆DAO テスト用
 		 */
-		ArrayList<OrganaizationBean> selectData = new ArrayList<OrganaizationBean>();
+		ArrayList<PostBean> selectData = new ArrayList<PostBean>();
 		try {
-			selectData = organizationDao.selectAllOrganaiation();
-			System.out.println("要素数" + selectData.size());
+			selectData = postDao.selectAllPosts();
+			/*System.out.println("要素数" + selectData.size());
 
 			for (int i = 0; i < selectData.size(); i++) {
-				System.out.println(selectData.get(i).getOrganaizationId());
-				System.out.println(selectData.get(i).getOrganaizationName());
-			}
+				System.out.println(selectData.get(i).getPostId());
+				System.out.println(selectData.get(i).getPostName());
+			}*/
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		} finally {
 			try {
-				organizationDao.close();
+				postDao.close();
 			} catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();
