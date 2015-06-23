@@ -10,12 +10,13 @@ package jp.ac.hal.tokyo.nippon_hal_fighters.beans;
  */
 public class OrganaiationBean {
 
-	private int organaizationId;
+	private String organaizationId;
 	private String organaizationName;
-	public int getOrganaizationId() {
+	
+	public String getOrganaizationId() {
 		return organaizationId;
 	}
-	public void setOrganaizationId(int organaizationId) {
+	public void setOrganaizationId(String organaizationId) {
 		this.organaizationId = organaizationId;
 	}
 	public String getOrganaizationName() {

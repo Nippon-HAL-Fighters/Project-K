@@ -66,7 +66,7 @@ public class UpdateEmployeeData extends HttpServlet {
 		int admin = Integer.parseInt(request.getParameter("admin"));
 		String password = request.getParameter("pass");
 		int posts = Integer.parseInt(request.getParameter("posts"));
-		int org = Integer.parseInt(request.getParameter("org"));
+		String org = request.getParameter("org");
 		int comp = Integer.parseInt(request.getParameter("comp"));
 		String phoneinside = request.getParameter("phoneinside");
 		String phoneout = request.getParameter("phoneout");	

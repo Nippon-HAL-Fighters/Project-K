@@ -86,6 +86,23 @@ public class PhoneDao {
 		return update.executeUpdate();
 	}
 	
+	
+	/**
+	 * 削除
+	 * @param  phoneBean 削除データ
+	 * @throws SQLException
+	 */
+	public int deletephone(PhoneBean delphone) throws SQLException{
+		String deleteSQL = "DELETE FROM employees WHERE employee_id = ?";
+		
+		PreparedStatement delete = con.prepareStatement(deleteSQL);
+		delete.setInt(1,delphone.getPhoneId());		
+		
+		return delete.executeUpdate();
+	}
+	
+	
+	
 	/**
 	 * コミット
 	 * @throws SQLException 

@@ -51,7 +51,7 @@ public class EmployeeDao {
 			employeeBean.setEmployeeStatus(selectResult.getString("employee_status"));
 			employeeBean.setAdmin(selectResult.getInt("admin"));
 			employeeBean.setPassword(selectResult.getString("password"));
-			employeeBean.setOrgnaizationId(selectResult.getInt("organaization_id"));
+			employeeBean.setOrgnaizationId(selectResult.getString("organaization_id"));
 			employeeBean.setPostId(selectResult.getInt("post_id"));
 			employeeBean.setPhoneId(selectResult.getInt("phone_id"));
 			employeeBean.setCompanyId(selectResult.getInt("company_id"));
@@ -84,7 +84,7 @@ public class EmployeeDao {
 			employeeBean.setEmployeeStatus(selectResult.getString("emp.employee_status"));
 			employeeBean.setAdmin(selectResult.getInt("emp.admin"));
 			employeeBean.setPassword(selectResult.getString("emp.password"));
-			employeeBean.setOrgnaizationId(selectResult.getInt("organaization_id"));
+			employeeBean.setOrgnaizationId(selectResult.getString("organaization_id"));
 			employeeBean.setOrgnaizationName(selectResult.getString("org.organaization_name"));
 			employeeBean.setPostName(selectResult.getString("pos.post_name"));
 			employeeBean.setPhoneInside(selectResult.getString("phone.phone_inside"));
@@ -123,7 +123,7 @@ public class EmployeeDao {
 			employeeBean.setEmployeeStatus(selectResult.getString("emp.employee_status"));
 			employeeBean.setAdmin(selectResult.getInt("emp.admin"));
 			employeeBean.setPassword(selectResult.getString("emp.password"));
-			employeeBean.setOrgnaizationId(selectResult.getInt("organaization_id"));
+			employeeBean.setOrgnaizationId(selectResult.getString("organaization_id"));
 			employeeBean.setOrgnaizationName(selectResult.getString("org.organaization_name"));
 			employeeBean.setPostName(selectResult.getString("pos.post_name"));
 			employeeBean.setPhoneInside(selectResult.getString("phone.phone_inside"));
@@ -163,7 +163,7 @@ public class EmployeeDao {
 		insert.setString(3, insertData.getEmployeeStatus());
 		insert.setInt(4, insertData.getAdmin());
 		insert.setString(5, insertData.getPassword());
-		insert.setInt(6, insertData.getOrgnaizationId());
+		insert.setString(6, insertData.getOrgnaizationId());
 		insert.setInt(7, insertData.getPostId());
 		insert.setInt(8, insertData.getPhoneId());
 		insert.setInt(9, insertData.getCompanyId());
@@ -192,7 +192,7 @@ public class EmployeeDao {
 		update.setString(3, updateData.getEmployeeStatus());
 		update.setInt(4, updateData.getAdmin());
 		update.setString(5, updateData.getPassword());
-		update.setInt(6, updateData.getOrgnaizationId());
+		update.setString(6, updateData.getOrgnaizationId());
 		update.setInt(7, updateData.getPostId());
 		update.setInt(8, updateData.getPhoneId());
 		update.setInt(9, updateData.getCompanyId());
@@ -201,6 +201,22 @@ public class EmployeeDao {
 		System.out.println(update);
 
 		return update.executeUpdate();
+	}
+	
+	/**
+	 * 社員情報削除
+	 *
+	 * @param  EmployeeBean 削除データ
+	 * @return deleteResult 情報追加成功数 1なら成功
+	 * @throws SQLException
+	 */
+	public int deleteEmployee(EmployeeBean delemployee) throws SQLException{
+		String deleteSQL = "DELETE FROM employees WHERE employee_id = ?";
+		
+		PreparedStatement delete = con.prepareStatement(deleteSQL);
+		delete.setString(1,delemployee.getEmployeeId());		
+		
+		return delete.executeUpdate();
 	}
 
 	public void commit() throws SQLException {

@@ -32,8 +32,7 @@ public class OrganaizationDao {
 		}
 	}
 	
-	
-	
+		
 	/**
 	 * 全件取得
 	 *
@@ -51,15 +50,13 @@ public class OrganaizationDao {
 		while (selectResult.next()) {
 			//EmployeeBean employeeBean = new EmployeeBean();
 			OrganaiationBean organaiationBean = new OrganaiationBean();
-			organaiationBean.setOrganaizationId(selectResult.getInt("organaization_id"));
+			organaiationBean.setOrganaizationId(selectResult.getString("organaization_id"));
 			organaiationBean.setOrganaizationName(selectResult.getString("organaization_name"));	
 			organaizationList.add(organaiationBean);
 		}
 		return organaizationList;
 	}
-	
-	
-	
+		
 	
 	/**
 	 * コミット

@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>社員情報登録</title>
+    <title>社員情報更新</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./css/styles.css" type="text/css" />
     <link rel="stylesheet" href="./css/font-awesome/font-awesome.css" type="text/css" />
@@ -26,12 +26,14 @@
     <script src="./js/EmployeeEntryCheck.js"></script>
     
     <script type="text/javascript">
-    pulldown_option = document.getElementById("koyo").getElementsByTagName('option');
-    for(i=0; i<pulldown_option.length;i++){
-       if(pulldown_option[i].value == "'<%= emprecode.getEmployeeStatus() %>'"){
-          pulldown_option[i].selected = true;
-          break;
-       }
+    var koyoselect = document.getElementById('koyo').options;
+    for(var i = 0; i < koyoselect.length; i++){
+    	console.log("aaa");
+    	if(koyoselect[i].text === '<%= emprecode.getEmployeeStatus() %>'){
+    		console.log(koyoselect[i].text+":"+<%= emprecode.getEmployeeStatus() %>);
+    		koyoselect[i].selected = true;
+    		break;
+    	};
     }
 	</script>
    </head>
@@ -95,7 +97,7 @@
     <!-- 共通部分ここまで -->
     <main>
     	<div id="main-form">
-	        <h2>社員情報登録</h2>
+	        <h2>社員情報更新</h2>
 	       <form action="UpdateEmployeeData" method="post">
 	        	<div class="forms">
 	        		社員番号:<label id="errid" style="display:none;color:red;"></label>
@@ -111,7 +113,7 @@
 	        	
 	        	<div class="forms">
 	        	雇用状態:<label id="errstatus" style="display:none;color:red;"></label>
-	        		<select name="koyo" class="form-control">
+	        		<select name="koyo" id="koyo" class="form-control">
 						<option value="none">選択してください</option>
 						<option value="会長">会長</option>
 						<option value="社長">社長</option>
@@ -156,7 +158,7 @@
 						<option value="none">選択してください</option>
 						<% 
 							for(OrganaiationBean org : orgrecode){
-								if(org.getOrganaizationId() == emprecode.getOrgnaizationId()){		//postIDと更新前postIDが一致していた場合
+								if(org.getOrganaizationId().equals(emprecode.getOrgnaizationId())){
 									out.print("<option value="+org.getOrganaizationId()+" selected >"+org.getOrganaizationName()+"</option>");
 								}else{
 									out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");	
