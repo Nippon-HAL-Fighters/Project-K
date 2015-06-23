@@ -22,13 +22,13 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
  * Servlet implementation class GetPhoneInsideServlet
  */
 @WebServlet("/GetPhoneInsideServlet")
-public class GetPhoneInsideServlet extends HttpServlet {
+public class GetPhoneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetPhoneInsideServlet() {
+    public GetPhoneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
