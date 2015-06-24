@@ -3,25 +3,11 @@ $(function() {
 	/** JointJS * */
 	var graph = new joint.dia.Graph;
 
-    graph.on('remove', function(cell) {
-        var rmIdx = _.indexOf(cells, cell);
-        cells.splice(rmIdx, 1);
-    });
-
-    graph.on('change', function(cell) {
-        isSaved = false;
-    });
-
-    var graphLayout = new joint.layout.TreeLayout({
-        graph: graph,
-        verticalGap: 20,
-        horizontalGap: 40
-    });
-
 	var cells = [];
 
 	/* 描画領域の作成 */
 	var $editArea = $('#editArea');
+
 	var editArea = {
 			width: $('#editArea').innerWidth(),
 			height: $('#editArea').innerHeight()
@@ -35,8 +21,18 @@ $(function() {
 		model : graph
 	});
 
+	paper.on('cell:pointerup', function(cellView) {
+	    if (cellView.model instanceof joint.dia.Link) return;
+
+	    var halo = new joint.ui.Halo({ graph: graph, paper: paper, cellView: cellView });
+	    halo.render();
+	});
+
+    var snaplines = new joint.ui.Snaplines({ paper: paper });
+    snaplines.startListening();
+
 	/* 作成ボタン押下アクション */
-	$('.button').click(function() {
+	$('.item').click(function() {
 		var selected = $(this).val();
 		switch (selected) {
 		case '机':
@@ -47,6 +43,9 @@ $(function() {
 			break;
 		case 'しきり':
 			createPartition();
+			break;
+		case 'プリント':
+			paper.print()
 			break;
 		default:
 			break;
@@ -62,10 +61,7 @@ $(function() {
 	function createDesk() {
 
 		cells.push( new joint.shapes.basic.Rect({
-			position : {
-				x: defaultPosition.x,
-				y: defaultPosition.y
-			},
+			position : defaultPosition,
 			size : {
 				width : 100,
 				height : 60
