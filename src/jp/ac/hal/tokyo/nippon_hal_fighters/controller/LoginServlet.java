@@ -109,9 +109,7 @@ public class LoginServlet extends HttpServlet {
 
 			PrintWriter out = response.getWriter();
 
-			out.println("ログイン成功");
-			out.println("Employee ID: " + (String) session.getAttribute("employee_id"));
-			out.println("isAdmin: " + (boolean) session.getAttribute("isAdmin"));
+			response.sendRedirect("./index.jsp");
 		}
 	}
 
