@@ -19,14 +19,14 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PostDao;
 /**
  * Servlet implementation class EmployeeServlet
  */
-@WebServlet("/PostServlet")
-public class GetPostServlet extends HttpServlet {
+@WebServlet("/GetPostsServlet")
+public class GetPostsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetPostServlet() {
+	public GetPostsServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

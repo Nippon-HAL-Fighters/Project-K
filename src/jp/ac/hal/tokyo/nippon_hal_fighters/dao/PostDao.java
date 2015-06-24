@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
@@ -43,11 +44,8 @@ public class PostDao {
 	 * @throws SQLException
 	 **/
 	public ArrayList<PostBean> selectAllPosts() throws SQLException {
-
 		String selectSQL = "SELECT post_id,post_name FROM posts";
-
 		PreparedStatement select = con.prepareStatement(selectSQL);
-
 		ResultSet selectResult = select.executeQuery();
 		ArrayList<PostBean> PostList = new ArrayList<PostBean>();
 
@@ -61,6 +59,39 @@ public class PostDao {
 		return PostList;
 	}
 	
+	/**
+	 * 登録データの件数を取得
+	 * @return int datacount
+	 * @throws SQLException	 
+	 */
+	public int datacount() throws SQLException{
+		String countsql = "SELECT post_id FROM posts";
+		PreparedStatement count = con.prepareStatement(countsql);
+		ResultSet countResult = count.executeQuery();
+		int datacount = 0;
+		while(countResult.next()){
+			datacount = countResult.getInt("post_id");
+		}
+		return datacount;
+	}
+	
+	/**
+	 * インサート 
+	 * @param PostBean
+	 * @throws SQLException	
+	 */
+	public int insertPost(PostBean insertpost) throws SQLException{
+		String insertSQL = "INSERT INTO posts("
+				+"post_id,post_name)"
+				+"VALUES(?,?)";
+		
+		PreparedStatement insert = con.prepareStatement(insertSQL);
+		
+		insert.setInt(1, insertpost.getPostId());
+		insert.setString(2, insertpost.getPostName());
+		
+		return insert.executeUpdate();
+	}
 	/**
 	 * コミット
 	 * @throws SQLException 

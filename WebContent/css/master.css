@@ -15,10 +15,10 @@
 #left {
 	width: 200px;
 	height: 50px;
-	/*border:solid 1px black;*/
-	float: left;
+	/*border:solid 1px black;*/	
 	padding-top: 10px;
 }
+
 
 #right {
 	width: 200px;

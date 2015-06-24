@@ -40,11 +40,10 @@ public class OrganaizationDao {
 	 * @return ArrayList OrganazationList
 	 * @throws SQLException
 	 */
-	public ArrayList<OrganaizationBean> selectAllOrganaiation()
-			throws SQLException {
-		String SelectSQL = "SELECT organaization_id,organaization_name FROM organaizations";
+	public ArrayList<OrganaizationBean> selectAllOrganaiation() throws SQLException {
+		String selectSQL = "SELECT organaization_id,organaization_name FROM organaizations";
 
-		PreparedStatement select = con.prepareStatement(SelectSQL);
+		PreparedStatement select = con.prepareStatement(selectSQL);
 
 		ResultSet selectResult = select.executeQuery();
 
@@ -75,127 +74,6 @@ public class OrganaizationDao {
 		prst.setString(2, organaiationBean.getOrganaizationName());
 		return prst.executeUpdate();
 	}
-	
-	/*
-	public ArrayList<OrganaizationBean> ChaneOrganaizations() throws SQLException {
-		String hanbetu = Request.getParameter("category");
-		
-		switch(hanbetu){
-		
-			//組織の場合↓↓ここから
-			case "organaization":
-			String ChangeSQL = "select * from organaizations";
-			
-			PreparedStatement select = con.prepareStatement(ChangeSQL);
-
-			ResultSet selectResult = select.executeQuery();
-
-			ArrayList<OrganaizationBean> organaizationList = new ArrayList<OrganaizationBean>();
-			while (selectResult.next()) {
-				OrganaizationBean organaiationBean = new OrganaizationBean();
-				organaiationBean.setOrganaizationId(selectResult
-						.getString("organaization_id"));
-				organaiationBean.setOrganaizationName(selectResult
-						.getString("organaization_name"));
-				organaizationList.add(organaiationBean);
-			}
-			return organaizationList;
-			break;
-			//↑↑ここまで
-			
-			//役職の場合↓↓ここから
-			case "organaization":
-			String ChangeSQL = "select * from organaizations";
-			
-			PreparedStatement select = con.prepareStatement(ChangeSQL);
-
-			ResultSet selectResult = select.executeQuery();
-
-			ArrayList<OrganaizationBean> organaizationList = new ArrayList<OrganaizationBean>();
-			while (selectResult.next()) {
-				OrganaizationBean organaiationBean = new OrganaizationBean();
-				organaiationBean.setOrganaizationId(selectResult
-						.getString("organaization_id"));
-				organaiationBean.setOrganaizationName(selectResult
-						.getString("organaization_name"));
-				organaizationList.add(organaiationBean);
-			}
-			return organaizationList;
-			break;
-			//↑↑ここまで
-			
-			//内線番号の場合↓↓ここから
-			case "organaization":
-			String ChangeSQL = "select * from organaizations";
-			
-			PreparedStatement select = con.prepareStatement(ChangeSQL);
-
-			ResultSet selectResult = select.executeQuery();
-
-			ArrayList<OrganaizationBean> organaizationList = new ArrayList<OrganaizationBean>();
-			while (selectResult.next()) {
-				OrganaizationBean organaiationBean = new OrganaizationBean();
-				organaiationBean.setOrganaizationId(selectResult
-						.getString("organaization_id"));
-				organaiationBean.setOrganaizationName(selectResult
-						.getString("organaization_name"));
-				organaizationList.add(organaiationBean);
-			}
-			return organaizationList;
-			break;
-			//↑↑ここまで
-			
-			//組織の場合↓↓ここから
-			case "organaization":
-			String ChangeSQL = "select * from organaizations";
-			
-			PreparedStatement select = con.prepareStatement(ChangeSQL);
-
-			ResultSet selectResult = select.executeQuery();
-
-			ArrayList<OrganaizationBean> organaizationList = new ArrayList<OrganaizationBean>();
-			while (selectResult.next()) {
-				OrganaizationBean organaiationBean = new OrganaizationBean();
-				organaiationBean.setOrganaizationId(selectResult
-						.getString("organaization_id"));
-				organaiationBean.setOrganaizationName(selectResult
-						.getString("organaization_name"));
-				organaizationList.add(organaiationBean);
-			}
-			return organaizationList;
-			break;
-			//↑↑ここまで
-			
-			//組織の場合↓↓ここから
-			case "organaization":
-			String ChangeSQL = "select * from organaizations";
-			
-			PreparedStatement select = con.prepareStatement(ChangeSQL);
-
-			ResultSet selectResult = select.executeQuery();
-
-			ArrayList<OrganaizationBean> organaizationList = new ArrayList<OrganaizationBean>();
-			while (selectResult.next()) {
-				OrganaizationBean organaiationBean = new OrganaizationBean();
-				organaiationBean.setOrganaizationId(selectResult
-						.getString("organaization_id"));
-				organaiationBean.setOrganaizationName(selectResult
-						.getString("organaization_name"));
-				organaizationList.add(organaiationBean);
-			}
-			return organaizationList;
-			break;
-			//↑↑ここまで
-			
-			
-			
-			case "";
-			
-			
-			
-		}
-		
-	}*/
 
 	/**
 	 * コミット

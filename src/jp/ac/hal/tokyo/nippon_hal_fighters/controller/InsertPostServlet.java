@@ -3,7 +3,6 @@ package jp.ac.hal.tokyo.nippon_hal_fighters.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,23 +11,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
-import jp.ac.hal.tokyo.nippon_hal_fighters.dao.OrganaizationDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.EmployeeDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PhoneDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PostDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
 /**
- * Servlet implementation class InsertOrganaizationServlet
+ * Servlet implementation class InsertPostServlet
  */
-@WebServlet("/InsertOrganaizationServlet")
-public class InsertOrganaizationServlet extends HttpServlet {
+@WebServlet("/InsertPostServlet")
+public class InsertPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertOrganaizationServlet() {
+    public InsertPostServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,37 +49,40 @@ public class InsertOrganaizationServlet extends HttpServlet {
 		
 		DBConnecter connecter = new DBConnecter();
 		Connection con = connecter.getConnection();
-		OrganaizationDao organaizationDao = new OrganaizationDao(con);
-		OrganaizationBean insertBean = new OrganaizationBean();
+		PostBean postBean= new PostBean();
+		PostDao postDao = new PostDao();
 		
-		String OrganaizationId = request.getParameter("organaizationid");
-		String OrganaizationName = request.getParameter("organaizationname");
+		int postId; 
+		String postName = request.getParameter("addData"); 
+		System.out.println(postName);
 		
-		
-		try{
-			insertBean.setOrganaizationId(OrganaizationId);
-			insertBean.setOrganaizationName(OrganaizationName);
+		try {
+			postId = postDao.datacount();
+			postId = postId + 1;
+			System.out.println(postId);
 			
-			organaizationDao.insertOrganaiation(insertBean);
-			organaizationDao.commit();
-		} catch (SQLException e){
+			postBean.setPostId(postId);
+			postBean.setPostName(postName);
+			
+			System.out.println(postId);
+			
+			postDao.insertPost(postBean);
+			postDao.commit();
+			System.out.print("OK!");
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally{
+		}finally{
 			try {
-				organaizationDao.close();
+				con.close();
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 		}
 		
-		//データを取得してから社員情報登録へ遷移
-		RequestDispatcher dispatcher = request.getRequestDispatcher("master.jsp");
+		//データを登録したら一覧へ遷移する。
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Master.jsp");
 		dispatcher.forward(request, response);
-		
-		
-		
-		
 	}
 
 }

@@ -113,6 +113,7 @@
 	</nav>
 	<!-- 共通部分ここまで -->
 	<main> <% 		
+			int num=(Integer)request.getAttribute("num");
    			//Organaiationの中身を取得
   		 	ArrayList<OrganaizationBean> Organaizationrecode = (ArrayList<OrganaizationBean>)request.getAttribute("recode");
    	        OrganaizationBean organaizationBean = new OrganaizationBean();
@@ -128,7 +129,7 @@
    			//companyの中身を取得
    		    ArrayList<CompanieBean> companyRecode = (ArrayList<CompanieBean>)request.getAttribute("recode");
    		    CompanieBean companieBean = new CompanieBean();
- %>
+ 	%>
 	<h1>マスタ情報</h1>
 
 
@@ -136,11 +137,12 @@
 	<div id="all">
 		<table border="0">
 			<tr>
-				<form action="InsertOrganaizationServlet" method="post">
-					<td id="left"><input type="text" name="text"
+				<form action="AddDataServlet" method="post">
+					<td id="left"><input type="text" name="addtext"
 						class="form-control" /></td>
 					<td><input type="submit" name="add" value="追加"
 						class="btn btn-info"></td>
+						<input type="hidden" name="addtype" value="<%= num %>" />
 				</form>
 
 				<form action="ChangeMasterServlet" method="post">
@@ -170,7 +172,7 @@
 		<tbody>
 			<%
 			//表示内容を判定するwordを取得
-     		int num=(Integer)request.getAttribute("num");
+     		
    			System.out.print(num);
 				switch(num){
 					//組織の場合

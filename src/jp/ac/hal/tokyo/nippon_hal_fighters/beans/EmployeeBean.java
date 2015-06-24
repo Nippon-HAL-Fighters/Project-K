@@ -7,7 +7,7 @@ public class EmployeeBean {
 	private String employeeStatus;
 	private int admin;
 	private String password;
-	private int orgnaizationId;
+	private String orgnaizationId;
 	private String orgnaizationName;
 	private int postId;
 	private String postName;
@@ -47,10 +47,10 @@ public class EmployeeBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getOrgnaizationId() {
+	public String getOrgnaizationId() {
 		return orgnaizationId;
 	}
-	public void setOrgnaizationId(int orgnaizationId) {
+	public void setOrgnaizationId(String orgnaizationId) {
 		this.orgnaizationId = orgnaizationId;
 	}
 	public String getOrgnaizationName() {
@@ -101,4 +101,6 @@ public class EmployeeBean {
 	public void setCompanayName(String companayName) {
 		this.companayName = companayName;
 	}
+	
+
 }

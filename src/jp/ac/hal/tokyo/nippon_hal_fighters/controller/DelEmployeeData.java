@@ -3,7 +3,6 @@ package jp.ac.hal.tokyo.nippon_hal_fighters.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,23 +11,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
-import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
-import jp.ac.hal.tokyo.nippon_hal_fighters.dao.OrganaizationDao;
-import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PostDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.EmployeeDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PhoneDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
 /**
- * Servlet implementation class InsertOrganaizationServlet
+ * Servlet implementation class DelEmployeeData
  */
-@WebServlet("/InsertOrganaizationServlet")
-public class InsertOrganaizationServlet extends HttpServlet {
+@WebServlet("/DelEmployeeData")
+public class DelEmployeeData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertOrganaizationServlet() {
+    public DelEmployeeData() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,40 +44,43 @@ public class InsertOrganaizationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		
 		DBConnecter connecter = new DBConnecter();
-		Connection con = connecter.getConnection();
-		OrganaizationDao organaizationDao = new OrganaizationDao(con);
-		OrganaizationBean insertBean = new OrganaizationBean();
+		Connection con = null;
+		EmployeeBean deleteempBean = new EmployeeBean();
+		PhoneBean delphoneBean = new PhoneBean();
 		
-		String OrganaizationId = request.getParameter("organaizationid");
-		String OrganaizationName = request.getParameter("organaizationname");
+		String employeeId = request.getParameter("delempid");
+		int phoneid = Integer.parseInt(request.getParameter("delphoneid"));
+		deleteempBean.setEmployeeId(employeeId);
+		delphoneBean.setPhoneId(phoneid);
 		
-		
-		try{
-			insertBean.setOrganaizationId(OrganaizationId);
-			insertBean.setOrganaizationName(OrganaizationName);
-			
-			organaizationDao.insertOrganaiation(insertBean);
-			organaizationDao.commit();
-		} catch (SQLException e){
+		try {
+			con = connecter.getConnection();
+			EmployeeDao employeeDao = new EmployeeDao(con);
+			PhoneDao phoneDao = new PhoneDao(con);		
+			phoneDao.deletephone(delphoneBean);	
+			employeeDao.deleteEmployee(deleteempBean);		
+			employeeDao.commit();
+			phoneDao.commit();
+			System.out.print("OK!");
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally{
+		}finally{
 			try {
-				organaizationDao.close();
+				if(con != null){
+					con.close();
+				}
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 		}
 		
-		//データを取得してから社員情報登録へ遷移
-		RequestDispatcher dispatcher = request.getRequestDispatcher("master.jsp");
+		//データを削除したら一覧へ遷移する。
+		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
 		dispatcher.forward(request, response);
-		
-		
-		
-		
 	}
 
 }

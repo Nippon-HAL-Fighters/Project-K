@@ -1,3 +1,4 @@
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean"%>
@@ -5,10 +6,16 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%	
+	EmployeeBean emprecode = (EmployeeBean)request.getAttribute("empData");
+	ArrayList<PostBean> postrecode = (ArrayList<PostBean>)request.getAttribute("postlist");
+	ArrayList<OrganaizationBean> orgrecode = (ArrayList<OrganaizationBean>)request.getAttribute("orglist");
+	ArrayList<CompanieBean> comprecode = (ArrayList<CompanieBean>)request.getAttribute("complist");				
+%>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>社員情報登録</title>
+    <title>社員情報更新</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./css/styles.css" type="text/css" />
     <link rel="stylesheet" href="./css/font-awesome/font-awesome.css" type="text/css" />
@@ -18,7 +25,19 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/EmployeeEntryCheck.js"></script>
-</head>
+    
+    <script type="text/javascript">
+    var koyoselect = document.getElementById('koyo').options;
+    for(var i = 0; i < koyoselect.length; i++){
+    	console.log("aaa");
+    	if(koyoselect[i].text === '<%= emprecode.getEmployeeStatus() %>'){
+    		console.log(koyoselect[i].text+":"+<%= emprecode.getEmployeeStatus() %>);
+    		koyoselect[i].selected = true;
+    		break;
+    	};
+    }
+	</script>
+   </head>
 <body>
     <!-- 共通部分 -->
     <nav>
@@ -78,36 +97,27 @@
     </nav>
     <!-- 共通部分ここまで -->
     <main>
-        <%			
-	       	ArrayList<PostBean> postrecode = (ArrayList<PostBean>)request.getAttribute("postlist");
-	    	ArrayList<OrganaizationBean> orgrecode = (ArrayList<OrganaizationBean>)request.getAttribute("orglist");
-	    	ArrayList<CompanieBean> comprecode = (ArrayList<CompanieBean>)request.getAttribute("complist");
-	       	
-			if(postrecode == null||orgrecode == null|| comprecode == null){
-				response.sendRedirect("GetEntryData");
-				return;
-			}
-				
-        %>
     	<div id="main-form">
-	        <h2>社員情報登録</h2>
-	       <form action="InsertEmployeeData" method="post">
+	        <h2>社員情報更新</h2>
+	       <form action="UpdateEmployeeData" method="post">
 	        	<div class="forms">
 	        		社員番号:<label id="errid" style="display:none;color:red;"></label>
-	        		<input type="text" name="employeeid" class="form-control" placeholder="社員番号を入力してください" />
+	        		<input type="text" name="employeeid" class="form-control" value="<%= emprecode.getEmployeeId() %>" />
 	        		<br/>
 	        	</div>
 	        	
 	        	<div class="forms">
 	        		氏名:<label id="errname" style="display:none;color:red;"></label>
-	        		<input type="text" name="employeename" class="form-control" placeholder="氏名を入力してください" />
+	        		<input type="text" name="employeename" class="form-control" value="<%= emprecode.getEmployeeName() %>" />
 	        		<br>
 	        	</div>
 	        	
 	        	<div class="forms">
 	        	雇用状態:<label id="errstatus" style="display:none;color:red;"></label>
-	        		<select name="koyo" class="form-control">
+	        		<select name="koyo" id="koyo" class="form-control">
 						<option value="none">選択してください</option>
+						<option value="会長">会長</option>
+						<option value="社長">社長</option>
 						<option value="社員">社員</option>
 						<option value="協力会社">協力会社</option>
 						<option value="派遣">派遣</option>
@@ -131,7 +141,12 @@
 						<option value="none">選択してください</option>
 						<% 
 							for(PostBean post : postrecode){
-								out.print("<option value="+post.getPostId()+">"+post.getPostName()+"</option>");
+								if(post.getPostId() == emprecode.getPostId()){		//postIDと更新前postIDが一致していた場合
+									out.print("<option value="+post.getPostId()+" selected >"+post.getPostName()+"</option>");
+									System.out.println(post.getPostId()+":"+emprecode.getPostId());
+								}else{
+									out.print("<option value="+post.getPostId()+">"+post.getPostName()+"</option>");
+								}
 							}
 						%>
 					</select>
@@ -144,7 +159,11 @@
 						<option value="none">選択してください</option>
 						<% 
 							for(OrganaizationBean org : orgrecode){
-								out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");
+								if(org.getOrganaizationId().equals(emprecode.getOrgnaizationId())){
+									out.print("<option value="+org.getOrganaizationId()+" selected >"+org.getOrganaizationName()+"</option>");
+								}else{
+									out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");	
+								}						
 							}
 						%>
 					</select>
@@ -153,12 +172,12 @@
 				
 				<div class="forms">
 	        		内線番号:<label id="errphonein" style="display:none;color:red;"></label>
-	        		<input type="text" name="phoneinside" class="form-control" placeholder="内線番号を入力してください" />
+	        		<input type="text" name="phoneinside" class="form-control" value="<%= emprecode.getPhoneInside() %>" />
 	        		<br>
 	        	</div>
 	        	
 	        	<div class="forms"><label id="errphoneout" style="display:none;color:red;"></label>
-	        		外線番号:<input type="text" name="phoneout" class="form-control" placeholder="外線番号を入力してください" />
+	        		外線番号:<input type="text" name="phoneout" class="form-control" value="<%= emprecode.getPhoneOutside() %>" />
 	        		<br>
 	        	</div>
 	        	
@@ -168,13 +187,18 @@
 						<option value="none">選択してください</option>
 						<% 
 							for(CompanieBean comp : comprecode){
-								out.print("<option value="+comp.getCompanyId()+">"+comp.getCompanyName()+"</option>");
+								if(comp.getCompanyId() == emprecode.getCompanyId()){		//postIDと更新前postIDが一致していた場合
+									out.print("<option value="+comp.getCompanyId()+" selected>"+comp.getCompanyName()+"</option>");
+								}else{
+									out.print("<option value="+comp.getCompanyId()+">"+comp.getCompanyName()+"</option>");	
+								}	
 							}
 						%>
 					</select>
 					<br>
 				</div>
 				<input type="hidden" name="pass" value="0000" />
+				<input type="hidden" name="phoneid" value="<%= emprecode.getPhoneId() %>" />
 	        	<input type="submit" value="登録" class="btn btn-default" />
 	        	
 	        </form>

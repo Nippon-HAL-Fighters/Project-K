@@ -1,0 +1,57 @@
+main {
+  width: 1090px;
+  height: 100px;
+}
+
+.sosikizu {
+  position: absolute;
+  top: 150px;
+  left: 240px;
+  height: 500px;
+  width: 800px;
+  background: #B4F0FF;
+}
+
+.jinin {
+  float: right;
+  margin-right: 7px;
+  width: 20%;
+  height: 100%;
+  min-height: 500px;
+  background: #ccc;
+}
+
+.sosikizu-menu {
+  width: 100%;
+}
+.sosikizu-menu .box-type {
+  float: left;
+}
+.sosikizu-menu .box-type button {
+  border-radius: 4px 0px 0px 4px;
+}
+.sosikizu-menu .box-text {
+  float: left;
+  width: 200px;
+  border-left: 0px;
+}
+.sosikizu-menu .box-submit {
+  float: left;
+  margin-left: 10px;
+}
+.sosikizu-menu .save-btn {
+  float: right;
+}
+
+/* JointJS */
+.snapline.horizontal {
+  border-bottom: 2px dotted #aaa;
+}
+
+.snapline.vertical {
+  border-right: 2px dotted #aaa;
+}
+
+.halo .box {
+  display: none;
+}

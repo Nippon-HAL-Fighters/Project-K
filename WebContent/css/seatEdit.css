@@ -22,7 +22,7 @@ h3 {
 	float: right;
 }
 
-.main_box {
+#main_box {
 	margin-top: 10px;
 	width: 900px;
 	height: 550px;

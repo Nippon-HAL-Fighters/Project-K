@@ -57,27 +57,6 @@ public class ChangeMasterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DBConnecter connecter = new DBConnecter();
-		Connection con = connecter.getConnection();
-
-		// OrganaizationDaoインスタンス化
-		OrganaizationDao organaizationDao = new OrganaizationDao(con);
-		ArrayList<OrganaizationBean> organaizationList = new ArrayList<OrganaizationBean>();
-
-		// PostDaoインスタンス化
-		PostDao postDao = new PostDao(con);
-		ArrayList<PostBean> postList = new ArrayList<PostBean>();
-
-		// PhoneDaoインスタンス化
-		PhoneDao phoneDao = new PhoneDao(con);
-		// 内線番号用リスト
-		ArrayList<PhoneBean> phoneInsideList = new ArrayList<PhoneBean>();
-		// 外線番号用リスト
-		ArrayList<PhoneBean> phoneOutsideList = new ArrayList<PhoneBean>();
-
-		// CompanyDaoインスタンス化
-		CompanyDao companyDao = new CompanyDao(con);
-		ArrayList<CompanieBean> companyList = new ArrayList<CompanieBean>();
 
 		// 判別用の数字
 		int num;
@@ -89,104 +68,42 @@ public class ChangeMasterServlet extends HttpServlet {
 		// 組織の場合ここから
 		case "organaization":
 			num = 1;
-			try {
-				organaizationList = organaizationDao.selectAllOrganaiation();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
 			request.setAttribute("num", num);
-			System.out.print(num);
-			request.setAttribute("recode", organaizationList);
-			// request.setAttribute("orglist", orglist);
+			RequestDispatcher orgdisp = request.getRequestDispatcher("GetOrganizationServlet");
+			orgdisp.forward(request, response);
 			break;
 
 		// 役職の場合ここから
 		case "post":
 			num = 2;
-			try {
-				postList = postDao.selectAllPosts();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
 			request.setAttribute("num", num);
-			request.setAttribute("recode", postList);
+			RequestDispatcher postdisp = request.getRequestDispatcher("GetPostsServlet");
+			postdisp.forward(request, response);
 			break;
 
 		// 内線電話の場合ここから
 		case "phoneInside":
-			num = 3;
-			try {
-				phoneInsideList = phoneDao.selectAll();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			num = 3;	
 			request.setAttribute("num", num);
-			request.setAttribute("recode", phoneInsideList);
+			RequestDispatcher phoneInsideDisp = request.getRequestDispatcher("GetPhoneServlet");
+			phoneInsideDisp.forward(request, response);
 			break;
 
 		// 外線電話の場合ここから
 		case "phoneOutside":
 			num = 4;
-			try {
-				phoneOutsideList = phoneDao.selectAll();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
 			request.setAttribute("num", num);
-			request.setAttribute("recode", phoneOutsideList);
+			RequestDispatcher phoneOutsideDisp = request.getRequestDispatcher("GetPhoneServlet");
+			phoneOutsideDisp.forward(request, response);
 			break;
 
 		// 会社の場合ここから
 		case "company":
 			num = 5;
-			try {
-				companyList = companyDao.selectAll();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block e.printStackTrace(); }
-				// finally {
-				try {
-					con.close();
-				} catch (SQLException e1) { // TODO Auto-generated
-					e1.printStackTrace();
-				}
-			}
 			request.setAttribute("num", num);
-			request.setAttribute("recode", companyList);
+			RequestDispatcher companyDisp = request.getRequestDispatcher("GetCompanyServlet");
+			companyDisp.forward(request, response);
 			break;
 		}// switch　終了
-		RequestDispatcher disp = request.getRequestDispatcher("master.jsp");
-		disp.forward(request, response);
 	}
 }

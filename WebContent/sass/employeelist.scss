@@ -1,2 +1,32 @@
+#sort_box{
+	margin:15px 0px 30px 0px;
+	backgeround:orange;
+	height:40px;
+}
 
+#header_left{
+	width:30%;
+	height:100%;
+	margin-right:10%;
+	float:left;
+}
 
+#header_right{
+	width:60%;
+	height:100%;
+	float:left;
+	
+	input#text{
+		width:50%;
+		margin-right:20px;
+		float:left;
+	}
+		
+	input#submit{
+		width:10%;
+		float:left;
+	}
+}
+
+table#list{
+}
