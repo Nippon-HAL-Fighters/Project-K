@@ -124,9 +124,6 @@
    		    CompanieBean companieBean = new CompanieBean();
  	%>
 	<h1>マスタ情報</h1>
-
-
-
 	<div id="all">
 		<table border="0">
 			<tr>
@@ -222,7 +219,6 @@
 			%>
 		</tbody>
 	</table>
-
-	</main>
+	</main>	
 </body>
 </html>

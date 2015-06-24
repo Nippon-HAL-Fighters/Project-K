@@ -63,6 +63,36 @@ public class CompanyDao {
 	}
 	
 	/**
+	 * 登録データの件数を取得
+	 * @return int datacount
+	 * @throws SQLException	 
+	 */
+	public int datacount() throws SQLException{
+		String countsql = "SELECT company_id FROM companies";
+		PreparedStatement count = con.prepareStatement(countsql);
+		ResultSet countResult = count.executeQuery();
+		int datacount = 0;
+		while(countResult.next()){
+			datacount = countResult.getInt("company_id");
+		}
+		return datacount;
+	}
+	
+	/**
+	 * インサート 
+	 * @param PhoneBean
+	 * @throws SQLException	
+	 */
+	public int insertCompany(CompanieBean insertcompany) throws SQLException{
+		String insertSQL = "INSERT INTO companies(company_id, compnay_name) VALUES (?,?)";
+		PreparedStatement insert = con.prepareStatement(insertSQL);
+		
+		insert.setInt(1, insertcompany.getCompanyId());
+		insert.setString(2, insertcompany.getCompanyName());
+		return insert.executeUpdate();
+	}
+	
+	/**
 	 * コミット
 	 * @throws SQLException 
 	 **/
