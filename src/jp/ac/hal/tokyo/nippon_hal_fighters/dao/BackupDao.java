@@ -17,14 +17,13 @@ public class BackupDao {
 		con = db.getConnection();
 	}
 
-	public int fileDelete(int backupId, int fileId) throws SQLException {
-		String deleteSQL = "DELETE FROM backups WHERE backup_id = ? AND file_id = ?";
+	public int fileDelete(int backupId) throws SQLException {
+		String deleteSQL = "DELETE FROM seat_backups WHERE backup_id = ?";
 		int deleteResult = 0;
 
 		PreparedStatement delete = con.prepareStatement(deleteSQL);
 
 		delete.setInt(1, backupId);
-		delete.setInt(2, fileId);
 
 		deleteResult = delete.executeUpdate();
 
@@ -32,13 +31,11 @@ public class BackupDao {
 
 	}
 
-	public ArrayList<BackupBean> fileSelect(int backupId, int fileId)
-			throws SQLException {
-		String selectSQL = "SELECT backup_id,backup_file,file_id FROM backups where backup_id=? AND file_id = ?";
+	public ArrayList<BackupBean> fileSelect(int backupId) throws SQLException {
+		String selectSQL = "SELECT backup_id,backup_file,backup_img,title FROM seat_backups where backup_id=?";
 		PreparedStatement select = con.prepareStatement(selectSQL);
 
 		select.setInt(1, backupId);
-		select.setInt(2, fileId);
 
 		ResultSet selectResult = select.executeQuery();
 
@@ -46,8 +43,9 @@ public class BackupDao {
 		while (selectResult.next()) {
 			BackupBean backupBean = new BackupBean();
 			backupBean.setBackupId(selectResult.getInt("backup_id"));
-			backupBean.setBackupFile(selectResult.getBytes("backup_file"));
-			backupBean.setFileId(selectResult.getInt("file_id"));
+			backupBean.setBackupFile(selectResult.getString("backup_file"));
+			backupBean.setBackupImg(selectResult.getByte("backup_img"));
+			backupBean.setTitle(selectResult.getString("title"));
 
 			BackupList.add(backupBean);
 		}
@@ -56,11 +54,9 @@ public class BackupDao {
 
 	}
 
-	public ArrayList<BackupBean> listSelect(int fileId) throws SQLException {
-		String selectSQL = "SELECT backup_id,title,reset_date,implementor FROM backups WHERE file_id = ?";
+	public ArrayList<BackupBean> listSelect() throws SQLException {
+		String selectSQL = "SELECT backup_id,title,reset_date,implementor FROM seat_backups";
 		PreparedStatement select = con.prepareStatement(selectSQL);
-
-		select.setInt(1, fileId);
 
 		ResultSet selectResult = select.executeQuery();
 
