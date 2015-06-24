@@ -14,7 +14,7 @@ public class BackupBean {
 
 	private int backupId;
 	private int fileId;
-	private byte backupFile[];
+	private String backupFile;
 	private Date resetDate;
 	private String implementor;
 	private String title;
@@ -35,11 +35,11 @@ public class BackupBean {
 		this.fileId = fileId;
 	}
 
-	public byte[] getBackupFile() {
+	public String getBackupFile() {
 		return backupFile;
 	}
 
-	public void setBackupFile(byte backupFile[]) {
+	public void setBackupFile(String backupFile) {
 		this.backupFile = backupFile;
 	}
 
