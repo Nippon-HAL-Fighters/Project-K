@@ -1,6 +1,7 @@
 package jp.ac.hal.tokyo.nippon_hal_fighters.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.OrganaizationDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PostDao;
+import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
 /**
  * Servlet implementation class EmployeeServlet
@@ -42,27 +44,26 @@ public class GetPostsServlet extends HttpServlet {
 		// 表示するための条件
 		int num = 2;
 
+		DBConnecter connecter = new DBConnecter();
+		Connection con = connecter.getConnection();
 		// DAO定義
-		PostDao postDao = new PostDao();
+		PostDao postDao = null;
 
 		/*
 		 * 以下 Connecter＆DAO テスト用
 		 */
 		ArrayList<PostBean> selectData = new ArrayList<PostBean>();
 		try {
+			postDao = new PostDao(con);
 			selectData = postDao.selectAllPosts();
-			/*System.out.println("要素数" + selectData.size());
-
-			for (int i = 0; i < selectData.size(); i++) {
-				System.out.println(selectData.get(i).getPostId());
-				System.out.println(selectData.get(i).getPostName());
-			}*/
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		} finally {
 			try {
-				postDao.close();
+				if(con != null){
+					con.close();
+				}
 			} catch (Exception e2) {
 				// TODO: handle exception
 				e2.printStackTrace();
@@ -73,8 +74,7 @@ public class GetPostsServlet extends HttpServlet {
 		request.setAttribute("num", num);
 		System.out.println(num);
 		// データを取得してから一覧へ遷移
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher("master.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("master.jsp");
 		dispatcher.forward(request, response);
 
 	}
@@ -118,21 +118,6 @@ public class GetPostsServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("master.jsp");
 		dispatcher.forward(request, response);
-
-		/**
-		 * // Bean 作成 & データセット EmployeeBean insertData = new EmployeeBean();
-		 * 
-		 * insertData.setEmployeeId(employeeId);
-		 * insertData.setEmployeeName(employeeName);
-		 * 
-		 * // 情報登録実行 try { insertResult =
-		 * insertOrganizationDao.insertOrganization(insertData);
-		 * insertEmployeeDao.commit(); } catch (SQLException e) { //
-		 * INSERTエラー発生時実行 try { insertEmployeeDao.rollback(); } catch
-		 * (SQLException e1) { e1.printStackTrace(); } e.printStackTrace(); }
-		 * finally { // Daoクローズ try { insertEmployeeDao.close(); } catch
-		 * (SQLException e) { e.printStackTrace(); } }
-		 **/
 
 	}
 

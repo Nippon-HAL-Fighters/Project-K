@@ -68,7 +68,7 @@ public class CompanyDao {
 	 * @throws SQLException	 
 	 */
 	public int datacount() throws SQLException{
-		String countsql = "SELECT company_id FROM phones";
+		String countsql = "SELECT company_id FROM companies";
 		PreparedStatement count = con.prepareStatement(countsql);
 		ResultSet countResult = count.executeQuery();
 		int datacount = 0;

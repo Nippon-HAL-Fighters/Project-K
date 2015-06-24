@@ -139,15 +139,12 @@ public class AddDataServlet extends HttpServlet {
 		case 3:
 			num = 3;
 			try {
-				addData=request.getParameter("addtext");
-				//System.out.println("add:"+addData);		
+				addData=request.getParameter("addtext");	
 				companyId = companyDao.datacount();
 				companyId = companyId+1;
-				System.out.println(companyId);
 				companyrecode.setCompanyId(companyId);
 				companyrecode.setCompanyName(addData);
 				companyDao.insertCompany(companyrecode);
-				System.out.println(companyrecode);
 				companyDao.commit();
 				companyList = companyDao.selectAll();
 			} catch (SQLException e) {

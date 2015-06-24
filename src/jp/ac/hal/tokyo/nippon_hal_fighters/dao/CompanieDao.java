@@ -53,6 +53,21 @@ public class CompanieDao {
 	}	
 	
 	/**
+	 * 会社情報の削除
+	 * @param  CompanyBean 削除データ
+	 * @return delete 情報追加成功数 1なら成功
+	 * @throws SQLException
+	 **/
+	public int deletePost(CompanieBean deletecomp) throws SQLException{
+		
+		String deleteSql = "DELETE FROM companies WHERE company_id = ?";
+		PreparedStatement delete = con.prepareStatement(deleteSql);
+		delete.setInt(1, deletecomp.getCompanyId());
+		
+		return delete.executeUpdate();
+	}
+	
+	/**
 	 * コミット
 	 * @throws SQLException 
 	 **/

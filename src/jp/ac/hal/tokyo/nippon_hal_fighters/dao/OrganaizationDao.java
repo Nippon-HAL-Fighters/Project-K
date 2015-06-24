@@ -49,11 +49,11 @@ public class OrganaizationDao {
 
 		ArrayList<OrganaizationBean> organaizationList = new ArrayList<OrganaizationBean>();
 		while (selectResult.next()) {
+			//EmployeeBean employeeBean = new EmployeeBean();
 			OrganaizationBean organaiationBean = new OrganaizationBean();
-			organaiationBean.setOrganaizationId(selectResult
-					.getString("organaization_id"));
-			organaiationBean.setOrganaizationName(selectResult
-					.getString("organaization_name"));
+			organaiationBean.setOrganaizationId(selectResult.getString("organaization_id"));
+			organaiationBean.setOrganaizationName(selectResult.getString("organaization_name"));	
+
 			organaizationList.add(organaiationBean);
 		}
 		return organaizationList;
@@ -62,7 +62,7 @@ public class OrganaizationDao {
 	/**
 	 * 組織情報を登録するためのメソッド
 	 * 
-	 * @param organaiationBean
+	 * @param organaizationBean
 	 * @return
 	 * @throws SQLException
 	 */
@@ -74,6 +74,22 @@ public class OrganaizationDao {
 		prst.setString(2, organaiationBean.getOrganaizationName());
 		return prst.executeUpdate();
 	}
+	
+	/**
+	 * 組織情報の削除
+	 * @param  organaizationBean 削除データ
+	 * @return deleteResult 情報追加成功数 1なら成功
+	 * @throws SQLException
+	 **/
+	public int deleteOrg(OrganaizationBean deleteorg) throws SQLException{
+		
+		String deleteSql = "DELETE FROM organaizations WHERE organaization_id = ?";
+		PreparedStatement delete = con.prepareStatement(deleteSql);
+		delete.setString(1, deleteorg.getOrganaizationId());
+		
+		return delete.executeUpdate();
+	}
+	
 
 	/**
 	 * コミット

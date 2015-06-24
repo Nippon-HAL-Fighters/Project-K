@@ -21,13 +21,6 @@
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/script.js"></script>
 <script src="./js/jquery.dataTables.min.js"></script>
-<!--  <script>
-	$(document).ready(function(){
-	    $('#myTable').DataTable({ "language": {
-	    	   "url": "//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Japanese.json"},});
-	});
-</script>-->
-
 <script>
 	$(document).ready(function() {
 		$('#myTable').DataTable({
@@ -131,9 +124,6 @@
    		    CompanieBean companieBean = new CompanieBean();
  	%>
 	<h1>マスタ情報</h1>
-
-
-
 	<div id="all">
 		<table border="0">
 			<tr>
@@ -162,6 +152,7 @@
 		id="myTable">
 		<thead>
 			<tr>
+				<th>No</th>
 				<th>部署名</th>
 				<th>変更</th>
 				<th>削除</th>
@@ -178,11 +169,13 @@
 					for(OrganaizationBean org : Organaizationrecode){
 						out.print(
 								"<tr>"
-								+"<input type=\"hidden\" name=\"OrganaizationID\" value="+org.getOrganaizationId()+">"
-								+"<td>"+org.getOrganaizationName()+"</td>"//部署名
-								+"<td><input type=\"submit\" id=\"change\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
-								+"<td><input type=\"submit\" id=\"delete\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
-								+"</tr>");
+								+"<td>"+org.getOrganaizationId()+"</td>"//組織ID
+								+"<td>"+org.getOrganaizationName()+"</td>"//組織名
+								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<input type=\"hidden\" name=\"OrganaizationID\" value="+org.getOrganaizationId()+" />"
+								+"<input type=\"hidden\" name=\"Deltype\" value=\"org\" />"
+								+"</form></tr>");
 							}
 					break;
 					
@@ -191,11 +184,13 @@
 					for(PostBean post : Postrecode){
 					out.print(
 								"<tr>"
-								+"<input type=\"hidden\" name=\"PostID\" value="+post.getPostId()+">"
+								+"<td>"+post.getPostId()+"</td>"//部署ID
 								+"<td>"+post.getPostName()+"</td>"//部署名
-								+"<td><input type=\"submit\" id=\"change\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
-								+"<td><input type=\"submit\" id=\"delete\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
-								+"</tr>");
+								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<input type=\"hidden\" name=\"PostID\" value="+post.getPostId()+" />"		
+								+"<input type=\"hidden\" name=\"Deltype\" value=\"post\" />"
+								+"</form></tr>");
 							}
 					break;
 					
@@ -204,11 +199,13 @@
 					for(CompanieBean company : companyRecode){
 					out.print(
 								"<tr>"
-								+"<input type=\"hidden\" name=\"CompanyID\" value="+company.getCompanyId()+">"
+								+"<td>"+company.getCompanyId()+"</td>"//会社ID
 								+"<td>"+company.getCompanyName()+"</td>"//会社名
-								+"<td><input type=\"submit\" id=\"change\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
-								+"<td><input type=\"submit\" id=\"delete\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
-								+"</tr>");
+								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<input type=\"hidden\" name=\"CompanyID\" value="+company.getCompanyId()+">"
+								+"<input type=\"hidden\" name=\"Deltype\" value=\"comp\" />"
+								+"</form></tr>");
 							}
 					break;
 					

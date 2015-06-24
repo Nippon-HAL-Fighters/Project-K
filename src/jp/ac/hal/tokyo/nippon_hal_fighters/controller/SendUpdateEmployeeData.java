@@ -62,6 +62,7 @@ public class SendUpdateEmployeeData extends HttpServlet {
 		ArrayList<OrganaizationBean> getOrg = new ArrayList<OrganaizationBean>();
 		ArrayList<CompanieBean> getComp = new ArrayList<CompanieBean>();	
 		EmployeeBean getData = new EmployeeBean();
+		String admin = null;
 		
 		
 		try {
@@ -75,8 +76,8 @@ public class SendUpdateEmployeeData extends HttpServlet {
 			getOrg = orgDao.selectAllOrganaiation();	
 			getComp = compDao.selectAllCompanie();
 			getData = empDao.selectListEmployees(updateEmpId);
-			
-			System.out.println(getData.getEmployeeStatus());
+			admin = String.valueOf(getData.getAdmin());
+			System.out.println(getData.getAdmin());
 						
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -97,6 +98,7 @@ public class SendUpdateEmployeeData extends HttpServlet {
 		request.setAttribute("postlist", getPost);
 		request.setAttribute("orglist", getOrg);
 		request.setAttribute("complist", getComp);
+		request.setAttribute("admin", admin);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeUpdate.jsp");
 		dispatcher.forward(request, response);
 	}

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
@@ -92,6 +93,22 @@ public class PostDao {
 		
 		return insert.executeUpdate();
 	}
+	
+	/**
+	 * 役職情報の削除
+	 * @param  PostBean 削除データ
+	 * @return delete 情報追加成功数 1なら成功
+	 * @throws SQLException
+	 **/
+	public int deletePost(PostBean deletepost) throws SQLException{
+		
+		String deleteSql = "DELETE FROM posts WHERE post_id = ?";
+		PreparedStatement delete = con.prepareStatement(deleteSql);
+		delete.setInt(1, deletepost.getPostId());
+		
+		return delete.executeUpdate();
+	}
+	
 	/**
 	 * コミット
 	 * @throws SQLException 
