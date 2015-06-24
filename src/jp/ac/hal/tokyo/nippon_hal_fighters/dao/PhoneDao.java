@@ -4,10 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-import jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
+
+/**
+ * Posts テーブル用のDao
+ * 
+ * @author s.kageyama
+ */
 
 public class PhoneDao {
 	private Connection con = null;
@@ -28,6 +34,30 @@ public class PhoneDao {
 			DBConnecter db = new DBConnecter();
 			con = db.getConnection();
 		}
+	}
+
+	/**
+	 * 　全件取得 　@return ArrayList PhoneList
+	 * 
+	 * @throws SQLException
+	 **/
+	public ArrayList<PhoneBean> selectAll() throws SQLException {
+
+		String selectSQL = "SELECT phone_id,phone_inside,phone_outside FROM phones";
+
+		PreparedStatement select = con.prepareStatement(selectSQL);
+
+		ResultSet selectResult = select.executeQuery();
+		ArrayList<PhoneBean> phoneList = new ArrayList<PhoneBean>();
+
+		while (selectResult.next()) {
+			PhoneBean phoneBean = new PhoneBean();
+			phoneBean.setPhoneId(selectResult.getInt("phone_id"));
+			phoneBean.setPhoneInside(selectResult.getString("phone_inside"));
+			phoneBean.setPhoneOutside(selectResult.getString("phone_outside"));
+			phoneList.add(phoneBean);
+		}
+		return phoneList;
 	}
 	
 	/**
@@ -101,8 +131,6 @@ public class PhoneDao {
 		return delete.executeUpdate();
 	}
 	
-	
-	
 	/**
 	 * コミット
 	 * @throws SQLException 
@@ -127,4 +155,5 @@ public class PhoneDao {
 		con.close();
 	}
 	
+
 }

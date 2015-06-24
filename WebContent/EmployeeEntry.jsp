@@ -143,8 +143,8 @@
 						<option value="none">選択してください</option>
 						<%
 							for(OrganaizationBean org : orgrecode){
-												out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");
-											}
+								out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");
+							}
 						%>
 					</select>
 					<br>

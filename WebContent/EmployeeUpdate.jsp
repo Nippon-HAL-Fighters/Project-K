@@ -1,3 +1,4 @@
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean"%>
@@ -11,7 +12,6 @@
 	ArrayList<OrganaizationBean> orgrecode = (ArrayList<OrganaizationBean>)request.getAttribute("orglist");
 	ArrayList<CompanieBean> comprecode = (ArrayList<CompanieBean>)request.getAttribute("complist");
 	String admin = (String)request.getAttribute("admin");
-	System.out.println(admin);
 %>
 <!DOCTYPE html>
 <html>
@@ -161,12 +161,12 @@
 						<option value="none">選択してください</option>
 						<%
 							for(OrganaizationBean org : orgrecode){
-												if(org.getOrganaizationId().equals(emprecode.getOrgnaizationId())){
-													out.print("<option value="+org.getOrganaizationId()+" selected >"+org.getOrganaizationName()+"</option>");
-												}else{
-													out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");	
-												}						
-											}
+								if(org.getOrganaizationId().equals(emprecode.getOrgnaizationId())){
+									out.print("<option value="+org.getOrganaizationId()+" selected >"+org.getOrganaizationName()+"</option>");
+								}else{
+									out.print("<option value="+org.getOrganaizationId()+">"+org.getOrganaizationName()+"</option>");	
+								}					
+							}
 						%>
 					</select>
 					<br>

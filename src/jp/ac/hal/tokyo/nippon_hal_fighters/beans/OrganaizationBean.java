@@ -5,7 +5,7 @@ package jp.ac.hal.tokyo.nippon_hal_fighters.beans;
  *
  * String organaizationId; String organaizationName;
  *
- * @author s.kato
+ * @author s.kage
  *
  */
 public class OrganaizationBean {
