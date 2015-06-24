@@ -131,8 +131,14 @@
 		<table border="0">
 			<tr>
 				<form action="AddDataServlet" method="post">
-					<td id="left"><input type="text" name="addtext"
-						class="form-control" /></td>
+					<td id="left">
+					<%
+						if(num == 1){
+							out.print("<input type=\"text\" name=\"otgid\" class=\"form-control\" />");
+						}
+					%>
+					<input type="text" name="addtext" class="form-control" />
+					</td>
 					<td><input type="submit" name="add" value="追加"
 						class="btn btn-info"></td>
 						<input type="hidden" name="addtype" value="<%= num %>" />
