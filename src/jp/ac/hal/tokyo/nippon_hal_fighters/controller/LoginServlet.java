@@ -1,6 +1,7 @@
 package jp.ac.hal.tokyo.nippon_hal_fighters.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
+import jp.ac.hal.tokyo.nippon_hal_fighters.service.UserUtil;
 
 /**
  * Servlet implementation class LoginServlet
@@ -39,6 +42,12 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// ログイン済みの場合は400エラー
+		if (UserUtil.isLogin(request)) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		}
+
 		String employeeId = request.getParameter("employee_id");
 		String passwd     = request.getParameter("password");
 
@@ -51,8 +60,9 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		// EmployeeID と Passwordが一致するユーザを検索
-		String findEmployee = "SELECT COUNT(employee_id) FROM employees WHERE employee_id = ? AND password = ?";
+		String findEmployee = "SELECT COUNT(employee_id), admin FROM employees WHERE employee_id = ? AND password = ?";
 		int empCount = 0;
+		boolean isAdmin = false;
 
 		DBConnecter dbConn = new DBConnecter();
 
@@ -69,6 +79,10 @@ public class LoginServlet extends HttpServlet {
 			result.first();
 
 			empCount = result.getInt(1);
+
+			if (result.getInt(2) == 1) {
+				isAdmin = true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -79,13 +93,25 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		if (empCount != 1) {
+			//ログイン失敗処理
 			request.setAttribute("errorMsg", "従業員番号とパスワードが一致しません");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 
 			return;
 		} else {
 			// ログイン成功処理
-			System.out.println("ログイン成功");
+			HttpSession session = request.getSession();
+
+			session.setAttribute("employee_id", employeeId);
+			session.setAttribute("isAdmin", isAdmin);
+
+			response.setCharacterEncoding("utf-8");
+
+			PrintWriter out = response.getWriter();
+
+			out.println("ログイン成功");
+			out.println("Employee ID: " + (String) session.getAttribute("employee_id"));
+			out.println("isAdmin: " + (boolean) session.getAttribute("isAdmin"));
 		}
 	}
 
