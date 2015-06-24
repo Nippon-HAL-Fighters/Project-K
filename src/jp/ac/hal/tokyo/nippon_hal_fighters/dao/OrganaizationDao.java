@@ -41,7 +41,7 @@ public class OrganaizationDao {
 	 * @throws SQLException
 	 */
 	public ArrayList<OrganaiationBean> selectAllOrganaiation() throws SQLException {
-		String selectSQL = "SELECT organaization_id,organaization_name FROM organaiations";
+		String selectSQL = "SELECT organaization_id,organaization_name FROM organaizations";
 
 		PreparedStatement select = con.prepareStatement(selectSQL);
 
