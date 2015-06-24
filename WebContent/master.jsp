@@ -180,8 +180,8 @@
 								"<tr>"
 								+"<input type=\"hidden\" name=\"OrganaizationID\" value="+org.getOrganaizationId()+">"
 								+"<td>"+org.getOrganaizationName()+"</td>"//部署名
-								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
-								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<td><input type=\"submit\" id=\"change\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
+								+"<td><input type=\"submit\" id=\"delete\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
 								+"</tr>");
 							}
 					break;
@@ -193,37 +193,11 @@
 								"<tr>"
 								+"<input type=\"hidden\" name=\"PostID\" value="+post.getPostId()+">"
 								+"<td>"+post.getPostName()+"</td>"//部署名
-								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
-								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<td><input type=\"submit\" id=\"change\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
+								+"<td><input type=\"submit\" id=\"delete\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
 								+"</tr>");
 							}
 					break;
-					
-					//内線電話番号の場合
-					/*case 3:
-					for(PhoneBean phoneInside : phoneRecode){
-					out.print(
-								"<tr>"
-								+"<input type=\"hidden\" name=\"PhoneID\" value="+phoneInside.getPhoneId()+">"
-								+"<td>"+phoneInside.getPhoneInside()+"</td>"//外線番号
-								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
-								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
-								+"</tr>");
-							}
-					break;
-					
-					//外線電話番号の場合
-					case 4:
-					for(PhoneBean phoneOutside : phoneRecode){
-					out.print(
-								"<tr>"
-								+"<input type=\"hidden\" name=\"PhoneID\" value="+phoneOutside.getPhoneId()+">"
-								+"<td>"+phoneOutside.getPhoneOutside()+"</td>"//内線番号
-								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
-								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
-								+"</tr>");
-							}
-					break;*/
 					
 					//所属会社の場合
 					case 3:
@@ -232,8 +206,8 @@
 								"<tr>"
 								+"<input type=\"hidden\" name=\"CompanyID\" value="+company.getCompanyId()+">"
 								+"<td>"+company.getCompanyName()+"</td>"//会社名
-								+"<td><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
-								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<td><input type=\"submit\" id=\"change\" name=\"change\" value=\"変更\" class=\"btn btn-info\" /></td>"
+								+"<td><input type=\"submit\" id=\"delete\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
 								+"</tr>");
 							}
 					break;
@@ -242,7 +216,6 @@
 			%>
 		</tbody>
 	</table>
-
-	</main>
+	</main>	
 </body>
 </html>

@@ -74,11 +74,7 @@ public class InsertOrganaizationServlet extends HttpServlet {
 		
 		//データを取得してから社員情報登録へ遷移
 		RequestDispatcher dispatcher = request.getRequestDispatcher("master.jsp");
-		dispatcher.forward(request, response);
-		
-		
-		
-		
+		dispatcher.forward(request, response);	
 	}
 
 }

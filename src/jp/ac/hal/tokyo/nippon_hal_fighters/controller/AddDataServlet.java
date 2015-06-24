@@ -67,19 +67,12 @@ public class AddDataServlet extends HttpServlet {
 		//phoneid
 		int postId;
 
-		// PhoneDaoインスタンス化
-		PhoneDao phoneDao = new PhoneDao(con);
-		PhoneBean phonerecode = new PhoneBean();
-		// 内線番号用リスト
-		ArrayList<PhoneBean> phoneInsideList = new ArrayList<PhoneBean>();
-		// 外線番号用リスト
-		ArrayList<PhoneBean> phoneOutsideList = new ArrayList<PhoneBean>();
-		//phoneId
-		int phoneId;
-
 		// CompanyDaoインスタンス化
 		CompanyDao companyDao = new CompanyDao(con);
+		CompanieBean companyrecode = new CompanieBean();
 		ArrayList<CompanieBean> companyList = new ArrayList<CompanieBean>();
+		//companyId
+		int companyId;
 
 		// 判別用の数字
 		int num;
@@ -122,11 +115,8 @@ public class AddDataServlet extends HttpServlet {
 				postId = postId + 1;
 				postrecode.setPostName(addData);
 				postrecode.setPostId(postId);
-				
 				postDao.insertPost(postrecode);
 				postDao.commit();
-				//System.out.print("OK!");
-				
 				postList = postDao.selectAllPosts();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -141,78 +131,42 @@ public class AddDataServlet extends HttpServlet {
 			}
 			request.setAttribute("num", 2);
 			request.setAttribute("recode", postList);
-			RequestDispatcher disp = request.getRequestDispatcher("master.jsp");
-			disp.forward(request, response);
+			RequestDispatcher postdisp = request.getRequestDispatcher("master.jsp");
+			postdisp.forward(request, response);
 			break;
 
-		// 内線電話の場合ここから
+		// 所属会社の場合ここから
 		case 3:
 			num = 3;
 			try {
 				addData=request.getParameter("addtext");
-				System.out.println("add:"+addData);				
-				phoneId = phoneDao.datacount();
-				phoneId = phoneId + 1;
-				phonerecode.setPhoneId(phoneId);
-				phonerecode.setPhoneInside(addData);
-				postDao.insertPost(postrecode);
-				postDao.commit();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			request.setAttribute("num", num);
-			request.setAttribute("recode", phoneInsideList);
-			break;
-
-		// 外線電話の場合ここから
-		case 4:
-			num = 4;
-			try {
-				phoneOutsideList = phoneDao.selectAll();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			request.setAttribute("num", num);
-			request.setAttribute("recode", phoneOutsideList);
-			break;
-
-		// 会社の場合ここから
-		case 5:
-			num = 5;
-			try {
+				//System.out.println("add:"+addData);		
+				companyId = companyDao.datacount();
+				companyId = companyId+1;
+				System.out.println(companyId);
+				companyrecode.setCompanyId(companyId);
+				companyrecode.setCompanyName(addData);
+				companyDao.insertCompany(companyrecode);
+				System.out.println(companyrecode);
+				companyDao.commit();
 				companyList = companyDao.selectAll();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block e.printStackTrace(); }
-				// finally {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
 				try {
 					con.close();
-				} catch (SQLException e1) { // TODO Auto-generated
-					e1.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
-			request.setAttribute("num", num);
+			request.setAttribute("num", 3);
 			request.setAttribute("recode", companyList);
+			RequestDispatcher companydisp = request.getRequestDispatcher("master.jsp");
+			companydisp.forward(request, response);
 			break;
 		}// switch　終了
-		/*RequestDispatcher disp = request.getRequestDispatcher("master.jsp");
-		disp.forward(request, response);*/
-		
 	}
 
 }
