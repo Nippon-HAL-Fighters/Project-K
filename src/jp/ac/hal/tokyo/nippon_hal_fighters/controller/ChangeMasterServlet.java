@@ -81,25 +81,9 @@ public class ChangeMasterServlet extends HttpServlet {
 			postdisp.forward(request, response);
 			break;
 
-		// 内線電話の場合ここから
-		case "phoneInside":
-			num = 3;	
-			request.setAttribute("num", num);
-			RequestDispatcher phoneInsideDisp = request.getRequestDispatcher("GetPhoneServlet");
-			phoneInsideDisp.forward(request, response);
-			break;
-
-		// 外線電話の場合ここから
-		case "phoneOutside":
-			num = 4;
-			request.setAttribute("num", num);
-			RequestDispatcher phoneOutsideDisp = request.getRequestDispatcher("GetPhoneServlet");
-			phoneOutsideDisp.forward(request, response);
-			break;
-
 		// 会社の場合ここから
 		case "company":
-			num = 5;
+			num = 3;
 			request.setAttribute("num", num);
 			RequestDispatcher companyDisp = request.getRequestDispatcher("GetCompanyServlet");
 			companyDisp.forward(request, response);

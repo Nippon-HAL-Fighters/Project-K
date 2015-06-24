@@ -45,7 +45,7 @@ public class GetCompanyServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		// 表示するための条件
-		int num = 5;
+		int num = 3;
 
 		// コンストラクタ取得
 		DBConnecter connecter = new DBConnecter();
@@ -96,7 +96,7 @@ public class GetCompanyServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		// 表示するための条件
-		int num = 5;
+		int num = 3;
 
 		// コンストラクタ取得
 		DBConnecter connecter = new DBConnecter();

@@ -149,8 +149,6 @@
 					<td id="right"><select name="category" class="form-control">
 							<option value="organaization">部署</option>
 							<option value="post">役職</option>
-							<option value="phoneInside">内線番号</option>
-							<option value="phoneOutside">外線番号</option>
 							<option value="company">所属会社</option>
 					</select></td>
 					<td><input type="submit" name="add" value="切替"
@@ -202,7 +200,7 @@
 					break;
 					
 					//内線電話番号の場合
-					case 3:
+					/*case 3:
 					for(PhoneBean phoneInside : phoneRecode){
 					out.print(
 								"<tr>"
@@ -225,10 +223,10 @@
 								+"<td><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
 								+"</tr>");
 							}
-					break;
+					break;*/
 					
 					//所属会社の場合
-					case 5:
+					case 3:
 					for(CompanieBean company : companyRecode){
 					out.print(
 								"<tr>"

@@ -151,11 +151,10 @@ public class AddDataServlet extends HttpServlet {
 			try {
 				addData=request.getParameter("addtext");
 				System.out.println("add:"+addData);				
-				postId = postDao.datacount();
-				postId = postId + 1;
-				postrecode.setPostName(addData);
-				postrecode.setPostId(postId);
-				
+				phoneId = phoneDao.datacount();
+				phoneId = phoneId + 1;
+				phonerecode.setPhoneId(phoneId);
+				phonerecode.setPhoneInside(addData);
 				postDao.insertPost(postrecode);
 				postDao.commit();
 			} catch (SQLException e) {
