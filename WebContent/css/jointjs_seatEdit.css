@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.snapline.horizontal {
+  border-bottom: 2px dotted #aaa;
+}
+
+.snapline.vertical {
+  border-right: 2px dotted #aaa;
+}
+
+.halo .box {
+  display: none;
+}
