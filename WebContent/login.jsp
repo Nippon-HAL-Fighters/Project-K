@@ -7,14 +7,12 @@
 		return;
 	}
 
-	String script = "<script>alert(\"Test Script\");</script>";
 	String css    = "<link rel=\"stylesheet\" href=\"./css/login.css\" type=\"text/css\" />";
 %>
 
 	<jsp:include page="./common_menu.jsp">
 	    <jsp:param value="ログインページ" name="title"/>
 	    <jsp:param value="<%= css %>" name="css" />
-	    <jsp:param value="<%= script %>" name="script"/>
 	</jsp:include>
     <main>
         <div class="left_box text-center">
