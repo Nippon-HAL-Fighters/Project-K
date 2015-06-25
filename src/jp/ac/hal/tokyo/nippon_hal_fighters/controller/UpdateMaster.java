@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eclipse.jdt.internal.compiler.flow.FinallyFlowContext;
+
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
@@ -21,16 +23,16 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PostDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
 /**
- * Servlet implementation class DelMaster
+ * Servlet implementation class UpdateMaster
  */
-@WebServlet("/DelMaster")
-public class DelMaster extends HttpServlet {
+@WebServlet("/UpdateMaster")
+public class UpdateMaster extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DelMaster() {
+    public UpdateMaster() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,38 +51,30 @@ public class DelMaster extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		
-		//DB接続
+		String updatetype=request.getParameter("updatetype");
 		DBConnecter connecter = new DBConnecter();
-		Connection con = connecter.getConnection();
+		Connection con = null;
 		OrganaizationBean orgBean = null;
 		OrganaizationDao orgDao = null;
 		PostBean postBean = null;
 		PostDao postDao = null;
 		CompanieBean compBean = null;
-		CompanieDao compDao= null;
-		
-		ArrayList<OrganaizationBean> orgList = new ArrayList<OrganaizationBean>();
-		ArrayList<PostBean> postList = new ArrayList<PostBean>();
-		ArrayList<CompanieBean> compList = new ArrayList<CompanieBean>();
-		
-		int nextnum = 0;
-		//switch文の判定条件
-		String deltype = request.getParameter("Deltype");
+		CompanieDao compDao = null;
 		RequestDispatcher dispatcher = null;
 		
-		switch (deltype) {
-		case "org":		//組織の場合
-			String delorgid = request.getParameter("OrganaizationID");			
-			nextnum = 1;
+		switch (updatetype) {
+		case "org":
 			try {
+				String orgid = request.getParameter("orgid");
+				String orgname = request.getParameter("orgname");
+				con = connecter.getConnection();		//コネクションの取得
 				orgBean = new OrganaizationBean();
-				orgBean.setOrganaizationId(delorgid);
 				orgDao = new OrganaizationDao(con);
-				
-				orgDao.deleteOrg(orgBean);					//削除
-				orgDao.commit();							//コミット
-				orgList = orgDao.selectAllOrganaiation();	//一覧の取得
-				
+				orgBean.setOrganaizationId(orgid);
+				orgBean.setOrganaizationName(orgname);
+				orgDao.updateOrganaiation(orgBean);
+				orgDao.commit();
+				dispatcher = request.getRequestDispatcher("GetOrganizationServlet");
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -94,24 +88,21 @@ public class DelMaster extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			
-			request.setAttribute("recode", orgList);
-			request.setAttribute("num", nextnum);
-			dispatcher = request.getRequestDispatcher("master.jsp");
 			dispatcher.forward(request, response);
 			break;
 			
-		case "post":		//役職削除の場合
-			int postid = Integer.parseInt(request.getParameter("PostID"));			
-			nextnum = 2;
+		case "post":
 			try {
+				int postid = Integer.parseInt(request.getParameter("postid"));
+				String postname = request.getParameter("postname");
+				con = connecter.getConnection();		//コネクションの取得
 				postBean = new PostBean();
-				postBean.setPostId(postid);
 				postDao = new PostDao(con);
-				
-				postDao.deletePost(postBean);
+				postBean.setPostId(postid);
+				postBean.setPostName(postname);
+				postDao.updatepost(postBean);
 				postDao.commit();
-				postList = postDao.selectAllPosts();
+				dispatcher = request.getRequestDispatcher("GetPostsServlet");
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -125,24 +116,21 @@ public class DelMaster extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			
-			request.setAttribute("recode", postList);
-			request.setAttribute("num", nextnum);
-			dispatcher = request.getRequestDispatcher("master.jsp");
 			dispatcher.forward(request, response);
 			break;
 
-		case "comp":		//役職削除の場合
-			int compid = Integer.parseInt(request.getParameter("CompanyID"));			
-			nextnum = 3;
+		case "comp":
 			try {
+				int compid = Integer.parseInt(request.getParameter("compid"));
+				String compname = request.getParameter("compname");
+				con = connecter.getConnection();		//コネクションの取得
 				compBean = new CompanieBean();
 				compBean.setCompanyId(compid);
+				compBean.setCompanyName(compname);
 				compDao = new CompanieDao(con);
-				
-				compDao.deletecomp(compBean);
-				compDao.commit();
-				compList = compDao.selectAllCompanie();
+				compDao.updatecomp(compBean);
+				compDao.commit();				
+				dispatcher = request.getRequestDispatcher("GetCompanyServlet");
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -156,12 +144,9 @@ public class DelMaster extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			
-			request.setAttribute("recode", compList);
-			request.setAttribute("num", nextnum);
-			dispatcher = request.getRequestDispatcher("master.jsp");
 			dispatcher.forward(request, response);
-			break;			
+			break;
 		}
 	}
+
 }

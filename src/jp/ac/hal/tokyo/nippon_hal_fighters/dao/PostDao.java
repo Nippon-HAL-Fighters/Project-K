@@ -95,6 +95,25 @@ public class PostDao {
 	}
 	
 	/**
+	 * 更新するためのメソッド
+	 * 
+	 * @param PostBean
+	 * @return update
+	 * @throws SQLException
+	 */
+	public int updatepost(PostBean updatepost) throws SQLException {
+
+		String updateSQL = "UPDATE posts SET post_id = ?,post_name=? WHERE post_id = ?";
+		PreparedStatement update = con.prepareStatement(updateSQL);
+		update.setInt(1, updatepost.getPostId());
+		update.setString(2, updatepost.getPostName());
+		update.setInt(3, updatepost.getPostId());
+		
+		return update.executeUpdate();
+	}
+	
+	
+	/**
 	 * 役職情報の削除
 	 * @param  PostBean 削除データ
 	 * @return delete 情報追加成功数 1なら成功

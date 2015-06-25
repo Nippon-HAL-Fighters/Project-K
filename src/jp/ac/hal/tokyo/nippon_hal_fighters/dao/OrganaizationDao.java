@@ -58,6 +58,28 @@ public class OrganaizationDao {
 		}
 		return organaizationList;
 	}
+	
+
+	/**
+	 * 特定取得
+	 * 
+	 * @return ArrayList OrganazationList
+	 * @throws SQLException
+	 */
+	public OrganaizationBean selectOrganaiation(OrganaizationBean selectorg) throws SQLException {
+		String selectSQL = "SELECT organaization_id,organaization_name FROM organaizations WHERE organaization_id = ?";
+
+		PreparedStatement select = con.prepareStatement(selectSQL);
+		select.setString(1, selectorg.getOrganaizationId());
+		ResultSet selectResult = select.executeQuery();
+
+		OrganaizationBean organaizationBean = new OrganaizationBean();		
+		while (selectResult.next()) {
+			organaizationBean.setOrganaizationId(selectResult.getString("organaization_id"));
+			organaizationBean.setOrganaizationName(selectResult.getString("organaization_name"));	
+		}
+		return organaizationBean;
+	}
 
 	/**
 	 * 組織情報を登録するためのメソッド
@@ -73,6 +95,25 @@ public class OrganaizationDao {
 		prst.setString(1, organaiationBean.getOrganaizationId());
 		prst.setString(2, organaiationBean.getOrganaizationName());
 		return prst.executeUpdate();
+	}
+	
+
+	/**
+	 * 組織情報を更新するためのメソッド
+	 * 
+	 * @param organaizationBean
+	 * @return update
+	 * @throws SQLException
+	 */
+	public int updateOrganaiation(OrganaizationBean organaiationBean) throws SQLException {
+
+		String updateSQL = "UPDATE organaizations SET organaization_id = ?,organaization_name=? WHERE organaization_id = ?";
+		PreparedStatement update = con.prepareStatement(updateSQL);
+		update.setString(1, organaiationBean.getOrganaizationId());
+		update.setString(2, organaiationBean.getOrganaizationName());
+		update.setString(3, organaiationBean.getOrganaizationId());
+		
+		return update.executeUpdate();
 	}
 	
 	/**

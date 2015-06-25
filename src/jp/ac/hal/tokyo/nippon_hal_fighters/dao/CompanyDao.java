@@ -62,6 +62,8 @@ public class CompanyDao {
 		return CompanyList;
 	}
 	
+	
+	
 	/**
 	 * 登録データの件数を取得
 	 * @return int datacount
