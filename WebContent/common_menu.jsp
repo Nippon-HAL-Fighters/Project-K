@@ -1,9 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="jp.ac.hal.tokyo.nippon_hal_fighters.service.UserUtil" %>
+<%@ page import="jp.ac.hal.tokyo.nippon_hal_fighters.service.UserUtil, java.net.URLEncoder, java.net.URLDecoder" %>
+<%
+	request.setCharacterEncoding("utf-8");
+	response.setCharacterEncoding("utf-8");
+
+	String title = request.getParameter("title");
+
+ 	if (title == null) {
+		title = URLDecoder.decode(URLEncoder.encode("要員管理システム", "utf-8"), "utf-8");
+	}
+
+%>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ログインページ</title>
+    <title><%= title %></title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./css/styles.css" type="text/css" />
     <link rel="stylesheet" href="./css/font-awesome/font-awesome.css" type="text/css" />
