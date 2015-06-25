@@ -43,7 +43,7 @@ public class LoginFilter implements Filter {
 		String reqFile  = reqURL.substring(reqURL.lastIndexOf("/") + 1);
 		String fileType = reqFile.substring(reqFile.lastIndexOf(".") + 1);
 
-		if (reqFile.equals("login.jsp") || (!fileType.equals("html") && !fileType.equals("jsp"))) {
+		if (reqFile.equals("login.jsp") || (!fileType.equals("html") && !fileType.equals("jsp") && !reqFile.isEmpty())) {
 			chain.doFilter(request, response);
 			return;
 		}
