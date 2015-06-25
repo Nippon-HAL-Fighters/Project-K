@@ -28,50 +28,58 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 @WebServlet("/AddDataServlet")
 public class AddDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddDataServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AddDataServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+
+		// 追加するデータの内容
+		String addData = "";
 		
 		DBConnecter connecter = new DBConnecter();
 		Connection con = connecter.getConnection();
+		String orgId;
 		
-		String addData="";
 
 		// OrganaizationDaoインスタンス化
 		OrganaizationDao organaizationDao = new OrganaizationDao(con);
+		OrganaizationBean orgrecode = new OrganaizationBean();
 		ArrayList<OrganaizationBean> organaizationList = new ArrayList<OrganaizationBean>();
 
 		// PostDaoインスタンス化
 		PostDao postDao = new PostDao(con);
 		PostBean postrecode = new PostBean();
 		ArrayList<PostBean> postList = new ArrayList<PostBean>();
-		//phoneid
+		// postid
 		int postId;
 
 		// CompanyDaoインスタンス化
 		CompanyDao companyDao = new CompanyDao(con);
 		CompanieBean companyrecode = new CompanieBean();
 		ArrayList<CompanieBean> companyList = new ArrayList<CompanieBean>();
-		//companyId
+		// companyId
 		int companyId;
 
 		// 判別用の数字
@@ -80,13 +88,20 @@ public class AddDataServlet extends HttpServlet {
 		String keyword = request.getParameter("category");
 		int hanbetu = Integer.parseInt(request.getParameter("addtype"));
 		System.out.print(hanbetu);
-		//System.out.print(keyword);
+		// System.out.print(keyword);
 
 		switch (hanbetu) {
 		// 組織の場合ここから
 		case 1:
 			num = 1;
 			try {
+				orgId = request.getParameter("orgid");
+				addData = request.getParameter("addtext");
+				System.out.println("add:" + addData);
+				orgrecode.setOrganaizationId(orgId);
+				orgrecode.setOrganaizationName(addData);
+				organaizationDao.insertOrganaiation(orgrecode);
+				postDao.commit();
 				organaizationList = organaizationDao.selectAllOrganaiation();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -99,18 +114,19 @@ public class AddDataServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			request.setAttribute("num", num);
+			request.setAttribute("num", 1);
 			System.out.print(num);
 			request.setAttribute("recode", organaizationList);
-			// request.setAttribute("orglist", orglist);
+			RequestDispatcher orgdisp = request.getRequestDispatcher("master.jsp");
+			orgdisp.forward(request, response);
 			break;
 
 		// 役職の場合ここから
 		case 2:
 			num = 2;
-			try{
-				addData=request.getParameter("addtext");
-				System.out.println("add:"+addData);				
+			try {
+				addData = request.getParameter("addtext");
+				System.out.println("add:" + addData);
 				postId = postDao.datacount();
 				postId = postId + 1;
 				postrecode.setPostName(addData);
@@ -131,7 +147,8 @@ public class AddDataServlet extends HttpServlet {
 			}
 			request.setAttribute("num", 2);
 			request.setAttribute("recode", postList);
-			RequestDispatcher postdisp = request.getRequestDispatcher("master.jsp");
+			RequestDispatcher postdisp = request
+					.getRequestDispatcher("master.jsp");
 			postdisp.forward(request, response);
 			break;
 
@@ -139,9 +156,9 @@ public class AddDataServlet extends HttpServlet {
 		case 3:
 			num = 3;
 			try {
-				addData=request.getParameter("addtext");	
+				addData = request.getParameter("addtext");
 				companyId = companyDao.datacount();
-				companyId = companyId+1;
+				companyId = companyId + 1;
 				companyrecode.setCompanyId(companyId);
 				companyrecode.setCompanyName(addData);
 				companyDao.insertCompany(companyrecode);
@@ -160,7 +177,8 @@ public class AddDataServlet extends HttpServlet {
 			}
 			request.setAttribute("num", 3);
 			request.setAttribute("recode", companyList);
-			RequestDispatcher companydisp = request.getRequestDispatcher("master.jsp");
+			RequestDispatcher companydisp = request
+					.getRequestDispatcher("master.jsp");
 			companydisp.forward(request, response);
 			break;
 		}// switch　終了
