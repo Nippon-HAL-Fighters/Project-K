@@ -53,12 +53,30 @@ public class CompanieDao {
 	}	
 	
 	/**
+	 * 会社情報の更新 
+	 * @param CompanieBean
+	 * @return update
+	 * @throws SQLException
+	 */
+	public int updatecomp(CompanieBean updatecomp) throws SQLException {
+
+		String updateSQL = "UPDATE companies SET company_id=?,compnay_name=? WHERE company_id = ?";
+		PreparedStatement update = con.prepareStatement(updateSQL);
+		update.setInt(1, updatecomp.getCompanyId());
+		update.setString(2, updatecomp.getCompanyName());
+		update.setInt(3, updatecomp.getCompanyId());
+		
+		return update.executeUpdate();
+	}
+	
+	
+	/**
 	 * 会社情報の削除
 	 * @param  CompanyBean 削除データ
 	 * @return delete 情報追加成功数 1なら成功
 	 * @throws SQLException
 	 **/
-	public int deletePost(CompanieBean deletecomp) throws SQLException{
+	public int deletecomp(CompanieBean deletecomp) throws SQLException{
 		
 		String deleteSql = "DELETE FROM companies WHERE company_id = ?";
 		PreparedStatement delete = con.prepareStatement(deleteSql);
