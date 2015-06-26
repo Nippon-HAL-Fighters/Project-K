@@ -64,6 +64,7 @@ public class DelMaster extends HttpServlet {
 		ArrayList<CompanieBean> compList = new ArrayList<CompanieBean>();
 		
 		int nextnum = 0;
+		//switch文の判定条件
 		String deltype = request.getParameter("Deltype");
 		RequestDispatcher dispatcher = null;
 		

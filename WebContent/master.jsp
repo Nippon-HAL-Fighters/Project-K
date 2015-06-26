@@ -105,8 +105,9 @@
 		</ul>
 	</nav>
 	<!-- 共通部分ここまで -->
-	<main> <% 		
+	<main> <%
 			int num=(Integer)request.getAttribute("num");
+				
    			//Organaiationの中身を取得
   		 	ArrayList<OrganaizationBean> Organaizationrecode = (ArrayList<OrganaizationBean>)request.getAttribute("recode");
    	        OrganaizationBean organaizationBean = new OrganaizationBean();
@@ -131,7 +132,7 @@
 					<td id="left">
 					<%
 						if(num == 1){
-							out.print("<input type=\"text\" name=\"otgid\" class=\"form-control\" />");
+							out.print("<input type=\"text\" name=\"orgid\" class=\"form-control\" />");
 						}
 					%>
 					<input type="text" name="addtext" class="form-control" />

@@ -86,33 +86,33 @@
     <!-- 共通部分ここまで -->
     <main>
     	<div id="main-form">
-	        <h2>マスタ情報更新</h2>
+	        <h1>マスタ情報更新</h1>
 	       <form action="UpdateMaster" method="post">
 	        	<div class="form">
 
 				<%
 					if(updatetype.equals("org")){	//組織だった場合
 						OrganaizationBean orgBean = (OrganaizationBean)request.getAttribute("orgBean");
-						out.print("組織ID：<input type=\"text\" name=\"orgid\" value="+orgBean.getOrganaizationId()+" />");
-						out.print("組織名：<input type=\"text\" name=\"orgname\" value="+orgBean.getOrganaizationName()+" />");
+						out.print("組織ID：<input type=\"text\" name=\"orgid\" value="+orgBean.getOrganaizationId()+" class=\"form-control\" />");
+						out.print("組織名：<input type=\"text\" name=\"orgname\" value="+orgBean.getOrganaizationName()+" class=\"form-control\" />");
 						out.print("<input type=\"hidden\" name=\"updatetype\" value=\"org\" />");
 					}else if(updatetype.equals("post")){	//役職だった場合
 						PostBean postBean = (PostBean)request.getAttribute("postBean");
 						out.print("役職：");
-						out.print("<input type=\"text\" name=\"postname\" value="+postBean.getPostName()+" />");
+						out.print("<input type=\"text\" name=\"postname\" value="+postBean.getPostName()+" class=\"form-control\" />");
 						out.print("<input type=\"hidden\" name=\"postid\" value="+postBean.getPostId()+" />");
 						out.print("<input type=\"hidden\" name=\"updatetype\" value=\"post\" />");
 					}else if(updatetype.equals("comp")){	//会社だった場合
 						CompanieBean compBean = (CompanieBean)request.getAttribute("compBean");
 						out.print("役職：");
-						out.print("<input type=\"text\" name=\"compname\" value="+compBean.getCompanyName()+" />");
+						out.print("<input type=\"text\" name=\"compname\" value="+compBean.getCompanyName()+" class=\"form-control\" />");
 						out.print("<input type=\"hidden\" name=\"compid\" value="+compBean.getCompanyId()+" />");
 						out.print("<input type=\"hidden\" name=\"updatetype\" value=\"comp\" />");
 					}
 				%>	
 				
 				</div>
-	        	<input type="submit" value="更新" class="btn btn-default" />
+	        	<input type="submit" value="更新" 	class="btn btn-info" />
 	        </form>
         </div>
     </main>
