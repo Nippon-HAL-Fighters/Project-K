@@ -112,19 +112,7 @@
     	%>
 		<h1>社員情報一覧</h1>
 		
-		<div id="sort_box">
-			<div id="header_left">
-				<select name="sort" class="form-control" id="sort">
-					<option value="1">条件1?</option>
-					<option value="2">条件2?</option>
-					<option value="3">条件3?</option>
-				</select>
-			</div>
-			<div id="header_right">
-				<input type="text" name="text" class="form-control" id="text"/>
-				<input type="submit" value="検索" id="submit" />
-			</div>
-		</div>
+		<div id="sort_box"></div>
 		
 		<!-- とりあえず仮置きでテーブルにて出力 -->	
 		<table cellpadding="0" cellspacing="0" border="0" class="display" id="myTable">
@@ -138,6 +126,7 @@
 					<th>内線番号</th>
 					<th>外線番号</th>
 					<th>所属会社</th>
+					<th></th>
 					<th></th>
 				</tr>	
 			</thead>
