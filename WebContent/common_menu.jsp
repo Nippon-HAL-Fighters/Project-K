@@ -69,25 +69,25 @@
         <%
         if (UserUtil.isAdmin(request)) {
        	%>
-            <a href="">
+            <a href="./index.jsp">
                 <li><i class="fa fa-home"></i>TOPページ</li>
             </a>
-            <a href="">
+            <a href="./GetEmployeeData">
                 <li><i class="fa fa-list"></i>社員情報一覧</li>
             </a>
-            <a href="">
+            <a href="./GetEntryData">
                 <li><i class="fa fa-user-plus"></i>社員情報登録</li>
             </a>
-            <a href="">
+            <a href="./GetPostsServlet">
                 <li><i class="fa fa-cog"></i>マスタ情報更新</li>
             </a>
-            <a href="">
+            <a href="./BackupServlet">
                 <li><i class="fa fa-pencil"></i>組織図作成</li>
             </a>
             <a href="">
                 <li><i class="fa fa-sitemap"></i>組織図閲覧</li>
             </a>
-            <a href="">
+            <a href="./BackupServlet">
                 <li><i class="fa fa-pencil"></i>座席表作成</li>
             </a>
             <a href="">
@@ -99,10 +99,10 @@
        	<%
         } else {
 		%>
-            <a href="">
+            <a href="./index.jsp">
                 <li><i class="fa fa-home"></i>TOPページ</li>
             </a>
-            <a href="">
+            <a href="./GetEmployeeData">
                 <li><i class="fa fa-list"></i>社員情報一覧</li>
             </a>
             <a href="">
