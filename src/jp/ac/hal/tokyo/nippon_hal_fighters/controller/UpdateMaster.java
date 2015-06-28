@@ -67,13 +67,15 @@ public class UpdateMaster extends HttpServlet {
 			try {
 				String orgid = request.getParameter("orgid");
 				String orgname = request.getParameter("orgname");
+				String ordid = request.getParameter("ordid"); 
 				con = connecter.getConnection();		//コネクションの取得
 				orgBean = new OrganaizationBean();
 				orgDao = new OrganaizationDao(con);
 				orgBean.setOrganaizationId(orgid);
 				orgBean.setOrganaizationName(orgname);
-				orgDao.updateOrganaiation(orgBean);
+				orgDao.updateOrganaiation(orgBean,ordid);
 				orgDao.commit();
+				System.out.print("hello");
 				dispatcher = request.getRequestDispatcher("GetOrganizationServlet");
 			} catch (Exception e) {
 				// TODO: handle exception

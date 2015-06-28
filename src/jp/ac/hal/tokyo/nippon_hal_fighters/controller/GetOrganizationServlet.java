@@ -49,12 +49,6 @@ public class GetOrganizationServlet extends HttpServlet {
 		ArrayList<OrganaizationBean> selectData = new ArrayList<OrganaizationBean>();
 		try {
 			selectData = organizationDao.selectAllOrganaiation();
-			/*System.out.println("要素数" + selectData.size());
-
-			for (int i = 0; i < selectData.size(); i++) {
-				System.out.println(selectData.get(i).getOrganaizationId());
-				System.out.println(selectData.get(i).getOrganaizationName());
-			}*/
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -97,12 +91,6 @@ public class GetOrganizationServlet extends HttpServlet {
 		ArrayList<OrganaizationBean> selectData = new ArrayList<OrganaizationBean>();
 		try {
 			selectData = organizationDao.selectAllOrganaiation();
-			System.out.println("要素数" + selectData.size());
-
-			for (int i = 0; i < selectData.size(); i++) {
-				System.out.println(selectData.get(i).getOrganaizationId());
-				System.out.println(selectData.get(i).getOrganaizationName());
-			}
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
