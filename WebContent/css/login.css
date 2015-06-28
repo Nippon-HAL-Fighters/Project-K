@@ -1,0 +1,26 @@
+main {
+  padding-top: 100px;
+  width: 900px;
+}
+main .left_box {
+  width: 50%;
+  float: left;
+}
+main .left_box h2 {
+  font-size: 40px;
+}
+main .left_box img {
+  margin-top: 30px;
+  width: 40%;
+}
+main .login_box {
+  margin-top: 60px;
+  width: 50%;
+  float: right;
+}
+main .login_box .input-group {
+  margin-top: 15px;
+}
+main .login_box .btn {
+  margin-top: 40px;
+}
