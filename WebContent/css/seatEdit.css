@@ -40,7 +40,7 @@ h3 {
 	position: absolute;
 	margin-top: 10px;
 	float: left;
-	left:1135px;
+	left: 1135px;
 	height: 550px;
 	background-color: #f1eff0;
 	width: 200px;
@@ -49,6 +49,12 @@ h3 {
 	box-shadow: 5px 5px 10px #000;
 	-webkit-box-shadow: 5px 5px 10px #000;
 	-moz-box-shadow: 5px 5px 10px #000;
+}
+
+.edit_area{
+	position: absolute;
+	width:1000px;
+	height:600px;
 }
 
 .user-input {
@@ -66,3 +72,4 @@ h3 {
 	padding: 15px 0px 15px 0px;
 	width: 90%;
 }
+

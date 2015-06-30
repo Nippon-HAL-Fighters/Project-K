@@ -6,11 +6,11 @@ $(function() {
 	var cells = [];
 
 	/* 描画領域の作成 */
-	var $editArea = $('.editArea');
+	var $editArea = $('.edit_area');
 
 	var editArea = {
-			width: $('.editArea').innerWidth(),
-			height: $('.editArea').innerHeight()
+			width: $editArea.innerWidth(),
+			height: $editArea.innerHeight()
 	};
 
 	var paper = new joint.dia.Paper({
@@ -21,6 +21,7 @@ $(function() {
 		model : graph
 	});
 
+	// アイテムクリック時のコマンド
 	paper.on('cell:pointerup', function(cellView) {
 	    if (cellView.model instanceof joint.dia.Link) return;
 
@@ -28,8 +29,12 @@ $(function() {
 	    halo.render();
 	});
 
+	// 編集時の線表示
     var snaplines = new joint.ui.Snaplines({ paper: paper });
     snaplines.startListening();
+
+    // redo undo マネージャー
+    var commandManager = new joint.dia.CommandManager({ graph: graph });
 
 	/* 作成ボタン押下アクション */
 	$('.item').click(function() {
@@ -44,8 +49,20 @@ $(function() {
 		case 'しきり':
 			createPartition();
 			break;
-		case 'プリント':
-			paper.print()
+		case 'undo':
+			commandManager.undo();
+			break;
+		case 'redo':
+			commandManager.redo();
+			break;
+		case '印刷':
+			//paper.print();
+		   var windowFeatures = 'menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes';
+		    var windowName = _.uniqueId('png_output');
+		    var imageWindow = window.open('', windowName, windowFeatures);
+	        paper.toPNG(function(dataURL) {
+	    	    imageWindow.document.write('<img src="' + dataURL + '"/>');
+	            });
 			break;
 		default:
 			break;

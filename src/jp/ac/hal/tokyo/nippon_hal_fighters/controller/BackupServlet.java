@@ -41,13 +41,25 @@ public class BackupServlet extends HttpServlet {
 		// DAO定義
 		BackupDao backupDao = new BackupDao();
 
-		String backPage = "./seatList.html";
-		int fileId = 1;
+		String backPage = "./seatList.jsp";
 
 		ArrayList<BackupBean> selectData = new ArrayList<BackupBean>();
 		ArrayList<BackupBean> listData = new ArrayList<BackupBean>();
+
 		try {
-			selectData = backupDao.listSelect(fileId);
+			selectData = backupDao.listSelect();
+
+			for (int i = 0; i < selectData.size(); i++) {
+				BackupBean backupBean = new BackupBean();
+
+				backupBean.setBackupId(selectData.get(i).getBackupId());
+				backupBean.setTitle(selectData.get(i).getTitle());
+				backupBean.setResetDate(selectData.get(i).getResetDate());
+				backupBean.setImplementor(selectData.get(i).getImplementor());
+
+				listData.add(backupBean);
+
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,24 +76,6 @@ public class BackupServlet extends HttpServlet {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-		}
-
-
-		for (int i = 0; i < selectData.size(); i++) {
-			BackupBean backupBean = new BackupBean();
-
-			backupBean.setBackupId(selectData.get(i).getBackupId());
-			backupBean.setTitle(selectData.get(i).getTitle());
-			backupBean.setResetDate(selectData.get(i).getResetDate());
-			backupBean.setImplementor(selectData.get(i).getImplementor());
-
-			System.out.println(selectData.get(i).getBackupId());
-			System.out.println(selectData.get(i).getTitle());
-			System.out.println(selectData.get(i).getResetDate());
-			System.out.println(selectData.get(i).getImplementor());
-
-			listData.add(backupBean);
-
 		}
 
 		request.setAttribute("listData", listData);
@@ -105,22 +99,32 @@ public class BackupServlet extends HttpServlet {
 
 		String title = request.getParameter("cell");
 		String choice = request.getParameter("choices");
-		String backPage = "./seatList.html";
-		int fileId = 1;
+		String backPage = "./BackupServlet";
 
 		String[] BackupId = title.split(",", 0);
-		int backupId = Integer.parseInt(BackupId[1]);
 
-		if (title != "") {
-			switch (choice) {
-			case "印刷":
-				response.setContentType("text/html; charset=utf-8");
-				response.sendRedirect(backPage);
+		System.out.println(choice);
 
-				break;
-			case "削除":
+		switch (choice) {
+		case "新規":
+			backPage = "seatEdit.html";
+			System.out.println(backPage);
+			response.setContentType("text/html; charset=utf-8");
+			response.sendRedirect(backPage);
+
+			break;
+
+		case "印刷":
+			response.setContentType("text/html; charset=utf-8");
+			response.sendRedirect(backPage);
+
+			break;
+
+		case "削除":
+			if (title != "") {
 				try {
-					if (backupDao.fileDelete(backupId, fileId) > 0) {
+					int backupId = Integer.parseInt(BackupId[1]);
+					if (backupDao.fileDelete(backupId) > 0) {
 						backupDao.commit();
 					}
 				} catch (SQLException e) {
@@ -139,17 +143,30 @@ public class BackupServlet extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
+			}
 
-				break;
+			response.setContentType("text/html; charset=utf-8");
+			response.sendRedirect(backPage);
 
-			case "編集":
+			break;
+
+		case "編集":
+			if (title != "") {
 				ArrayList<BackupBean> selectData = new ArrayList<BackupBean>();
 				try {
-					selectData = backupDao.fileSelect(backupId, fileId);
+					int backupId = Integer.parseInt(BackupId[1]);
+					selectData = backupDao.fileSelect(backupId);
 
-					// System.out.println(selectData.get(0).getBackupId());
-					// System.out.println(selectData.get(1).getBackupFile());
-					// System.out.println(selectData.get(2).getFileId());
+					System.out.println(selectData.get(0).getBackupId());
+					System.out.println(selectData.get(1).getBackupFile());
+
+					request.setAttribute("selectData", selectData);
+					backPage = "./seatEdit.html";
+
+					RequestDispatcher dispatcher = request
+							.getRequestDispatcher(backPage);
+					dispatcher.forward(request, response);
+
 				} catch (SQLException e) {
 					e.printStackTrace();
 					try {
@@ -167,28 +184,23 @@ public class BackupServlet extends HttpServlet {
 					}
 				}
 				backPage = "./seatEdit.html";
-				response.setContentType("text/html; charset=utf-8");
-				response.sendRedirect(backPage);
-
-				break;
-
-			default:
-				break;
 			}
 
 			response.setContentType("text/html; charset=utf-8");
 			response.sendRedirect(backPage);
 
-		} else {
+			break;
 
+		default:
 			// ServletContext sc = getServletContext();
-			backPage = "./seatList.html";
+			backPage = "./BackupServlet";
 			// sc.getRequestDispatcher(backPage).forward(request, response);
 
 			response.setContentType("text/html; charset=utf-8");
 			response.sendRedirect(backPage);
-		}
 
+			break;
+		}
 	}
 
 }

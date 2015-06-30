@@ -13,11 +13,13 @@ import java.sql.Date;
 public class BackupBean {
 
 	private int backupId;
-	private int fileId;
+
 	private String backupFile;
+	private byte backupImg;
+	private String title;
+	private int fileId;
 	private Date resetDate;
 	private String implementor;
-	private String title;
 
 	public int getBackupId() {
 		return backupId;
@@ -65,6 +67,14 @@ public class BackupBean {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public byte getBackupImg() {
+		return backupImg;
+	}
+
+	public void setBackupImg(byte backupImg) {
+		this.backupImg = backupImg;
 	}
 
 }
