@@ -15,6 +15,11 @@
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/script.js"></script>
 <script src="./js/list.js"></script>
+<script src="./js/change.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="jquery.focused.js"></script>
+
 </head>
 <body>
 	<!-- 共通部分 -->
@@ -74,47 +79,15 @@
 		</ul>
 	</nav>
 	<!-- 共通部分ここまで -->
-	<main> <!-- <script language="javascript">
-		function getCELL() {
-			var myTbl = document.getElementById('TBL');
-			// trをループ。rowsコレクションで,行位置取得。
-			for (var i = 0; i < myTbl.rows.length; i++) {
-				// tr内のtdをループ。cellsコレクションで行内セル位置取得。
-				for (var j = 0; j < myTbl.rows[i].cells.length; j++) {
-					var Cells = myTbl.rows[i].cells[j]; //i番行のj番列のセル "td"
-					// onclickで 'Mclk'を実行。thisはクリックしたセル"td"のオブジェクトを返す。
-					Cells.onclick = function() {
-						Mclk(this);
-					}
-				}
-			}
-		}
-
-		function Mclk(Cell) {
-			var rowINX = '行位置：' + Cell.parentNode.rowIndex;//Cellの親ノード'tr'の行位置
-			var cellINX = 'セル位置：' + Cell.cellIndex;
-			var cellVal = 'セルの内容：' + Cell.innerHTML;
-			//取得した値の書き出し
-			res = rowINX + '<br/> ' + cellINX + '<br/>' + cellVal;
-			document.getElementById('Mbox0').innerHTML = res;
-			var Ms1 = document.getElementById('Mbox1')
-			Ms1.innerText = Cell.innerHTML;
-			Ms1.textContent = Cell.innerHTML;
-		}
-		// try ～ catch 例外処理、エラー処理
-		// イベントリスナーaddEventListener,attachEventメソッド
-		try {
-			window.addEventListener("load", getCELL, false);
-		} catch (e) {
-			window.attachEvent("onload", getCELL);
-		}
-	</script>
-	-->
+	<main>
 
 	<div class="header_box">
 		<h2>座席表一覧</h2>
 		<form action="BackupServlet" name="form" method="post">
-
+			<select id="select" onchange="changeSelect()">
+				<option value="東京">東京</option>
+				<option value="大阪">大阪</option>
+			</select>
 			<input type="hidden" id="cell" name="cell" value="" />
 			<button type="submit" class="btn btn-primary headerbtn" value="編集"
 				name="choices">編集</button>
@@ -129,38 +102,51 @@
 
 	<div class="main_box">
 
-
-		<table id="TBL">
-			<tbody>
-				<tr>
-					<th width="50%">タイトル</th>
-					<th width="25%">最終変更日</th>
-					<th width="25">変更者</th>
-				</tr>
-
-
-				<c:forEach items="${listData}" var="list" varStatus="status">
-					<tr id="tr${status.count}" onclick="sentaku(${status.count})"
-						style="">
-						<td><a style="display: none">,${list.backupId},</a>${list.title}</td>
-						<td><a style="display: none">,${list.backupId},</a>${list.resetDate}</td>
-						<td><a style="display: none">,${list.backupId},</a>${list.implementor}</td>
+		<div id="東京" style="display: block;">
+			<table id="TBL">
+				<tbody>
+					<tr>
+						<th width="50%">タイトル</th>
+						<th width="25%">最終変更日</th>
+						<th width="25">変更者</th>
 					</tr>
-				</c:forEach>
 
 
-			</tbody>
-		</table>
-		<div id="Div">
+					<c:forEach items="${listData}" var="list" varStatus="status">
+						<tr id="tr${status.count}" onclick="sentaku(${status.count})"
+							style="">
+							<td><a style="display: none">,${list.backupId},</a>${list.title}</td>
+							<td><a style="display: none">,${list.backupId},</a>${list.resetDate}</td>
+							<td><a style="display: none">,${list.backupId},</a>${list.implementor}</td>
+						</tr>
+					</c:forEach>
 
-			<p id="Mbox0">セルをクリックしたらここに書き出します。</p>
-			<p id="Mbox1">インデックス値は '0'から始まります。</p>
-			<input type="hidden" id="Mbox0" /> <input type="hidden" id="Mbox1" />
+				</tbody>
+			</table>
+
+			<div id="Div">
+
+				<p id="Mbox0">セルをクリックしたらここに書き出します。</p>
+				<p id="Mbox1">インデックス値は '0'から始まります。</p>
+				<input type="hidden" id="Mbox0" /> <input type="hidden" id="Mbox1" />
+
+			</div>
+
+		</div>
+		<div id="大阪" style="display: none;">
+
+			<div>
+				<button type="button" class="button btn btn-primary name" value="机">机</button>
+				<button type="button" class="button btn btn-primary name" value="丸">丸</button>
+				<button type="button" class="button btn btn-primary name"
+					value="しきり">しきり</button>
+			</div>
 
 		</div>
 	</div>
-
-
-	</main>
+	<script type="text/javascript">
+			// デフォルトのタブを選択
+			//changeSelect('東京');
+		</script> </main>
 </body>
 </html>

@@ -1,0 +1,7 @@
+.noprint {
+	display: none;
+}
+
+div.pagebreak {
+	page-break-after: always;
+}

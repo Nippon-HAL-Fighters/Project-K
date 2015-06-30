@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +9,27 @@
 <link rel="stylesheet" href="./css/font-awesome/font-awesome.css"
 	type="text/css" />
 <link rel="stylesheet" href="./css/seatEdit.css" type="text/css" />
+<link rel="stylesheet" href="./css/joint.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="./print.css" media="print" />
 <script src="./js/jquery-2.1.4.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/script.js"></script>
+<script type="text/javascript" src="joint.format.print.js"></script>
+<script src="./js/joint.all.min.js"></script>
+<script src="./js/jointjs_seatEdit.js"></script>
+<script src="./js/change.js"></script>
+
+
+<style type="text/css">
+input#sample {
+    width:200px;
+    padding:2px;
+}
+input.dummy_text {
+    color:#888;
+}
+</style>
+
 </head>
 <body>
 	<!-- 共通部分 -->
@@ -72,36 +92,54 @@
 	<main>
 	<div class="header_box">
 		<h2>座席表作成</h2>
-		<a class="btn btn-primary headerbtn">削除</a> <a
-			class="btn btn-primary headerbtn">保存</a> <a
-			class="btn btn-primary headerbtn">切り替え</a>
+		<input type="text" id="sample" value="" />
+
+		<a class="btn btn-primary headerbtn">保存</a> <a href="#tab1" id="tab1"
+			class="btn btn-primary headerbtn" style="display: none;"
+			onclick="ChangeTab('0'); return false;">切り替え</a> <a href="#tab2"
+			id="tab2" class="btn btn-primary headerbtn" style="display: block;"
+			onclick="ChangeTab('1'); return false;">切り替え</a>
+		<button type="button" class="btn btn-primary headerbtn button"
+			value="印刷">印刷</button>
 
 	</div>
 	<div id="main_box">
-		<script src="./js/joint.js"></script>
-		<script src="./js/main.js"></script>
+		<div id="editArea" style="width: 1000px; height: 600px;"></div>
 	</div>
 
 	<div class="sub_box">
-		<form class="input-group">
-			<input type="text" class="form-control_text user-input"
-				placeholder="キーワード"> <input type="submit"
-				class="btn btn-success" value="検索" />
-		</form>
+		<div class="tabbox">
+			<div id="0" class="tab">
+				<p>
+				<div class="btn btn-primary name">田中 タロウ</div>
+				<div class="btn btn-primary name">田中 タロウ</div>
+				<div class="btn btn-primary name">田中 タロウ</div>
+				</p>
 
-		<div class="btn btn-primary name">田中 タロウ</div>
-		<div class="btn btn-primary name">田中 タロウ</div>
-		<div class="btn btn-primary name">田中 タロウ</div>
-		<div class="btn btn-primary name">田中 タロウ</div>
-		<div class="btn btn-primary name">田中 タロウ</div>
-		<div class="btn btn-primary name">田中 タロウ</div>
-		<div class="btn btn-primary name">田中 タロウ</div>
-		<div class="btn btn-primary name">田中 タロウ</div>
-		<div class="btn btn-primary name">田中 タロウ</div>
-		<div class="btn btn-primary name">田中 タロウ</div>
+			</div>
+			<div id="1" class="tab">
+				<p>
+				<div>
+					<button type="button" class="button btn btn-primary name" value="机">机</button>
+					<button type="button" class="button btn btn-primary name" value="丸">丸</button>
+					<button type="button" class="button btn btn-primary name"
+						value="しきり">しきり</button>
+				</div>
+				</p>
+
+			</div>
+		</div>
+		<script type="text/javascript">
+			// デフォルトのタブを選択
+			ChangeTab('0');
+		</script>
+
+
+
 
 	</div>
 
 	</main>
 </body>
 </html>
+
