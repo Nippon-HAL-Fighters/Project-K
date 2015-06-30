@@ -14,12 +14,16 @@ $(function(){
 				document.getElementById("errorgid").innerText = '組織IDが入力されていません';
 				document.getElementById("errorgid").style.display="block";
 				errflug = 1;
-			}else if(!orgid.val().match(/^[0-9]+$/)){
+			}else if (orgid.val().length < 4 ||  orgid.val().length > 4) {
+				document.getElementById("errorgid").innerText = '組織IDは4桁で入力してください';
+				document.getElementById("errorgid").style.display = "block";
+				errflug = 1;
+			} 
+			else if(!orgid.val().match(/^[0-9]+$/)){
 				document.getElementById("errorgid").innerText = '組織IDは数字で入力してください';
 				document.getElementById("errorgid").style.display="block";
 				errflug = 1;
-			}
-			
+			}			
 			/**組織名**/
 			if(orgname.val() == ""){
 				document.getElementById("errorgname").innerText = '組織名が入力されていません';

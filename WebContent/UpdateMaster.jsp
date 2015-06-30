@@ -86,7 +86,7 @@
     <!-- 共通部分ここまで -->
     <main>
     	<div id="main-form">
-	        <h2>マスタ情報更新</h2>
+	        <h1>マスタ情報更新</h1>
 	       <form action="UpdateMaster" method="post">
 	        	<div class="form">
 
@@ -115,7 +115,7 @@
 				%>	
 				
 				</div>
-	        	<input type="submit" value="更新" class="btn btn-default" />
+	        	<input type="submit" value="更新" 	class="btn btn-info" />
 	        </form>
         </div>
     </main>
