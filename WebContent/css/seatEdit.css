@@ -22,7 +22,8 @@ h3 {
 	float: right;
 }
 
-#main_box {
+.main_box {
+	position: absolute;
 	margin-top: 10px;
 	width: 900px;
 	height: 550px;
@@ -36,8 +37,10 @@ h3 {
 }
 
 .sub_box {
+	position: absolute;
 	margin-top: 10px;
 	float: left;
+	left:1135px;
 	height: 550px;
 	background-color: #f1eff0;
 	width: 200px;

@@ -6,11 +6,11 @@ $(function() {
 	var cells = [];
 
 	/* 描画領域の作成 */
-	var $editArea = $('#editArea');
+	var $editArea = $('.editArea');
 
 	var editArea = {
-			width: $('#editArea').innerWidth(),
-			height: $('#editArea').innerHeight()
+			width: $('.editArea').innerWidth(),
+			height: $('.editArea').innerHeight()
 	};
 
 	var paper = new joint.dia.Paper({
@@ -62,19 +62,8 @@ $(function() {
 
 		cells.push( new joint.shapes.basic.Rect({
 			position : defaultPosition,
-			size : {
-				width : 100,
-				height : 60
-			},
-			attrs : {
-				rect : {
-					fill : 'blue'
-				},
-				text : {
-					text : '机',
-					fill : 'white'
-				}
-			}
+			size : { width : 100, height : 60 },
+			attrs : { rect : { fill : 'blue' }, text : { text : '机', fill : 'white' } }
 		}));
 
 		graph.addCells(cells);
@@ -85,18 +74,8 @@ $(function() {
 
 		cells.push( new joint.shapes.basic.Circle({
 			position : defaultPosition,
-			size : {
-				width : 50,
-				height : 50
-			},
-			attrs : {
-				text : {
-					text : '丸'
-				},
-				circle : {
-					fill : '#2ECC71'
-				}
-			}
+			size : { width : 50, height : 50 },
+			attrs : { text : { text : '丸' }, circle : { fill : '#2ECC71' } }
 		}));
 
 		graph.addCells(cells);
