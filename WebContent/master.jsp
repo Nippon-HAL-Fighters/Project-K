@@ -191,6 +191,7 @@ function delcheck(){
 		id="myTable">
 		<thead>
 			<tr>
+
 			<%
 			//表示内容を判定するwordを取得
      		
