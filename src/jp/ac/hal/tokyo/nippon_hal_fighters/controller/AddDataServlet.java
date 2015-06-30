@@ -54,6 +54,7 @@ public class AddDataServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 
 		// 追加するデータの内容
 		String addData = "";
@@ -95,14 +96,15 @@ public class AddDataServlet extends HttpServlet {
 		case 1:
 			num = 1;
 			try {
-				orgId = request.getParameter("orgid");
-				addData = request.getParameter("addtext");
-				System.out.println("add:" + addData);
-				orgrecode.setOrganaizationId(orgId);
-				orgrecode.setOrganaizationName(addData);
-				organaizationDao.insertOrganaiation(orgrecode);
-				postDao.commit();
-				organaizationList = organaizationDao.selectAllOrganaiation();
+					orgId = request.getParameter("orgid");
+					addData = request.getParameter("orgaddtext");
+					orgrecode.setOrganaizationId(orgId);
+					orgrecode.setOrganaizationName(addData);
+					organaizationDao.insertOrganaiation(orgrecode);
+					postDao.commit();
+					organaizationList = organaizationDao.selectAllOrganaiation();
+					//}
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -115,7 +117,6 @@ public class AddDataServlet extends HttpServlet {
 				}
 			}
 			request.setAttribute("num", 1);
-			System.out.print(num);
 			request.setAttribute("recode", organaizationList);
 			RequestDispatcher orgdisp = request.getRequestDispatcher("master.jsp");
 			orgdisp.forward(request, response);
@@ -125,7 +126,7 @@ public class AddDataServlet extends HttpServlet {
 		case 2:
 			num = 2;
 			try {
-				addData = request.getParameter("addtext");
+				addData = request.getParameter("postaddtext");
 				System.out.println("add:" + addData);
 				postId = postDao.datacount();
 				postId = postId + 1;
@@ -134,6 +135,7 @@ public class AddDataServlet extends HttpServlet {
 				postDao.insertPost(postrecode);
 				postDao.commit();
 				postList = postDao.selectAllPosts();
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -156,7 +158,7 @@ public class AddDataServlet extends HttpServlet {
 		case 3:
 			num = 3;
 			try {
-				addData = request.getParameter("addtext");
+				addData = request.getParameter("compaddtext");
 				companyId = companyDao.datacount();
 				companyId = companyId + 1;
 				companyrecode.setCompanyId(companyId);
@@ -164,6 +166,7 @@ public class AddDataServlet extends HttpServlet {
 				companyDao.insertCompany(companyrecode);
 				companyDao.commit();
 				companyList = companyDao.selectAll();
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

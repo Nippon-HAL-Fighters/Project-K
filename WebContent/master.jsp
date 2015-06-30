@@ -1,3 +1,4 @@
+<%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.controller.GetOrganizationServlet"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean"%>
 <%@page import="jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean"%>
@@ -21,6 +22,8 @@
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/script.js"></script>
 <script src="./js/jquery.dataTables.min.js"></script>
+<script src="./js/AddCheck.js"></script>
+
 <script>
 	$(document).ready(function() {
 		$('#myTable').DataTable({
@@ -106,8 +109,15 @@
 	</nav>
 	<!-- 共通部分ここまで -->
 	<main> <%
-			int num=(Integer)request.getAttribute("num");
-				
+			int num;
+			if(request.getAttribute("num")== null){
+				//num=1;
+				response.sendRedirect("GetOrganizationServlet");
+				return;
+			}else{
+				num = (Integer)request.getAttribute("num");
+			}	
+			//System.out.println(num);
    			//Organaiationの中身を取得
   		 	ArrayList<OrganaizationBean> Organaizationrecode = (ArrayList<OrganaizationBean>)request.getAttribute("recode");
    	        OrganaizationBean organaizationBean = new OrganaizationBean();
@@ -123,6 +133,12 @@
    			//companyの中身を取得
    		    ArrayList<CompanieBean> companyRecode = (ArrayList<CompanieBean>)request.getAttribute("recode");
    		    CompanieBean companieBean = new CompanieBean();
+   		    
+   		/*if(Organaizationrecode == null|| Postrecode == null|| phoneRecode == null ||companyRecode == null){
+     		response.sendRedirect("GetOrganizationServlet");
+     		return;
+     	}*/
+   		    
  	%>
 	<h1>マスタ情報</h1>
 	<div id="all">
@@ -132,13 +148,22 @@
 					<td id="left">
 					<%
 						if(num == 1){
-							out.print("<input type=\"text\" name=\"orgid\" class=\"form-control\" />");
+							
+							out.print("<label id=\"errorgid\" style=\"display:none;color:red;\"></label>"
+										+"<input type=\"text\" name=\"orgid\" class=\"form-control\" value=\"\" />"
+									 	+"<label id=\"errorgname\" style=\"display:none;color:red;\"></label>"
+									 	+"<input type=\"text\" name=\"orgaddtext\" class=\"form-control\" value=\"\" />");
+						}else if(num == 2){
+							out.print("<label id=\"errpostname\" style=\"display:none;color:red;\"></label>"
+									+"<input type=\"text\" name=\"postaddtext\" class=\"form-control\" value=\"\" />");
+						}else if(num == 3){
+							out.print("<label id=\"errcompname\" style=\"display:none;color:red;\"></label>"
+									+"<input type=\"text\" name=\"compaddtext\" class=\"form-control\" value=\"\" />");
 						}
 					%>
-					<input type="text" name="addtext" class="form-control" />
 					</td>
 					<td><input type="submit" name="add" value="追加"
-						class="btn btn-info"></td>
+						class="btn btn-info" id="add"/></td>
 						<input type="hidden" name="addtype" value="<%= num %>" />
 				</form>
 
@@ -173,17 +198,18 @@
 				switch(num){
 					//組織の場合
 					case 1:
+						
 					for(OrganaizationBean org : Organaizationrecode){
 						out.print(
 								"<tr>"
 								+"<td>"+org.getOrganaizationId()+"</td>"//組織ID
 								+"<td>"+org.getOrganaizationName()+"</td>"//組織名
-								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" />"
+								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" class=\"btn btn-info\" value=\"変更\" />"
 								+"<input type=\"hidden\" name=\"OrganaizationID\" value="+org.getOrganaizationId()+" />"	
 								+"<input type=\"hidden\" name=\"OrganaizationName\" value="+org.getOrganaizationName()+" />"	
 								+"<input type=\"hidden\" name=\"updateType\" value=\"org\" />"
 								+"</form></td>"
-								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" class=\"btn btn-info\" value=\"削除\" /></td>"
 								+"<input type=\"hidden\" name=\"OrganaizationID\" value="+org.getOrganaizationId()+" />"
 								+"<input type=\"hidden\" name=\"Deltype\" value=\"org\" />"
 								+"</form></tr>");
@@ -197,12 +223,12 @@
 								"<tr>"
 								+"<td>"+post.getPostId()+"</td>"//部署ID
 								+"<td>"+post.getPostName()+"</td>"//部署名
-								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" />"
+								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" class=\"btn btn-info\" value=\"変更\" />"
 								+"<input type=\"hidden\" name=\"PostID\" value="+post.getPostId()+" />"		
 								+"<input type=\"hidden\" name=\"PostName\" value="+post.getPostName()+" />"		
 								+"<input type=\"hidden\" name=\"updateType\" value=\"post\" />"
 								+"</form></td>"
-								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" class=\"btn btn-info\" value=\"削除\" /></td>"
 								+"<input type=\"hidden\" name=\"PostID\" value="+post.getPostId()+" />"		
 								+"<input type=\"hidden\" name=\"PostName\" value="+post.getPostName()+" />"	
 								+"<input type=\"hidden\" name=\"Deltype\" value=\"post\" />"
@@ -217,12 +243,12 @@
 								"<tr>"
 								+"<td>"+company.getCompanyId()+"</td>"//会社ID
 								+"<td>"+company.getCompanyName()+"</td>"//会社名
-								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" />"
+								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" class=\"btn btn-info\" value=\"変更\" />"
 								+"<input type=\"hidden\" name=\"CompanyID\" value="+company.getCompanyId()+">"
 								+"<input type=\"hidden\" name=\"CompanyName\" value="+company.getCompanyName()+">"	
 								+"<input type=\"hidden\" name=\"updateType\" value=\"comp\" />"
 								+"</form></td>"
-								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" class=\"btn btn-info\" value=\"削除\" /></td>"
 								+"<input type=\"hidden\" name=\"CompanyID\" value="+company.getCompanyId()+">"
 								+"<input type=\"hidden\" name=\"CompanyName\" value="+company.getCompanyName()+">"
 								+"<input type=\"hidden\" name=\"Deltype\" value=\"comp\" />"

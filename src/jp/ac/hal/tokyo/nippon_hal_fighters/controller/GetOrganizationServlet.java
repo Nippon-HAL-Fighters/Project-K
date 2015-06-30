@@ -36,10 +36,10 @@ public class GetOrganizationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		
 		//表示するための条件
 		int num = 1;
-
 		// DAO定義
 		OrganaizationDao organizationDao = new OrganaizationDao();
 
@@ -49,12 +49,6 @@ public class GetOrganizationServlet extends HttpServlet {
 		ArrayList<OrganaizationBean> selectData = new ArrayList<OrganaizationBean>();
 		try {
 			selectData = organizationDao.selectAllOrganaiation();
-			/*System.out.println("要素数" + selectData.size());
-
-			for (int i = 0; i < selectData.size(); i++) {
-				System.out.println(selectData.get(i).getOrganaizationId());
-				System.out.println(selectData.get(i).getOrganaizationName());
-			}*/
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -63,17 +57,15 @@ public class GetOrganizationServlet extends HttpServlet {
 				organizationDao.close();
 			} catch (Exception e2) {
 				// TODO: handle exception
-				e2.printStackTrace();
+				e2.printStackTrace(); 
 			}
 		}
-
 		request.setAttribute("recode", selectData);
 		request.setAttribute("num", num);
 		// データを取得してから一覧へ遷移
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("master.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 	/**
@@ -82,27 +74,19 @@ public class GetOrganizationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		
 		//表示するための条件
 		int num = 1;
-
 		// DAO定義
 		OrganaizationDao organizationDao = new OrganaizationDao();
-
 		/*
 		 * 以下 Connecter＆DAO テスト用
 		 */
 		ArrayList<OrganaizationBean> selectData = new ArrayList<OrganaizationBean>();
 		try {
 			selectData = organizationDao.selectAllOrganaiation();
-			System.out.println("要素数" + selectData.size());
-
-			for (int i = 0; i < selectData.size(); i++) {
-				System.out.println(selectData.get(i).getOrganaizationId());
-				System.out.println(selectData.get(i).getOrganaizationName());
-			}
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -114,14 +98,11 @@ public class GetOrganizationServlet extends HttpServlet {
 				e2.printStackTrace();
 			}
 		}
-
 		request.setAttribute("recode", selectData);
 		request.setAttribute("num", num);
 		// データを取得してから一覧へ遷移
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("master.jsp");
 		dispatcher.forward(request, response);
-
 	}
-
 }
