@@ -44,8 +44,21 @@
 				}
 			},
 		});
-	});
+	});	
 </script>
+
+<script type="text/javascript">
+<!--
+function delcheck(){
+	if(window.confirm('削除します。よろしいですか？')){
+	}
+	else{
+		return false;
+	}
+}
+// -->
+</script>
+
 </head>
 <body>
 	<!-- 共通部分 -->
@@ -182,7 +195,7 @@
 								+"<input type=\"hidden\" name=\"OrganaizationName\" value="+org.getOrganaizationName()+" />"	
 								+"<input type=\"hidden\" name=\"updateType\" value=\"org\" />"
 								+"</form></td>"
-								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\" class=\"btn btn-info\" onClick=\"return delcheck()\" /></td>"
 								+"<input type=\"hidden\" name=\"OrganaizationID\" value="+org.getOrganaizationId()+" />"
 								+"<input type=\"hidden\" name=\"Deltype\" value=\"org\" />"
 								+"</form></tr>");
@@ -196,12 +209,12 @@
 								"<tr>"
 								+"<td>"+post.getPostId()+"</td>"//部署ID
 								+"<td>"+post.getPostName()+"</td>"//部署名
-								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" value=\"変更\" class=\"btn btn-info\" />"
+								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\"  value=\"変更\" class=\"btn btn-info\" />"
 								+"<input type=\"hidden\" name=\"PostID\" value="+post.getPostId()+" />"		
 								+"<input type=\"hidden\" name=\"PostName\" value="+post.getPostName()+" />"		
 								+"<input type=\"hidden\" name=\"updateType\" value=\"post\" />"
 								+"</form></td>"
-								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\" class=\"btn btn-info\" onClick=\"return delcheck()\" /></td>"
 								+"<input type=\"hidden\" name=\"PostID\" value="+post.getPostId()+" />"		
 								+"<input type=\"hidden\" name=\"PostName\" value="+post.getPostName()+" />"	
 								+"<input type=\"hidden\" name=\"Deltype\" value=\"post\" />"
@@ -221,7 +234,7 @@
 								+"<input type=\"hidden\" name=\"CompanyName\" value="+company.getCompanyName()+">"	
 								+"<input type=\"hidden\" name=\"updateType\" value=\"comp\" />"
 								+"</form></td>"
-								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\"  class=\"btn btn-info\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\" class=\"btn btn-info\" onClick=\"return	 delcheck()\" /></td>"
 								+"<input type=\"hidden\" name=\"CompanyID\" value="+company.getCompanyId()+">"
 								+"<input type=\"hidden\" name=\"CompanyName\" value="+company.getCompanyName()+">"
 								+"<input type=\"hidden\" name=\"Deltype\" value=\"comp\" />"
