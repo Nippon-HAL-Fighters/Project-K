@@ -234,7 +234,7 @@ function delcheck(){
 								+"<input type=\"hidden\" name=\"CompanyName\" value="+company.getCompanyName()+">"	
 								+"<input type=\"hidden\" name=\"updateType\" value=\"comp\" />"
 								+"</form></td>"
-								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\" class=\"btn btn-info\" onClick=\"return	 delcheck()\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\" class=\"btn btn-info\" onClick=\"return delcheck()\" /></td>"
 								+"<input type=\"hidden\" name=\"CompanyID\" value="+company.getCompanyId()+">"
 								+"<input type=\"hidden\" name=\"CompanyName\" value="+company.getCompanyName()+">"
 								+"<input type=\"hidden\" name=\"Deltype\" value=\"comp\" />"
