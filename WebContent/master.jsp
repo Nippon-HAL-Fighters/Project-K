@@ -47,8 +47,21 @@
 				}
 			},
 		});
-	});
+	});	
 </script>
+
+<script type="text/javascript">
+<!--
+function delcheck(){
+	if(window.confirm('削除します。よろしいですか？')){
+	}
+	else{
+		return false;
+	}
+}
+// -->
+</script>
+
 </head>
 <body>
 	<!-- 共通部分 -->
@@ -132,13 +145,7 @@
    		    
    			//companyの中身を取得
    		    ArrayList<CompanieBean> companyRecode = (ArrayList<CompanieBean>)request.getAttribute("recode");
-   		    CompanieBean companieBean = new CompanieBean();
-   		    
-   		/*if(Organaizationrecode == null|| Postrecode == null|| phoneRecode == null ||companyRecode == null){
-     		response.sendRedirect("GetOrganizationServlet");
-     		return;
-     	}*/
-   		    
+   		    CompanieBean companieBean = new CompanieBean();    
  	%>
 	<h1>マスタ情報</h1>
 	<div id="all">
@@ -184,13 +191,6 @@
 		id="myTable">
 		<thead>
 			<tr>
-				<th>No</th>
-				<th>部署名</th>
-				<th>変更</th>
-				<th>削除</th>
-			</tr>
-		</thead>
-		<tbody>
 			<%
 			//表示内容を判定するwordを取得
      		
@@ -198,18 +198,25 @@
 				switch(num){
 					//組織の場合
 					case 1:
+						out.print("<th>組織ID</th>"
+								+"<th>組織名</th>"
+								+"<th>変更</th>"
+								+"<th>削除</th>"
+								+"</tr>"
+								+"</thead>"
+								+"<tbody>");
 						
 					for(OrganaizationBean org : Organaizationrecode){
 						out.print(
 								"<tr>"
 								+"<td>"+org.getOrganaizationId()+"</td>"//組織ID
 								+"<td>"+org.getOrganaizationName()+"</td>"//組織名
-								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" class=\"btn btn-info\" value=\"変更\" />"
+								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" class=\"btn btn-info\" value=\"変更\" style=\"width:100%\" />"
 								+"<input type=\"hidden\" name=\"OrganaizationID\" value="+org.getOrganaizationId()+" />"	
 								+"<input type=\"hidden\" name=\"OrganaizationName\" value="+org.getOrganaizationName()+" />"	
 								+"<input type=\"hidden\" name=\"updateType\" value=\"org\" />"
 								+"</form></td>"
-								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" class=\"btn btn-info\" value=\"削除\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\" class=\"btn btn-info\" style=\"width:100%\" onClick=\"return delcheck()\" style=\"width:100%\" /></td>"
 								+"<input type=\"hidden\" name=\"OrganaizationID\" value="+org.getOrganaizationId()+" />"
 								+"<input type=\"hidden\" name=\"Deltype\" value=\"org\" />"
 								+"</form></tr>");
@@ -218,37 +225,51 @@
 					
 					//役職の場合
 					case 2:
+						out.print("<th>役職No</th>"
+								+"<th>役職名</th>"
+								+"<th>変更</th>"
+								+"<th>削除</th>"
+								+"</tr>"
+								+"</thead>"
+								+"<tbody>");
 					for(PostBean post : Postrecode){
 					out.print(
-								"<tr>"
-								+"<td>"+post.getPostId()+"</td>"//部署ID
-								+"<td>"+post.getPostName()+"</td>"//部署名
-								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" class=\"btn btn-info\" value=\"変更\" />"
-								+"<input type=\"hidden\" name=\"PostID\" value="+post.getPostId()+" />"		
-								+"<input type=\"hidden\" name=\"PostName\" value="+post.getPostName()+" />"		
-								+"<input type=\"hidden\" name=\"updateType\" value=\"post\" />"
-								+"</form></td>"
-								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" class=\"btn btn-info\" value=\"削除\" /></td>"
-								+"<input type=\"hidden\" name=\"PostID\" value="+post.getPostId()+" />"		
-								+"<input type=\"hidden\" name=\"PostName\" value="+post.getPostName()+" />"	
-								+"<input type=\"hidden\" name=\"Deltype\" value=\"post\" />"
-								+"</form></tr>");
+							"<tr>"
+							+"<td>"+post.getPostId()+"</td>"//部署ID
+							+"<td>"+post.getPostName()+"</td>"//部署名
+							+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\"  value=\"変更\" class=\"btn btn-info\" style=\"width:100%\" />"
+							+"<input type=\"hidden\" name=\"PostID\" value="+post.getPostId()+" />"		
+							+"<input type=\"hidden\" name=\"PostName\" value="+post.getPostName()+" />"		
+							+"<input type=\"hidden\" name=\"updateType\" value=\"post\" />"
+							+"</form></td>"
+							+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\" class=\"btn btn-info\" style=\"width:100%\" onClick=\"return delcheck()\" /></td>"
+							+"<input type=\"hidden\" name=\"PostID\" value="+post.getPostId()+" />"		
+							+"<input type=\"hidden\" name=\"PostName\" value="+post.getPostName()+" />"	
+							+"<input type=\"hidden\" name=\"Deltype\" value=\"post\" />"
+							+"</form></tr>");
 							}
 					break;
 					
 					//所属会社の場合
 					case 3:
+						out.print("<th>会社No</th>"
+								+"<th>会社名</th>"
+								+"<th>変更</th>"
+								+"<th>削除</th>"
+								+"</tr>"
+								+"</thead>"
+								+"<tbody>");
 					for(CompanieBean company : companyRecode){
 					out.print(
 								"<tr>"
 								+"<td>"+company.getCompanyId()+"</td>"//会社ID
 								+"<td>"+company.getCompanyName()+"</td>"//会社名
-								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" class=\"btn btn-info\" value=\"変更\" />"
+								+"<td><form action=\"SendUpdateMaster\" method=\"post\"><input type=\"submit\" name=\"change\" class=\"btn btn-info\" value=\"変更\" style=\"width:100%\" />"
 								+"<input type=\"hidden\" name=\"CompanyID\" value="+company.getCompanyId()+">"
 								+"<input type=\"hidden\" name=\"CompanyName\" value="+company.getCompanyName()+">"	
 								+"<input type=\"hidden\" name=\"updateType\" value=\"comp\" />"
 								+"</form></td>"
-								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" class=\"btn btn-info\" value=\"削除\" /></td>"
+								+"<td><form action=\"DelMaster\" method=\"post\"><input type=\"submit\" name=\"delete\" value=\"削除\" class=\"btn btn-info\" style=\"width:100%\" onClick=\"return delcheck()\" /></td>"
 								+"<input type=\"hidden\" name=\"CompanyID\" value="+company.getCompanyId()+">"
 								+"<input type=\"hidden\" name=\"CompanyName\" value="+company.getCompanyName()+">"
 								+"<input type=\"hidden\" name=\"Deltype\" value=\"comp\" />"

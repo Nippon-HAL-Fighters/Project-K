@@ -105,13 +105,13 @@ public class OrganaizationDao {
 	 * @return update
 	 * @throws SQLException
 	 */
-	public int updateOrganaiation(OrganaizationBean organaiationBean) throws SQLException {
-
-		String updateSQL = "UPDATE organaizations SET organaization_id = ?,organaization_name=? WHERE organaization_id = ?";
+	public int updateOrganaiation(OrganaizationBean organaiationBean , String ordId) throws SQLException {
+	
+		String updateSQL = "UPDATE organaizations SET organaization_id = ?,organaization_name = ? WHERE organaization_id = ?";
 		PreparedStatement update = con.prepareStatement(updateSQL);
 		update.setString(1, organaiationBean.getOrganaizationId());
 		update.setString(2, organaiationBean.getOrganaizationName());
-		update.setString(3, organaiationBean.getOrganaizationId());
+		update.setString(3, ordId);
 		
 		return update.executeUpdate();
 	}

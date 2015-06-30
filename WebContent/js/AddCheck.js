@@ -2,20 +2,19 @@
  * 組織情報が入力されているかどうかをチェックするためのJavaScript
  */
 $(function() {
-
+	
 	// ボタンが押された時にcheck()を呼び出す
 	$("#add").click(function(event) {
 		
 		var addtype = $("input[name='addtype']");
-		System.out.println(addtype);
 		var errflug = 0;
-		
-		if(addtype == 1){
-			errReset();
+
+		if(addtype.val() == "1"){
+			orgerrReset();
 			var organaizationid = $("input[name='orgid']");
 			var organaizationname = $("input[name='orgaddtext']");
 		
-			/** 社員番号* */
+			/** 組織番号* */
 			if (organaizationid.val() == "") {
 				document.getElementById("errorgid").innerText = '組織番号が入力されていません';
 				document.getElementById("errorgid").style.display = "block";
@@ -24,7 +23,7 @@ $(function() {
 				document.getElementById("errorgid").innerText = '組織番号は数字で入力してください';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
-			} else if (!organaizationid.val().length < 4 || !organaizationid.val().length > 4 ) {
+			} else if (organaizationid.val().length < 4 || organaizationid.val().length > 4 ) {
 				document.getElementById("errorgid").innerText = '組織番号は4桁で入力してください';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
@@ -35,7 +34,8 @@ $(function() {
 				document.getElementById("errorgname").style.display = "block";
 				errflug = 1;
 			}
-		}else if(addtype == 2){
+		}else if(addtype.val() == "2"){
+			posterrReset();
 			var postname = $("input[name='postaddtext']");			
 			/** 役職名**/
 			if (postname.val() == "") {
@@ -44,8 +44,8 @@ $(function() {
 				errflug = 1;
 			}		
 			
-		}else if(addtype == 3){
-			
+		}else if(addtype.val() == "3"){
+			comperrReset();
 			var companyname = $("input[name='compaddtext']");
 						
 			/** 組織名* */
@@ -66,8 +66,19 @@ $(function() {
 	});
 
 	/** ボタンが押された時にエラーメッセージを初期化する */
-	function errReset() {
+	//組織
+	function orgerrReset() {
 		document.getElementById("errorgid").style.display = "none";
 		document.getElementById("errorgname").style.display = "none";
 	}
+	//役職
+	function posterrReset() {
+		console.log(document.getElementById("errpostname"));
+		document.getElementById("errpostname").style.display = "none";
+	}
+	//会社
+	function comperrReset() {
+		document.getElementById("errcompname").style.display = "none";
+	}
+	
 });

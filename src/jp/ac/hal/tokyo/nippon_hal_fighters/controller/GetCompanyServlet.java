@@ -73,10 +73,6 @@ public class GetCompanyServlet extends HttpServlet {
 				e2.printStackTrace();
 			}
 		}
-
-		for (int i = 0; i <= selectData.size(); i++) {
-			System.out.println(selectData);
-		}
 		request.setAttribute("recode", selectData);
 		request.setAttribute("num", num);
 		// データを取得してから一覧へ遷移
@@ -125,9 +121,6 @@ public class GetCompanyServlet extends HttpServlet {
 			}
 		}
 
-		for (int i = 0; i <= selectData.size(); i++) {
-			System.out.println(selectData);
-		}
 		request.setAttribute("recode", selectData);
 		request.setAttribute("num", num);
 		// データを取得してから一覧へ遷移

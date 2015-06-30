@@ -1,0 +1,19 @@
+main {
+    .panel {
+        margin: 50px 50px;
+        width: 30%;
+        box-shadow: 5px 5px 10px #666;
+    }
+    .panel-body {
+        form {
+            width: 100%;
+
+            .form-control {
+                margin-bottom: 10px;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    }
+}
