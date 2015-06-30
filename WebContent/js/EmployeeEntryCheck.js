@@ -22,7 +22,11 @@ $(function(){
 			document.getElementById("errid").innerText = '社員番号は数字で入力してください';
 			document.getElementById("errid").style.display="block";
 			errflug = 1;
-		}
+		}else if (employeeid.val().length < 6 || employeeid.val().length > 6 ) {
+			document.getElementById("errorgid").innerText = '組織番号は6桁で入力してください';
+			document.getElementById("errorgid").style.display = "block";
+			errflug = 1;
+		} 
 		
 		/**社員氏名**/
 		if(employeename.val() == ""){
@@ -112,20 +116,4 @@ $(function(){
 			document.getElementById("errphoneout").style.display="none";
 			document.getElementById("errcomp").style.display="none";
 	}
-});
-
-$(function kakunin(){		
-	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
-	if(window.confirm('削除します。よろしいですか？')){
-		return true;
-	}
-	// 「OK」時の処理終了
-
-	// 「キャンセル」時の処理開始
-	else{
-
-		window.alert('キャンセルされました'); // 警告ダイアログを表示
-		return false;
-	}
-	// 「キャンセル」時の処理終了
 });

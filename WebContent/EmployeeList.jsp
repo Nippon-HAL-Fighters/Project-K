@@ -40,6 +40,17 @@
 	    });
 	});
 	</script>
+	<script type="text/javascript">
+		<!--
+		function delcheck(){
+			if(window.confirm('削除します。よろしいですか？')){
+			}
+			else{
+				return false;
+			}
+		}
+		// -->
+	</script>
 </head>
 <body>
     <!-- 共通部分 -->
@@ -143,11 +154,11 @@
 								+"<td>"+emp.getPhoneOutside()+"</td>"			//外線番号
 								+"<td>"+emp.getCompanayName()+"</td>"			//所属会社
 								+"<td><form action=\"SendUpdateEmployeeData\" method=\"post\">"
-								+"<input type=\"submit\" value=\"更新\" class=\"chengebutton\" style=\"width:100%\" />"
+								+"<input type=\"submit\" name=\"chenge\" value=\"更新\" class=\"btn btn-info\" style=\"width:100%\" />"
 								+"<input type=\"hidden\" name=\"updateempid\" value="+emp.getEmployeeId()+" />"
 								+"</form></td>"
 								+"<td><form action=\"DelEmployeeData\" method=\"post\">"
-								+"<input type=\"submit\" value=\"削除\" class=\"chengebutton\" style=\"width:100%\" />"
+								+"<input type=\"submit\" name=\"delete\" value=\"削除\" class=\"btn btn-info\" onclick=\"return delcheck()\" style=\"width:100%\"　/>"
 								+"<input type=\"hidden\" name=\"delempid\" value="+emp.getEmployeeId()+" />"
 								+"<input type=\"hidden\" name=\"delphoneid\" value="+emp.getPhoneId()+" />"
 								+"</form></td>"

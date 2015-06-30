@@ -7,9 +7,9 @@ $(function(){
 		if(updatetype.val() == "org"){
 			var orgid = $("input[name='orgid']");
 			var orgname = $("input[name='orgname']");
+			alert(orgid.val());
 			errOrgReset();
-			
-			/**部署ID**/
+			/**組織ID**/
 			if(orgid.val() == ""){
 				document.getElementById("errorgid").innerText = '組織IDが入力されていません';
 				document.getElementById("errorgid").style.display="block";
@@ -23,8 +23,8 @@ $(function(){
 				document.getElementById("errorgid").innerText = '組織IDは数字で入力してください';
 				document.getElementById("errorgid").style.display="block";
 				errflug = 1;
-			}
-			/**部署名**/
+			}			
+			/**組織名**/
 			if(orgname.val() == ""){
 				document.getElementById("errorgname").innerText = '組織名が入力されていません';
 				document.getElementById("errorgname").style.display="block";
