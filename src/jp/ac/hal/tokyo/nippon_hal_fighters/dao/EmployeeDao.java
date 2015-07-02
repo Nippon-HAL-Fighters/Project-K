@@ -179,10 +179,10 @@ public class EmployeeDao {
 	 * @return insertResult 情報追加成功数 1なら成功
 	 * @throws SQLException
 	 */
-	public int updateEmployee(EmployeeBean updateData) throws SQLException {
+	public int updateEmployee(EmployeeBean updateData , String ordEmpId) throws SQLException {
 
 		String updateSQL = "UPDATE employees SET " 
-				+"employee_id=?,employee_name=?,employee_status=?,admin=?,password=?,organaization_id= ? ,post_id = ? ,phone_id= ? ,company_id = ? "
+				+"employee_id = ?,employee_name=?,employee_status=?,admin=?,password=?,organaization_id= ? ,post_id = ? ,phone_id= ? ,company_id = ? "
 				+"WHERE employee_id = ?";
 
 		PreparedStatement update = con.prepareStatement(updateSQL);
@@ -196,7 +196,7 @@ public class EmployeeDao {
 		update.setInt(7, updateData.getPostId());
 		update.setInt(8, updateData.getPhoneId());
 		update.setInt(9, updateData.getCompanyId());
-		update.setString(10, updateData.getEmployeeId());
+		update.setString(10, ordEmpId);
 		
 		System.out.println(update);
 

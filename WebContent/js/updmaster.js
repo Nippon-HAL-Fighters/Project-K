@@ -7,7 +7,6 @@ $(function(){
 		if(updatetype.val() == "org"){
 			var orgid = $("input[name='orgid']");
 			var orgname = $("input[name='orgname']");
-			alert(orgid.val());
 			errOrgReset();
 			/**組織ID**/
 			if(orgid.val() == ""){

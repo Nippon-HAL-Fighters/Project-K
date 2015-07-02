@@ -106,6 +106,7 @@
 	        	<div class="forms">
 	        		社員番号:<label id="errid" style="display:none;color:red;"></label>
 	        		<input type="text" name="employeeid" class="form-control" value="<%=emprecode.getEmployeeId()%>" />
+	        		<input type="hidden" name="ordempid" value="<%=emprecode.getEmployeeId()%>" />
 	        		<br/>
 	        	</div>
 	        	
