@@ -20,7 +20,7 @@ $(function() {
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
 			} else if (!organaizationid.val().match(/^[0-9]+$/)) {
-				document.getElementById("errorgid").innerText = '組織番号は数字で入力してください';
+				document.getElementById("errorgid").innerText = '組織番号は半角数字で入力してください';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
 			} else if (organaizationid.val().length < 4 || organaizationid.val().length > 4 ) {

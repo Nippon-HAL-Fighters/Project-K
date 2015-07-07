@@ -10,32 +10,32 @@ $(function(){
 			alert(orgid.val());
 			errOrgReset();
 			/**組織ID**/
-			if(orgid.val() == ""){
+			if(orgid.val() == ""){//何も入力されなかったら
 				document.getElementById("errorgid").innerText = '組織IDが入力されていません';
 				document.getElementById("errorgid").style.display="block";
 				errflug = 1;
-			}else if (orgid.val().length < 4 ||  orgid.val().length > 4) {
+			}else if (orgid.val().length < 4 ||  orgid.val().length > 4) {//入力された桁が4桁未満もしくは4桁より多かったら
 				document.getElementById("errorgid").innerText = '組織IDは4桁で入力してください';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
 			} 
-			else if(!orgid.val().match(/^[0-9]+$/)){
-				document.getElementById("errorgid").innerText = '組織IDは数字で入力してください';
+			else if(!orgid.val().match(/^[0-9]+$/)){//数字で入力されてなかったら	
+				document.getElementById("errorgid").innerText = '組織IDは半角数字で入力してください';
 				document.getElementById("errorgid").style.display="block";
 				errflug = 1;
-			}			
+			}
 			/**組織名**/
-			if(orgname.val() == ""){
+			if(orgname.val() == ""){//何も入力されてなかったら
 				document.getElementById("errorgname").innerText = '組織名が入力されていません';
 				document.getElementById("errorgname").style.display="block";
 				errflug = 1;
 			}
 			
-		}else if(updatetype.val() == "post"){
+		}else if(updatetype.val() == "post"){//役職だったら
 			/**役職名**/
 			var postname = $("input[name='postname']");
 			errPostReset();
-			if(postname.val() == ""){
+			if(postname.val() == ""){//何も入力されてなかったら
 				document.getElementById("errpost").innerText = '役職名が入力されていません';
 				document.getElementById("errpost").style.display="block";
 				errflug = 1;
