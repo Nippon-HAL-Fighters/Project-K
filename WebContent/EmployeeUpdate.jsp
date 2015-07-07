@@ -202,7 +202,7 @@
 				</div>
 				<input type="hidden" name="pass" value="0000" />
 				<input type="hidden" name="phoneid" value="<%= emprecode.getPhoneId() %>" />
-	        	<input type="submit" value="登録" class="btn btn-default" />
+	        	<input type="submit" value="更新" class="btn btn-default" />
 	        	
 	        </form>
         </div>

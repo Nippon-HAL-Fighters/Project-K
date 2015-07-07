@@ -36,7 +36,10 @@
 	    		    "next" : "次へ",
 	    		    "last" : "末尾"
 	    		  }
-	    		}
+	    		},
+	    	"aoColumnDefs": [
+	                     { "bSortable": false, "aTargets": [ 8, 9 ] }
+	                     ],
 	    });
 	});
 	</script>

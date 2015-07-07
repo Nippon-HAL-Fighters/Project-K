@@ -46,6 +46,9 @@
 					"last" : "末尾"
 				}
 			},
+	    	"aoColumnDefs": [
+		                     { "bSortable": false, "aTargets": [ 2, 3 ] }
+		                     ],
 		});
 	});	
 </script>
@@ -147,7 +150,7 @@ function delcheck(){
    		    ArrayList<CompanieBean> companyRecode = (ArrayList<CompanieBean>)request.getAttribute("recode");
    		    CompanieBean companieBean = new CompanieBean();    
  	%>
-	<h1>マスタ情報</h1>
+	<h1>マスタ情報一覧</h1>
 	<div id="all">
 		<table border="0">
 			<tr>
