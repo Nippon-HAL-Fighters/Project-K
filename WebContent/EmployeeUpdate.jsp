@@ -106,6 +106,7 @@
 	        	<div class="forms">
 	        		社員番号:<label id="errid" style="display:none;color:red;"></label>
 	        		<input type="text" name="employeeid" class="form-control" value="<%=emprecode.getEmployeeId()%>" />
+	        		<input type="hidden" name="ordempid" value="<%=emprecode.getEmployeeId()%>" />
 	        		<br/>
 	        	</div>
 	        	
@@ -201,7 +202,7 @@
 				</div>
 				<input type="hidden" name="pass" value="0000" />
 				<input type="hidden" name="phoneid" value="<%= emprecode.getPhoneId() %>" />
-	        	<input type="submit" value="登録" class="btn btn-default" />
+	        	<input type="submit" value="更新" class="btn btn-default" />
 	        	
 	        </form>
         </div>

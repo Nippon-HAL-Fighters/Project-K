@@ -46,6 +46,9 @@
 					"last" : "末尾"
 				}
 			},
+	    	"aoColumnDefs": [
+		                     { "bSortable": false, "aTargets": [ 2, 3 ] }
+		                     ],
 		});
 	});	
 </script>
@@ -147,7 +150,7 @@ function delcheck(){
    		    ArrayList<CompanieBean> companyRecode = (ArrayList<CompanieBean>)request.getAttribute("recode");
    		    CompanieBean companieBean = new CompanieBean();    
  	%>
-	<h1>マスタ情報</h1>
+	<h1>マスタ情報一覧</h1>
 	<div id="all">
 		<table border="0">
 			<tr>
@@ -157,15 +160,15 @@ function delcheck(){
 						if(num == 1){
 							
 							out.print("<label id=\"errorgid\" style=\"display:none;color:red;\"></label>"
-										+"<input type=\"text\" name=\"orgid\" class=\"form-control\" value=\"\" />"
+										+"<input type=\"text\" name=\"orgid\" class=\"form-control\" value=\"\" placeholder=\"組織IDを入力してください\" />"
 									 	+"<label id=\"errorgname\" style=\"display:none;color:red;\"></label>"
-									 	+"<input type=\"text\" name=\"orgaddtext\" class=\"form-control\" value=\"\" />");
+									 	+"<input type=\"text\" name=\"orgaddtext\" class=\"form-control\" value=\"\" placeholder=\"組織名を入力してください\" />");
 						}else if(num == 2){
 							out.print("<label id=\"errpostname\" style=\"display:none;color:red;\"></label>"
-									+"<input type=\"text\" name=\"postaddtext\" class=\"form-control\" value=\"\" />");
+									+"<input type=\"text\" name=\"postaddtext\" class=\"form-control\" value=\"\" placeholder=\"役職名を入力してください\" />");
 						}else if(num == 3){
 							out.print("<label id=\"errcompname\" style=\"display:none;color:red;\"></label>"
-									+"<input type=\"text\" name=\"compaddtext\" class=\"form-control\" value=\"\" />");
+									+"<input type=\"text\" name=\"compaddtext\" class=\"form-control\" value=\"\"　 placeholder=\"協力会社名を入力してください\" />");
 						}
 					%>
 					</td>
@@ -176,7 +179,7 @@ function delcheck(){
 
 				<form action="ChangeMasterServlet" method="post">
 					<td id="right"><select name="category" class="form-control">
-							<option value="organaization">部署</option>
+							<option value="organaization">組織</option>
 							<option value="post">役職</option>
 							<option value="company">所属会社</option>
 					</select></td>

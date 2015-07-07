@@ -60,6 +60,7 @@ public class UpdateEmployeeData extends HttpServlet {
 		PhoneDao phoneDao = new PhoneDao(con);
 		
 		String employeeId = request.getParameter("employeeid");
+		String ordemployeeId = request.getParameter("ordempid");
 		String employeeName = request.getParameter("employeename"); 
 		String koyo = request.getParameter("koyo");
 		int admin = Integer.parseInt(request.getParameter("admin"));
@@ -89,7 +90,7 @@ public class UpdateEmployeeData extends HttpServlet {
 			phoneBean.setPhoneInside(phoneinside);
 			phoneBean.setPhoneOutside(phoneout);
 			
-			employeeDao.updateEmployee(updateBean);
+			employeeDao.updateEmployee(updateBean , ordemployeeId);
 			phoneDao.upodatePhone(phoneBean);			
 			employeeDao.commit();
 			phoneDao.commit();

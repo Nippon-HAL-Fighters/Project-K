@@ -23,8 +23,8 @@ $(function(){
 			document.getElementById("errid").style.display="block";
 			errflug = 1;
 		}else if (employeeid.val().length < 6 || employeeid.val().length > 6 ) {
-			document.getElementById("errorgid").innerText = '組織番号は6桁で入力してください';
-			document.getElementById("errorgid").style.display = "block";
+			document.getElementById("errid").innerText = '社員番号は6桁で入力してください';
+			document.getElementById("errid").style.display = "block";
 			errflug = 1;
 		} 
 		
