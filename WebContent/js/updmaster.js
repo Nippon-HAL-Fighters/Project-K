@@ -28,7 +28,7 @@ $(function(){
 				document.getElementById("errorgname").innerText = '組織名が入力されていません';
 				document.getElementById("errorgname").style.display="block";
 				errflug = 1;
-			}else if(orgname.length > 40){
+			}else if(orgname.val().length > 40){
 				document.getElementById("errorgname").innerText = '組織名は40文字以内で入力してください';
 				document.getElementById("errorgname").style.display="block";
 				errflug = 1;
@@ -42,7 +42,7 @@ $(function(){
 				document.getElementById("errpost").innerText = '役職名が入力されていません';
 				document.getElementById("errpost").style.display="block";
 				errflug = 1;
-			}else if(postname.length > 40){
+			}else if(postname.val().length > 40){
 				document.getElementById("errpost").innerText = '役職名は40文字以内で入力してください';
 				document.getElementById("errpost").style.display="block";
 				errflug = 1;
@@ -56,7 +56,7 @@ $(function(){
 				document.getElementById("errcomp").innerText = '会社名が入力されていません';
 				document.getElementById("errcomp").style.display="block";
 				errflug = 1;
-			}else if(comp.length > 40){
+			}else if(comp.val().length > 40){
 				document.getElementById("errcomp").innerText = '会社名は40文字以内で入力してください';
 				document.getElementById("errcomp").style.display="block";
 				errflug = 1;

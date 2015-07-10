@@ -33,7 +33,7 @@ $(function(){
 			document.getElementById("errname").innerText = '氏名が入力されていません';
 			document.getElementById("errname").style.display="block";
 			errflug = 1;
-		}else if(employeename.length > 20){
+		}else if(employeename.val().length > 20){
 			document.getElementById("errname").innerText = '氏名は20文字以内で入力してください';
 			document.getElementById("errname").style.display="block";
 			errflug = 1;
@@ -42,10 +42,6 @@ $(function(){
 		/**雇用状態**/
 		if(employeestatus == "none"){
 			document.getElementById("errstatus").innerText = '雇用状態が選択されていません';
-			document.getElementById("errstatus").style.display="block";
-			errflug = 1;
-		}else if(employeestatus.length > 20){
-			document.getElementById("errstatus").innerText = '雇用状態は20文字以内で入力してください';
 			document.getElementById("errstatus").style.display="block";
 			errflug = 1;
 		}
