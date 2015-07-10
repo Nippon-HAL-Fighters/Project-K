@@ -16,15 +16,15 @@ $(function() {
 		
 			/** 組織番号* */
 			if (organaizationid.val() == "") {
-				document.getElementById("errorgid").innerText = '組織番号が入力されていません';
+				document.getElementById("errorgid").innerText = '組織IDが入力されていません';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
 			} else if (!organaizationid.val().match(/^[0-9]+$/)) {
-				document.getElementById("errorgid").innerText = '組織番号は半角数字で入力してください';
+				document.getElementById("errorgid").innerText = '組織IDは半角数字4桁で入力してください';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
 			} else if (organaizationid.val().length < 4 || organaizationid.val().length > 4 ) {
-				document.getElementById("errorgid").innerText = '組織番号は4桁で入力してください';
+				document.getElementById("errorgid").innerText = '組織IDは半角数字4桁で入力してください';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
 			} 
@@ -33,7 +33,11 @@ $(function() {
 				document.getElementById("errorgname").innerText = '組織名が入力されていません';
 				document.getElementById("errorgname").style.display = "block";
 				errflug = 1;
-			}
+			} else if (organaizationname.val().length > 40 ) {
+				document.getElementById("errorgname").innerText = '組織名は40文字以内で入力してください';
+				document.getElementById("errorgname").style.display = "block";
+				errflug = 1;
+			} 
 		}else if(addtype.val() == "2"){
 			posterrReset();
 			var postname = $("input[name='postaddtext']");			
@@ -42,7 +46,11 @@ $(function() {
 				document.getElementById("errpostname").innerText = '役職名が入力されていません';
 				document.getElementById("errpostname").style.display = "block";
 				errflug = 1;
-			}		
+			}	else if (postname.val().length > 40 ) {
+				document.getElementById("errpostname").innerText = '役職名は40文字以内で入力してください';
+				document.getElementById("errpostname").style.display = "block";
+				errflug = 1;
+			} 	
 			
 		}else if(addtype.val() == "3"){
 			comperrReset();
@@ -53,7 +61,11 @@ $(function() {
 				document.getElementById("errcompname").innerText = '役職名が入力されていません';
 				document.getElementById("errcompname").style.display = "block";
 				errflug = 1;
-			}
+			} else if (companyname.val().length > 40 ) {
+				document.getElementById("errcompname").innerText = '所属会社名は40文字以内で入力してください';
+				document.getElementById("errcompname").style.display = "block";
+				errflug = 1;
+			} 	
 		}
 				
 		if(errflug == 0){

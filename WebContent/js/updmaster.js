@@ -14,12 +14,12 @@ $(function(){
 				document.getElementById("errorgid").style.display="block";
 				errflug = 1;
 			}else if (orgid.val().length < 4 ||  orgid.val().length > 4) {//入力された桁が4桁未満もしくは4桁より多かったら
-				document.getElementById("errorgid").innerText = '組織IDは4桁で入力してください';
+				document.getElementById("errorgid").innerText = '組織IDは半角数字4桁で入力してください';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
 			} 
 			else if(!orgid.val().match(/^[0-9]+$/)){//数字で入力されてなかったら	
-				document.getElementById("errorgid").innerText = '組織IDは半角数字で入力してください';
+				document.getElementById("errorgid").innerText = '組織IDは半角数字4桁で入力してください';
 				document.getElementById("errorgid").style.display="block";
 				errflug = 1;
 			}

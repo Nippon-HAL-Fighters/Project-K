@@ -127,13 +127,11 @@ function delcheck(){
 	<main> <%
 			int num;
 			if(request.getAttribute("num")== null){
-				//num=1;
 				response.sendRedirect("GetOrganizationServlet");
 				return;
 			}else{
 				num = (Integer)request.getAttribute("num");
 			}	
-			//System.out.println(num);
    			//Organaiationの中身を取得
   		 	ArrayList<OrganaizationBean> Organaizationrecode = (ArrayList<OrganaizationBean>)request.getAttribute("recode");
    	        OrganaizationBean organaizationBean = new OrganaizationBean();
@@ -198,7 +196,7 @@ function delcheck(){
 			<%
 			//表示内容を判定するwordを取得
      		
-   			System.out.print(num);
+   			//System.out.print(num);
 				switch(num){
 					//組織の場合
 					case 1:

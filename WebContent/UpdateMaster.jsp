@@ -96,19 +96,19 @@
 						out.print("<h2>組織</h2><label id=\"errorgid\" style=\"display:none;color:red;\"></label>"
 						+"組織ID：<input type=\"text\" name=\"orgid\" class=\"form-control\" value="+orgBean.getOrganaizationId()+" />"
 						+"<label id=\"errorgname\" style=\"display:none;color:red;\"></label>"
-						+"組織名：<input type=\"text\" name=\"orgname\" value="+orgBean.getOrganaizationName()+">"
+						+"組織名：<input type=\"text\" name=\"orgname\" class=\"form-control\" value="+orgBean.getOrganaizationName()+">"
 						+"<input type=\"hidden\" name=\"updatetype\" value=\"org\" />"
 						+"<input type=\"hidden\" name=\"ordid\" value="+orgBean.getOrganaizationId()+" />");
 					}else if(updatetype.equals("post")){	//役職だった場合
 						PostBean postBean = (PostBean)request.getAttribute("postBean");
 						out.print("<h2>役職</h2><label id=\"errpost\" style=\"display:none;color:red;\"></label>"
-						+"役職名:<input type=\"text\" name=\"postname\" value="+postBean.getPostName()+">"
+						+"役職名:<input type=\"text\" name=\"postname\" class=\"form-control\" value="+postBean.getPostName()+">"
 						+"<input type=\"hidden\" name=\"postid\" value="+postBean.getPostId()+" />"
 						+"<input type=\"hidden\" name=\"updatetype\" value=\"post\" />");
 					}else if(updatetype.equals("comp")){	//会社だった場合
 						CompanieBean compBean = (CompanieBean)request.getAttribute("compBean");
 						out.print("<h2>会社</h2><label id=\"errcomp\" style=\"display:none;color:red;\"></label>"
-						+"会社:<input type=\"text\" name=\"compname\" value="+compBean.getCompanyName()+">"
+						+"会社:<input type=\"text\" name=\"compname\" class=\"form-control\" value="+compBean.getCompanyName()+">"
 						+"<input type=\"hidden\" name=\"compid\" value="+compBean.getCompanyId()+" />"
 						+"<input type=\"hidden\" name=\"updatetype\" value=\"comp\" />");
 					}
