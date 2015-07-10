@@ -44,6 +44,10 @@ $(function(){
 			document.getElementById("errstatus").innerText = '雇用状態が選択されていません';
 			document.getElementById("errstatus").style.display="block";
 			errflug = 1;
+		}else if(employeestatus.length > 20){
+			document.getElementById("errstatus").innerText = '雇用状態は20文字以内で入力してください';
+			document.getElementById("errstatus").style.display="block";
+			errflug = 1;
 		}
 		
 		/**管理者権限**/
