@@ -90,42 +90,43 @@
         %>
     	<div id="main-form">
 	        <h2>社員情報登録</h2>
-	       <form action="InsertEmployeeData" method="post">
+	       <form action="InsertEmployeeData" method="post" class="form-inline text-left">
 	        	<div class="forms">
-	        		社員番号:<label id="errid" style="display:none;color:red;"></label>
+	        	<label id="errid" style="display:none;color:red;"></label>
+	        		社員番号:
 	        		<input type="text" name="employeeid" class="form-control" placeholder="社員番号を入力してください" />
-	        		<br/>
 	        	</div>
 	        	
 	        	<div class="forms">
-	        		氏名:<label id="errname" style="display:none;color:red;"></label>
+	        		<label id="errname" style="display:none;color:red;"></label>
+	        		氏名:
 	        		<input type="text" name="employeename" class="form-control" placeholder="氏名を入力してください" />
-	        		<br>
 	        	</div>
 	        	
 	        	<div class="forms">
-	        	雇用状態:<label id="errstatus" style="display:none;color:red;"></label>
+	        	<label id="errstatus" style="display:none;color:red;"></label>
+	        	雇用状態:
 	        		<select name="koyo" class="form-control">
 						<option value="none">選択してください</option>
 						<option value="社員">社員</option>
 						<option value="協力会社">協力会社</option>
 						<option value="派遣">派遣</option>
 					</select>
-					<br>
 				</div>
 				
 		      	<div class="forms">
-	        	管理者権限:<label id="erradmin" style="display:none;color:red;"></label>
+	        	<label id="erradmin" style="display:none;color:red;"></label>
+	        	管理者権限:
 	        		<select name="admin" class="form-control">
 						<option value="none">選択してください</option>
 						<option value="0">なし</option>
 						<option value="1">あり</option>
 					</select>
-					<br>
 				</div>
 				
 				<div class="forms">
-				役職:<label id="errpost" style="display:none;color:red;"></label>
+				<label id="errpost" style="display:none;color:red;"></label>
+				役職:
 					<select name="posts" class="form-control">
 						<option value="none">選択してください</option>
 						<%
@@ -134,11 +135,11 @@
 											}
 						%>
 					</select>
-					<br>
 				</div>
 				
 				<div class="forms">
-				部署:<label id="errorg" style="display:none;color:red;"></label>
+				<label id="errorg" style="display:none;color:red;"></label>
+				部署:
 					<select name="org" class="form-control">
 						<option value="none">選択してください</option>
 						<%
@@ -147,22 +148,23 @@
 							}
 						%>
 					</select>
-					<br>
 				</div>
 				
 				<div class="forms">
-	        		内線番号:<label id="errphonein" style="display:none;color:red;"></label>
+	        		<label id="errphonein" style="display:none;color:red;"></label>
+	        		内線番号:
 	        		<input type="text" name="phoneinside" class="form-control" placeholder="内線番号を入力してください" />
-	        		<br>
 	        	</div>
 	        	
-	        	<div class="forms"><label id="errphoneout" style="display:none;color:red;"></label>
-	        		外線番号:<input type="text" name="phoneout" class="form-control" placeholder="外線番号を入力してください" />
-	        		<br>
+	        	<div class="forms">
+	        	<label id="errphoneout" style="display:none;color:red;"></label>
+	        		外線番号:
+	        		<input type="text" name="phoneout" class="form-control" placeholder="外線番号を入力してください" />
 	        	</div>
 	        	
-	        	<div class="form">
-	        	所属会社:<label id="errcomp" style="display:none;color:red;"></label>
+	        	<div class="forms">
+	        	<label id="errcomp" style="display:none;color:red;"></label>
+	        	所属会社:
 	        		<select name="comp" class="form-control">
 						<option value="none">選択してください</option>
 						<% 
@@ -171,11 +173,12 @@
 							}
 						%>
 					</select>
-					<br>
 				</div>
 				<input type="hidden" name="pass" value="0000" />
-	        	<input type="submit" value="登録" class="btn btn-default" />
 	        	
+	        	<div class="forms">
+	        		<input type="submit" value="登録" class="btn btn-primary" />
+	        	</div>
 	        </form>
         </div>
     </main>

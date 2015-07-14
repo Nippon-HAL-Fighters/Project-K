@@ -102,23 +102,21 @@
     <main>
     	<div id="main-form">
 	        <h2>社員情報更新</h2>
-	       <form action="UpdateEmployeeData" method="post">
+	       <form action="UpdateEmployeeData" method="post" class="form-inline text-left">
 	        	<div class="forms">
-	        		社員番号:<label id="errid" style="display:none;color:red;"></label>
-	        		<input type="text" name="employeeid" class="form-control" value="<%=emprecode.getEmployeeId()%>" />
+	        		<label id="errid" style="display:none;color:red;"></label>
+	        		社員番号:<input type="text" name="employeeid" class="form-control" value="<%=emprecode.getEmployeeId()%>" />
 	        		<input type="hidden" name="ordempid" value="<%=emprecode.getEmployeeId()%>" />
-	        		<br/>
 	        	</div>
 	        	
 	        	<div class="forms">
-	        		氏名:<label id="errname" style="display:none;color:red;"></label>
-	        		<input type="text" name="employeename" class="form-control" value="<%=emprecode.getEmployeeName()%>" />
-	        		<br>
+	        		<label id="errname" style="display:none;color:red;"></label>
+	        		氏名:<input type="text" name="employeename" class="form-control" value="<%=emprecode.getEmployeeName()%>" />
 	        	</div>
 	        	
 	        	<div class="forms">
-	        	雇用状態:<label id="errstatus" style="display:none;color:red;"></label>
-	        		<select name="koyo" id="koyo" class="form-control">
+	        	<label id="errstatus" style="display:none;color:red;"></label>
+	        	雇用状態:<select name="koyo" id="koyo" class="form-control">
 						<option value="none">選択してください</option>
 						<option value="会長">会長</option>
 						<option value="社長">社長</option>
@@ -126,22 +124,20 @@
 						<option value="協力会社">協力会社</option>
 						<option value="派遣">派遣</option>
 					</select>
-					<br>
 				</div>
 				
 		      	<div class="forms">
-	        	管理者権限:<label id="erradmin" style="display:none;color:red;"></label>
-	        		<select name="admin" id="admin" class="form-control">
+	        	<label id="erradmin" style="display:none;color:red;"></label>
+	        	管理者権限:<select name="admin" id="admin" class="form-control">
 						<option value="none">選択してください</option>
 						<option value="0">なし</option>
 						<option value="1">あり</option>
 					</select>
-					<br>
 				</div>
 				
 				<div class="forms">
-				役職:<label id="errpost" style="display:none;color:red;"></label>
-					<select name="posts" class="form-control">
+				<label id="errpost" style="display:none;color:red;"></label>
+				役職:<select name="posts" class="form-control">
 						<option value="none">選択してください</option>
 						<%
 							for(PostBean post : postrecode){
@@ -153,12 +149,11 @@
 											}
 						%>
 					</select>
-					<br>
 				</div>
 				
 				<div class="forms">
-				部署:<label id="errorg" style="display:none;color:red;"></label>
-					<select name="org" class="form-control">
+				<label id="errorg" style="display:none;color:red;"></label>
+				部署:<select name="org" class="form-control">
 						<option value="none">選択してください</option>
 						<%
 							for(OrganaizationBean org : orgrecode){
@@ -170,23 +165,21 @@
 							}
 						%>
 					</select>
-					<br>
 				</div>
 				
 				<div class="forms">
-	        		内線番号:<label id="errphonein" style="display:none;color:red;"></label>
-	        		<input type="text" name="phoneinside" class="form-control" value="<%= emprecode.getPhoneInside() %>" />
-	        		<br>
+	        		<label id="errphonein" style="display:none;color:red;"></label>
+	        		内線番号:<input type="text" name="phoneinside" class="form-control" value="<%= emprecode.getPhoneInside() %>" />
 	        	</div>
 	        	
-	        	<div class="forms"><label id="errphoneout" style="display:none;color:red;"></label>
+	        	<div class="forms">
+	        		<label id="errphoneout" style="display:none;color:red;"></label>
 	        		外線番号:<input type="text" name="phoneout" class="form-control" value="<%= emprecode.getPhoneOutside() %>" />
-	        		<br>
 	        	</div>
 	        	
-	        	<div class="form">
-	        	所属会社:<label id="errcomp" style="display:none;color:red;"></label>
-	        		<select name="comp" class="form-control">
+	        	<div class="forms">
+	        	<label id="errcomp" style="display:none;color:red;"></label>
+	        	所属会社:<select name="comp" class="form-control">
 						<option value="none">選択してください</option>
 						<% 
 							for(CompanieBean comp : comprecode){
@@ -198,12 +191,13 @@
 							}
 						%>
 					</select>
-					<br>
 				</div>
 				<input type="hidden" name="pass" value="0000" />
 				<input type="hidden" name="phoneid" value="<%= emprecode.getPhoneId() %>" />
-	        	<input type="submit" value="更新" class="btn btn-default" />
 	        	
+	        	<div class="forms">
+	        		<input type="submit" value="更新" class="btn btn-primary" />
+	        	</div>
 	        </form>
         </div>
     </main>
