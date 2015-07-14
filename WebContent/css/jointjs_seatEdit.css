@@ -3,3 +3,23 @@
 .halo .box {
   display: none;
 }
+
+.halo .clone {
+	left: initial !important;
+	right: -25px !important;
+}
+
+.halo .link {
+	display: none;
+}
+
+.halo .fork {
+	display: none;
+}
+
+#paper-holder .paper-scroller {
+   background-color: lightgray;
+}
+#paper-holder .paper-scroller svg {
+   background-color: white;
+}
