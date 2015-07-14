@@ -58,6 +58,7 @@ $(function() {
 	    halo.render();
 	});
 
+	/* 範囲選択・複数選択機能 */
 	var selection = new Backbone.Collection;
 	var selectionView = new joint.ui.SelectionView({ paper: paper, graph: graph, model: selection });
 
@@ -144,35 +145,24 @@ $(function() {
 
 	/* 保存処理 */
 	function save(){
-		var user = window.prompt("保存名を入力してください", "");
-		console.log(user);
-
-
-		var res = graph.save(null, {
+		/*var res = graph.save(null, {
             dataType: 'text',
             success: function() {
                 alert('保存しました');
-                sampleForm(user);
                 isSaved = true;
             },
             error: function() {
                 alert('保存に失敗しました');
             }
-        });
-	}
+        });*/
 
-	function sampleForm( value ){
-	    var form = document.createElement( 'form');
-	    form.setAttribute( 'action' , graph.url );
-	    form.setAttribute( 'method' , 'post' );
-	    document.body.appendChild( form );
-	    var input = document.createElement( 'input' );
-	    input.setAttribute( 'type' , 'hidden' );
-	    input.setAttribute( 'name' , 'name' );
-	    input.setAttribute( 'value' ,value );
-	    form.appendChild( input );
+		var graphJSON = graph.toJSON();
+		console.log(graphJSON);
 
-	    form.submit();
+		var jsonString = JSON.stringify(graph)
+		console.log(jsonString);
+
+		graph.fromJSON(JSON.parse(jsonString));
 	}
 
 });
