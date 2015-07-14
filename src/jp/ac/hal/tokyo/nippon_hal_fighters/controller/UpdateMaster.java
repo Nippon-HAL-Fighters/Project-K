@@ -75,7 +75,7 @@ public class UpdateMaster extends HttpServlet {
 				orgBean.setOrganaizationName(orgname);
 				orgDao.updateOrganaiation(orgBean,ordid);
 				orgDao.commit();
-				System.out.print("hello");
+				//System.out.print("hello");
 				dispatcher = request.getRequestDispatcher("GetOrganizationServlet");
 			} catch (Exception e) {
 				// TODO: handle exception

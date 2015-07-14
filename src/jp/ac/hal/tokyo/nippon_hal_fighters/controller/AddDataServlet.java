@@ -88,7 +88,7 @@ public class AddDataServlet extends HttpServlet {
 
 		String keyword = request.getParameter("category");
 		int hanbetu = Integer.parseInt(request.getParameter("addtype"));
-		System.out.print(hanbetu);
+		//System.out.print(hanbetu);
 		// System.out.print(keyword);
 
 		switch (hanbetu) {
@@ -127,7 +127,7 @@ public class AddDataServlet extends HttpServlet {
 			num = 2;
 			try {
 				addData = request.getParameter("postaddtext");
-				System.out.println("add:" + addData);
+				//System.out.println("add:" + addData);
 				postId = postDao.datacount();
 				postId = postId + 1;
 				postrecode.setPostName(addData);

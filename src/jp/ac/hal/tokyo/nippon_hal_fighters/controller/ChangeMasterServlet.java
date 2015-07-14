@@ -62,7 +62,7 @@ public class ChangeMasterServlet extends HttpServlet {
 		int num;
 
 		String keyword = request.getParameter("category");
-		System.out.print(keyword);
+		//System.out.print(keyword);
 
 		switch (keyword) {
 		// 組織の場合ここから

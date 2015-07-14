@@ -207,7 +207,6 @@ function delcheck(){
 			<%
 			//表示内容を判定するwordを取得
      		
-   			//System.out.print(num);
 				switch(num){
 					//組織の場合
 					case 1:
