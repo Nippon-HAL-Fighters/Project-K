@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>テンプレート</title>
+<title>座席表テンプレート作成ページ</title>
 <meta charset="UTF-8" />
 <link rel="stylesheet" href="./css/styles.css" type="text/css" />
 <link rel="stylesheet" href="./css/font-awesome/font-awesome.css" type="text/css" />
@@ -16,8 +16,7 @@
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/joint.all.min.js"></script>
 <script src="./js/script.js"></script>
-<script src="./js/change.js"></script>
-<script src="./js/jointjs_seatEdit.js"></script>
+<script src="./js/jointjs_seat_tamplate.js"></script>
 
 
 <style type="text/css">
@@ -89,23 +88,17 @@ input.dummy_text {
 		</ul>
 	</nav>
 	<!-- 共通部分ここまで -->
+
 	<main>
 	<div class="header_box">
 		<h2>座席表作成</h2>
 		<input type="text" id="sample" value="" />
 
-		<a class="item btn btn-primary headerbtn">保存</a>
-		<button type="button" class="item btn btn-primary headerbtn button"	value="印刷">印刷</button>
+		<button type="button" class="item btn btn-primary headerbtn" value="保存">保存</button>
+		<button type="button" class="item btn btn-primary headerbtn" value="印刷">印刷</button>
 
-
-		<a href="#tab1" id="tab1" class="btn btn-primary headerbtn" style="display: none;"
-			onclick="ChangeTab('0'); return false;">切り替え</a>
-
-		<a href="#tab2" id="tab2" class="btn btn-primary headerbtn" style="display: block;"
-			onclick="ChangeTab('1'); return false;">切り替え</a>
-
-		<button type="button" class="item btn btn-primary headerbtn button" value="redo">進む</button>
-		<button type="button" class="item btn btn-primary headerbtn button" value="undo">戻る</button>
+		<button type="button" class="item btn btn-primary headerbtn" value="redo">進む</button>
+		<button type="button" class="item btn btn-primary headerbtn" value="undo">戻る</button>
 
 	</div>
 	<div class="main_box">
@@ -113,35 +106,7 @@ input.dummy_text {
 	</div>
 
 	<div class="sub_box">
-		<div class="tabbox">
-			<div id="0" class="tab">
-				<p>
-				<div class="btn btn-primary name">田中 タロウ</div>
-				<div class="btn btn-primary name">田中 タロウ</div>
-				<div class="btn btn-primary name">田中 タロウ</div>
-				</p>
-
-			</div>
-			<div id="1" class="tab">
-				<p>
-				<div>
-					<button type="button" class="item btn btn-primary name" value="机">机</button>
-					<button type="button" class="item btn btn-primary name" value="丸">丸</button>
-					<button type="button" class="item btn btn-primary name"
-						value="しきり">しきり</button>
-				</div>
-				</p>
-
-			</div>
-		</div>
-		<script type="text/javascript">
-			// デフォルトのタブを選択
-			ChangeTab('0');
-		</script>
-
-
-
-
+		<div class="item_area"></div>
 	</div>
 
 	</main>
