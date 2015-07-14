@@ -45,8 +45,16 @@ public class GetEmployeeData extends HttpServlet {
 		
 		ArrayList<EmployeeBean> getData = new ArrayList<EmployeeBean>();
 		
+		int count = 0;
+				
 		try {
 			getData = employeeDao.selectListAllEmployees();
+			for(int i=0;i < getData.size();i++){
+				System.out.println(getData.get(i));
+				count++;
+			}
+			
+			System.out.print("count:"+count);
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

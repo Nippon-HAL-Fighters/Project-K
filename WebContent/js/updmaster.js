@@ -57,7 +57,7 @@ $(function(){
 				document.getElementById("errcomp").style.display="block";
 				errflug = 1;
 			}else if(comp.val().length > 40){
-				document.getElementById("errcomp").innerText = '会社名は40文字以内で入力してください';
+				document.getElementById("errcomp").innerText = '所属会社名は40文字以内で入力してください';
 				document.getElementById("errcomp").style.display="block";
 				errflug = 1;
 			}

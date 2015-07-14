@@ -22,7 +22,8 @@
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/script.js"></script>
 <script src="./js/jquery.dataTables.min.js"></script>
-<script src="./js/AddCheck.js"></script>
+<!--  <script src="./js/AddCheck.js"></script> -->
+<script src="./js/TestAddCheck.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -152,21 +153,28 @@ function delcheck(){
 	<div id="all">
 		<table border="0">
 			<tr>
-				<form action="AddDataServlet" method="post">
+			<%
+						if(num == 1){
+							out.print("<label id=\"errorgid\" style=\"display:none;color:red;\"></label><label id=\"errorgname\" style=\"display:none;color:red;\"></label>");
+						}else if(num == 2){
+							out.print("<label id=\"errpostname\" style=\"display:none;color:red;\"></label>");
+						}else if(num == 3){
+							out.print("<label id=\"errcompname\" style=\"display:none;color:red;\"></label>");
+						}
+					%>
+			
+			
+				<form action="AddDataServlet" method="post" class="form-inline text-right">
 					<td id="left">
 					<%
 						if(num == 1){
 							
-							out.print("<label id=\"errorgid\" style=\"display:none;color:red;\"></label>"
-										+"<input type=\"text\" name=\"orgid\" class=\"form-control\" value=\"\" placeholder=\"組織IDを入力してください\" />"
-									 	+"<label id=\"errorgname\" style=\"display:none;color:red;\"></label>"
+							out.print("<input type=\"text\" name=\"orgid\" class=\"form-control\" value=\"\" placeholder=\"組織IDを入力してください\" />"
 									 	+"<input type=\"text\" name=\"orgaddtext\" class=\"form-control\" value=\"\" placeholder=\"組織名を入力してください\" />");
 						}else if(num == 2){
-							out.print("<label id=\"errpostname\" style=\"display:none;color:red;\"></label>"
-									+"<input type=\"text\" name=\"postaddtext\" class=\"form-control\" value=\"\" placeholder=\"役職名を入力してください\" />");
+							out.print("<input type=\"text\" name=\"postaddtext\" class=\"form-control\" value=\"\" placeholder=\"役職名を入力してください\" />");
 						}else if(num == 3){
-							out.print("<label id=\"errcompname\" style=\"display:none;color:red;\"></label>"
-									+"<input type=\"text\" name=\"compaddtext\" class=\"form-control\" value=\"\"　 placeholder=\"協力会社名を入力してください\" />");
+							out.print("<input type=\"text\" name=\"compaddtext\" class=\"form-control\" value=\"\"　 placeholder=\"協力会社名を入力してください\" />");
 						}
 					%>
 					</td>
@@ -175,15 +183,18 @@ function delcheck(){
 						<input type="hidden" name="addtype" value="<%= num %>" />
 				</form>
 
-				<form action="ChangeMasterServlet" method="post">
-					<td id="right"><select name="category" class="form-control">
+				
+					<td id="right">
+					<form action="ChangeMasterServlet" method="post" class="form-inline text-left">
+							<select name="category" class="form-control">
 							<option value="organaization">組織</option>
 							<option value="post">役職</option>
 							<option value="company">所属会社</option>
-					</select></td>
-					<td><input type="submit" name="add" value="切替"
-						class="btn btn-info"></td>
-				</form>
+					</select>
+					<input type="submit" name="add" value="切替"
+						class="btn btn-info">
+					</form></td>
+					
 			</tr>
 		</table>
 	</div>
