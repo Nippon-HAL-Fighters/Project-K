@@ -17,13 +17,14 @@ public class BackupDao {
 		con = db.getConnection();
 	}
 
-	public int fileDelete(int backupId) throws SQLException {
-		String deleteSQL = "DELETE FROM seat_backups WHERE backup_id = ?";
+	public int fileDelete(int backupId, int companyPlace) throws SQLException {
+		String deleteSQL = "DELETE FROM seat_backups WHERE backup_id = ? AND company_place = ?";
 		int deleteResult = 0;
 
 		PreparedStatement delete = con.prepareStatement(deleteSQL);
 
 		delete.setInt(1, backupId);
+		delete.setInt(2, companyPlace);
 
 		deleteResult = delete.executeUpdate();
 
@@ -54,9 +55,36 @@ public class BackupDao {
 
 	}
 
-	public ArrayList<BackupBean> listSelect() throws SQLException {
-		String selectSQL = "SELECT backup_id,title,reset_date,implementor FROM seat_backups";
+	// 東京
+	public ArrayList<BackupBean> tokyoSelect() throws SQLException {
+		String selectSQL = "SELECT backup_id,title,reset_date,implementor FROM seat_backups where company_place = ?";
 		PreparedStatement select = con.prepareStatement(selectSQL);
+
+		select.setInt(1, 0);
+
+		ResultSet selectResult = select.executeQuery();
+
+		ArrayList<BackupBean> BackupList = new ArrayList<BackupBean>();
+		while (selectResult.next()) {
+			BackupBean backupBean = new BackupBean();
+			backupBean.setBackupId(selectResult.getInt("backup_id"));
+			backupBean.setTitle(selectResult.getString("title"));
+			backupBean.setResetDate(selectResult.getDate("reset_date"));
+			backupBean.setImplementor(selectResult.getString("implementor"));
+
+			BackupList.add(backupBean);
+		}
+
+		return BackupList;
+
+	}
+
+	// 大阪
+	public ArrayList<BackupBean> osakaSelect() throws SQLException {
+		String selectSQL = "SELECT backup_id,title,reset_date,implementor FROM seat_backups where company_place = ?";
+		PreparedStatement select = con.prepareStatement(selectSQL);
+
+		select.setInt(1, 1);
 
 		ResultSet selectResult = select.executeQuery();
 

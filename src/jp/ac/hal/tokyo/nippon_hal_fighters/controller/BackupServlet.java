@@ -36,52 +36,8 @@ public class BackupServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("utf-8");
 
-		// DAO定義
-		BackupDao backupDao = new BackupDao();
-
-		String backPage = "./seatList.jsp";
-
-		ArrayList<BackupBean> selectData = new ArrayList<BackupBean>();
-		ArrayList<BackupBean> listData = new ArrayList<BackupBean>();
-
-		try {
-			selectData = backupDao.listSelect();
-
-			for (int i = 0; i < selectData.size(); i++) {
-				BackupBean backupBean = new BackupBean();
-
-				backupBean.setBackupId(selectData.get(i).getBackupId());
-				backupBean.setTitle(selectData.get(i).getTitle());
-				backupBean.setResetDate(selectData.get(i).getResetDate());
-				backupBean.setImplementor(selectData.get(i).getImplementor());
-
-				listData.add(backupBean);
-
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			try {
-				backupDao.rollback();
-			} catch (SQLException e1) {
-				// TODO 自動生成された catch ブロック
-				e1.printStackTrace();
-			}
-		} finally {
-			try {
-				backupDao.close();
-			} catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-		}
-
-		request.setAttribute("listData", listData);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher(backPage);
-		dispatcher.forward(request, response);
+		System.out.println("doGET");
 
 	}
 
@@ -99,15 +55,18 @@ public class BackupServlet extends HttpServlet {
 
 		String title = request.getParameter("cell");
 		String choice = request.getParameter("choices");
-		String backPage = "./BackupServlet";
+		String area = request.getParameter("area");
+		String change = "東京";
+		String backPage = "./DisplayServlet";
 
 		String[] BackupId = title.split(",", 0);
 
 		System.out.println(choice);
+		System.out.println(area);
 
 		switch (choice) {
 		case "新規":
-			backPage = "seatEdit.html";
+			backPage = "seatEdit.jsp";
 			System.out.println(backPage);
 			response.setContentType("text/html; charset=utf-8");
 			response.sendRedirect(backPage);
@@ -121,32 +80,67 @@ public class BackupServlet extends HttpServlet {
 			break;
 
 		case "削除":
-			if (title != "") {
-				try {
-					int backupId = Integer.parseInt(BackupId[1]);
-					if (backupDao.fileDelete(backupId) > 0) {
-						backupDao.commit();
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
+			switch (area) {
+
+			case "東京":
+
+				if (title != "") {
 					try {
-						backupDao.rollback();
-					} catch (SQLException e1) {
-						// TODO 自動生成された catch ブロック
-						e1.printStackTrace();
-					}
-				} finally {
-					try {
-						backupDao.close();
+						int backupId = Integer.parseInt(BackupId[1]);
+						if (backupDao.fileDelete(backupId, 0) > 0) {
+							change = "東京";
+							backupDao.commit();
+						}
 					} catch (SQLException e) {
-						// TODO 自動生成された catch ブロック
 						e.printStackTrace();
+						try {
+							backupDao.rollback();
+						} catch (SQLException e1) {
+							// TODO 自動生成された catch ブロック
+							e1.printStackTrace();
+						}
+					} finally {
+						try {
+							backupDao.close();
+						} catch (SQLException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						}
+					}
+				}
+
+			case "大阪":
+
+				if (title != "") {
+					try {
+						int backupId = Integer.parseInt(BackupId[1]);
+						if (backupDao.fileDelete(backupId, 1) > 0) {
+							change = "大阪";
+							backupDao.commit();
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+						try {
+							backupDao.rollback();
+						} catch (SQLException e1) {
+							// TODO 自動生成された catch ブロック
+							e1.printStackTrace();
+						}
+					} finally {
+						try {
+							backupDao.close();
+						} catch (SQLException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						}
 					}
 				}
 			}
-
-			response.setContentType("text/html; charset=utf-8");
-			response.sendRedirect(backPage);
+			System.out.println(change);
+			request.setAttribute("change", change);
+			RequestDispatcher dispatcher = request
+					.getRequestDispatcher(backPage);
+			dispatcher.forward(request, response);
 
 			break;
 
@@ -163,9 +157,9 @@ public class BackupServlet extends HttpServlet {
 					request.setAttribute("selectData", selectData);
 					backPage = "./seatEdit.html";
 
-					RequestDispatcher dispatcher = request
+					RequestDispatcher dispatcher2 = request
 							.getRequestDispatcher(backPage);
-					dispatcher.forward(request, response);
+					dispatcher2.forward(request, response);
 
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -183,24 +177,19 @@ public class BackupServlet extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
-				backPage = "./seatEdit.html";
-			}
 
+			}
+			backPage = "seatEdit.jsp";
 			response.setContentType("text/html; charset=utf-8");
 			response.sendRedirect(backPage);
 
 			break;
 
 		default:
-			// ServletContext sc = getServletContext();
-			backPage = "./BackupServlet";
-			// sc.getRequestDispatcher(backPage).forward(request, response);
-
 			response.setContentType("text/html; charset=utf-8");
 			response.sendRedirect(backPage);
 
 			break;
 		}
 	}
-
 }

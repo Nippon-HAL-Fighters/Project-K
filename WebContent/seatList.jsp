@@ -15,10 +15,9 @@
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/script.js"></script>
 <script src="./js/list.js"></script>
+<script src="./js/list_o.js"></script>
 <script src="./js/change.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script src="jquery.focused.js"></script>
+<script src="./js/keep.js"></script>
 
 </head>
 <body>
@@ -84,11 +83,10 @@
 	<div class="header_box">
 		<h2>座席表一覧</h2>
 		<form action="BackupServlet" name="form" method="post">
-			<select id="select" onchange="changeSelect()">
+			<select id="select" name="area" onchange="changeSelect()">
 				<option value="東京">東京</option>
 				<option value="大阪">大阪</option>
-			</select>
-			<input type="hidden" id="cell" name="cell" value="" />
+			</select> <input type="hidden" id="cell" name="cell" value="" />
 			<button type="submit" class="btn btn-primary headerbtn" value="編集"
 				name="choices">編集</button>
 			<button type="submit" class="btn btn-primary headerbtn" value="削除"
@@ -102,8 +100,8 @@
 
 	<div class="main_box">
 
-		<div id="東京" style="display: block;">
-			<table id="TBL">
+		<div id="1" style="display: block;">
+			<table id="TBL_t">
 				<tbody>
 					<tr>
 						<th width="50%">タイトル</th>
@@ -112,41 +110,60 @@
 					</tr>
 
 
-					<c:forEach items="${listData}" var="list" varStatus="status">
+					<c:forEach items="${tokyoListData}" var="tokyoList"
+						varStatus="status">
 						<tr id="tr${status.count}" onclick="sentaku(${status.count})"
 							style="">
-							<td><a style="display: none">,${list.backupId},</a>${list.title}</td>
-							<td><a style="display: none">,${list.backupId},</a>${list.resetDate}</td>
-							<td><a style="display: none">,${list.backupId},</a>${list.implementor}</td>
+							<td><a style="display: none">,${tokyoList.backupId},</a>${tokyoList.title}</td>
+							<td><a style="display: none">,${tokyoList.backupId},</a>${tokyoList.resetDate}</td>
+							<td><a style="display: none">,${tokyoList.backupId},</a>${tokyoList.implementor}</td>
 						</tr>
 					</c:forEach>
 
 				</tbody>
 			</table>
 
-			<div id="Div">
 
-				<p id="Mbox0">セルをクリックしたらここに書き出します。</p>
-				<p id="Mbox1">インデックス値は '0'から始まります。</p>
-				<input type="hidden" id="Mbox0" /> <input type="hidden" id="Mbox1" />
-
-			</div>
 
 		</div>
-		<div id="大阪" style="display: none;">
 
-			<div>
-				<button type="button" class="button btn btn-primary name" value="机">机</button>
-				<button type="button" class="button btn btn-primary name" value="丸">丸</button>
-				<button type="button" class="button btn btn-primary name"
-					value="しきり">しきり</button>
-			</div>
+		<div id="0" style="display: none;">
+
+			<table id="TBL_o">
+				<tbody>
+					<tr>
+						<th width="50%">タイトル</th>
+						<th width="25%">最終変更日</th>
+						<th width="25">変更者</th>
+					</tr>
+
+
+					<c:forEach items="${osakaListData}" var="osakaList"
+						varStatus="status">
+						<tr id="tr${status.count}o" onclick="sentaku_o(${status.count})"
+							style="">
+							<td><a style="display: none">,${osakaList.backupId},</a>${osakaList.title}</td>
+							<td><a style="display: none">,${osakaList.backupId},</a>${osakaList.resetDate}</td>
+							<td><a style="display: none">,${osakaList.backupId},</a>${osakaList.implementor}</td>
+						</tr>
+					</c:forEach>
+
+				</tbody>
+			</table>
+
 
 		</div>
+		<div id="Div">
+
+			<p id="Mbox0">セルをクリックしたらここに書き出します。</p>
+			<p id="Mbox1">インデックス値は '0'から始まります。</p>
+			<input type="hidden" id="Mbox0" /> <input type="hidden" id="Mbox1" />
+		</div>
+
 	</div>
 	<script type="text/javascript">
-			// デフォルトのタブを選択
-			//changeSelect('東京');
-		</script> </main>
+	// デフォルトのタブを選択
+	changeSelected('${change}');
+</script> </main>
 </body>
 </html>

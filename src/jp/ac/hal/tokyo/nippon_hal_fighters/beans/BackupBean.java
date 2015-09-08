@@ -20,6 +20,15 @@ public class BackupBean {
 	private int fileId;
 	private Date resetDate;
 	private String implementor;
+	private String companyPlace;
+
+	public String getCompanyPlace() {
+		return companyPlace;
+	}
+
+	public void setCompanyPlace(String companyPlace) {
+		this.companyPlace = companyPlace;
+	}
 
 	public int getBackupId() {
 		return backupId;

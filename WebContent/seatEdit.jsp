@@ -10,14 +10,14 @@
 	type="text/css" />
 <link rel="stylesheet" href="./css/seatEdit.css" type="text/css" />
 <link rel="stylesheet" href="./css/joint.css" type="text/css" />
-<link rel="stylesheet" type="text/css" href="./print.css" media="print" />
+<link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
 <script src="./js/jquery-2.1.4.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/script.js"></script>
-<script type="text/javascript" src="joint.format.print.js"></script>
 <script src="./js/joint.all.min.js"></script>
 <script src="./js/jointjs_seatEdit.js"></script>
 <script src="./js/change.js"></script>
+<script src="./js/emp_DB.js"></script>
 
 
 <style type="text/css">
@@ -110,6 +110,7 @@ input.dummy_text {
 	<div class="sub_box">
 		<div class="tabbox">
 			<div id="0" class="tab">
+
 				<p>
 				<div class="btn btn-primary name">田中 タロウ</div>
 				<div class="btn btn-primary name">田中 タロウ</div>
@@ -117,6 +118,10 @@ input.dummy_text {
 				</p>
 
 			</div>
+
+
+
+			<!-- 取っておくやつ！！ -->
 			<div id="1" class="tab">
 				<p>
 				<div>
