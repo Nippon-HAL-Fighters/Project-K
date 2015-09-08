@@ -5,7 +5,9 @@ import java.sql.Date;
 /**
  * バックアップテーブル用のBean
  *
- * int backupId; int fileId;
+ * private int backupId; private String backupFile; private byte backupImg;
+ * private String title; private int fileId; private Date resetDate; private
+ * String implementor;
  *
  * @author s.kato
  *
@@ -13,7 +15,6 @@ import java.sql.Date;
 public class BackupBean {
 
 	private int backupId;
-
 	private String backupFile;
 	private byte backupImg;
 	private String title;
