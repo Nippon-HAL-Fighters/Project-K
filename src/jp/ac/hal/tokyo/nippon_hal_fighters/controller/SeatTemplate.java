@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.ac.hal.tokyo.nippon_hal_fighters.beans.BackupBean;
+import jp.ac.hal.tokyo.nippon_hal_fighters.dao.BackupDao;
+
 /**
  * 座席表テンプレート保存処理などを行うサーブレット
  *
@@ -36,21 +39,14 @@ public class SeatTemplate extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//BackupDao backupDao = new BackupDao();
-		//BackupBean backupBean = new BackupBean();
+		BackupDao backupDao = new BackupDao();
+		BackupBean backupBean = new BackupBean();
 
+		// jointjs_seat_template からバックアップ情報の受取り
 		BufferedReader bufferReader = new BufferedReader(request.getReader());
 		String buckupString = bufferReader.readLine();
 
-		String value = request.getParameter("name");
-
-		System.out.println(value);
-
-//		System.out.println(buckupString);
-
-
-
-
+		System.out.println(buckupString); // バックアップ情報の表示用
 
 	}
 
