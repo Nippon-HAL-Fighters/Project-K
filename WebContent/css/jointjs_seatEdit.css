@@ -4,6 +4,11 @@
   display: none;
 }
 
+.halo .handle.n .clone {
+  top: -21px;
+  right: -25px;
+}
+
 .halo .clone {
 	left: initial !important;
 	right: -25px !important;
@@ -15,6 +20,14 @@
 
 .halo .fork {
 	display: none;
+}
+
+.selection-wrapper .box {
+	display: none !important;
+}
+
+.selection-wrapper {
+	box-sizing: content-box;
 }
 
 #paper-holder .paper-scroller {
