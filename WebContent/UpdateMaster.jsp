@@ -7,9 +7,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	//ArrayList<PostBean> postrecode = (ArrayList<PostBean>)request.getAttribute("postlist");
-	//ArrayList<OrganaizationBean> orgrecode = (ArrayList<OrganaizationBean>)request.getAttribute("orglist");
-	//ArrayList<CompanieBean> comprecode = (ArrayList<CompanieBean>)request.getAttribute("complist");
 	String updatetype = (String)request.getAttribute("updatetype");
 %>
 <!DOCTYPE html>

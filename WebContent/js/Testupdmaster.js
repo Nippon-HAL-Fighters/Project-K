@@ -10,26 +10,26 @@ $(function(){
 			errOrgReset();
 			/**組織ID**/
 			if(orgid.val() == ""){//何も入力されなかったら
-				document.getElementById("errorgid").innerText = '*エラーメッセージを出力';
+				document.getElementById("errorgid").innerText = '※エラーメッセージを出力';
 				document.getElementById("errorgid").style.display="block";
 				errflug = 1;
 			}else if (orgid.val().length < 4 ||  orgid.val().length > 4) {//入力された桁が4桁未満もしくは4桁より多かったら
-				document.getElementById("errorgid").innerText = '*エラーメッセージを出力';
+				document.getElementById("errorgid").innerText = '※エラーメッセージを出力';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
 			} 
 			else if(!orgid.val().match(/^[0-9]+$/)){//数字で入力されてなかったら	
-				document.getElementById("errorgid").innerText = '*エラーメッセージを出力';
+				document.getElementById("errorgid").innerText = '※エラーメッセージを出力';
 				document.getElementById("errorgid").style.display="block";
 				errflug = 1;
 			}
 			/**組織名**/
 			if(orgname.val() == ""){//何も入力されてなかったら
-				document.getElementById("errorgname").innerText = '*エラーメッセージを出力';
+				document.getElementById("errorgname").innerText = '※エラーメッセージを出力';
 				document.getElementById("errorgname").style.display="block";
 				errflug = 1;
 			}else if(orgname.val().length > 40){
-				document.getElementById("errorgname").innerText = '*エラーメッセージを出力';
+				document.getElementById("errorgname").innerText = '※エラーメッセージを出力';
 				document.getElementById("errorgname").style.display="block";
 				errflug = 1;
 			}
@@ -39,11 +39,11 @@ $(function(){
 			var postname = $("input[name='postname']");
 			errPostReset();
 			if(postname.val() == ""){//何も入力されてなかったら
-				document.getElementById("errpost").innerText = '*エラーメッセージを出力';
+				document.getElementById("errpost").innerText = '※エラーメッセージを出力';
 				document.getElementById("errpost").style.display="block";
 				errflug = 1;
 			}else if(postname.val().length > 40){
-				document.getElementById("errpost").innerText = '*エラーメッセージを出力';
+				document.getElementById("errpost").innerText = '※エラーメッセージを出力';
 				document.getElementById("errpost").style.display="block";
 				errflug = 1;
 			}
@@ -53,11 +53,11 @@ $(function(){
 			var comp = $("input[name='compname']");
 			errCompReset();
 			if(comp.val() == ""){
-				document.getElementById("errcomp").innerText = '*エラーメッセージを出力';
+				document.getElementById("errcomp").innerText = '※エラーメッセージを出力';
 				document.getElementById("errcomp").style.display="block";
 				errflug = 1;
 			}else if(comp.val().length > 40){
-				document.getElementById("errcomp").innerText = '*エラーメッセージを出力';
+				document.getElementById("errcomp").innerText = '※エラーメッセージを出力';
 				document.getElementById("errcomp").style.display="block";
 				errflug = 1;
 			}

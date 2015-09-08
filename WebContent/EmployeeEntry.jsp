@@ -107,9 +107,9 @@
 	        	雇用状態:<label id="errstatus" style="display:none;color:red;"></label>
 	        		<select name="koyo" class="form-control">
 						<option value="none">選択してください</option>
-						<option value="社員">社員</option>
-						<option value="協力会社">協力会社</option>
+						<option value="プロパー">プロパー</option>
 						<option value="派遣">派遣</option>
+						<option value="出向">出向</option>
 					</select>
 					<br>
 				</div>

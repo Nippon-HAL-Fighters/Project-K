@@ -11,30 +11,30 @@ $(function() {
 
 		if(addtype.val() == "1"){
 			orgerrReset();
-			var organaizationid = $("input[name='orgid']");
-			var organaizationname = $("input[name='orgaddtext']");
+			var organaizationid = $("input[name='orgid']");//入力された組織IDを受け取る
+			var organaizationname = $("input[name='orgaddtext']");//入力された組織名を受け取る
 		
 			/** 組織番号* */
 			if (organaizationid.val() == "") {
-				document.getElementById("errorgid").innerText = '*エラーメッセージを出力';
+				document.getElementById("errorgid").innerText = '※エラーメッセージを出力';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
 			} else if (!organaizationid.val().match(/^[0-9]+$/)) {
-				document.getElementById("errorgid").innerText = '*エラーメッセージを出力';
+				document.getElementById("errorgid").innerText = '※エラーメッセージを出力';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
 			} else if (organaizationid.val().length < 4 || organaizationid.val().length > 4 ) {
-				document.getElementById("errorgid").innerText = '*エラーメッセージを出力';
+				document.getElementById("errorgid").innerText = '※エラーメッセージを出力';
 				document.getElementById("errorgid").style.display = "block";
 				errflug = 1;
 			} 
 			/** 組織名* */
 			if (organaizationname.val() == "") {
-				document.getElementById("errorgname").innerText = '*エラーメッセージを出力';
+				document.getElementById("errorgname").innerText = '※エラーメッセージを出力';
 				document.getElementById("errorgname").style.display = "block";
 				errflug = 1;
 			} else if (organaizationname.val().length > 40 ) {
-				document.getElementById("errorgname").innerText = '*エラーメッセージを出力';
+				document.getElementById("errorgname").innerText = '※エラーメッセージを出力';
 				document.getElementById("errorgname").style.display = "block";
 				errflug = 1;
 			} 
@@ -43,11 +43,11 @@ $(function() {
 			var postname = $("input[name='postaddtext']");			
 			/** 役職名**/
 			if (postname.val() == "") {
-				document.getElementById("errpostname").innerText = '*エラーメッセージを出力';
+				document.getElementById("errpostname").innerText = '※エラーメッセージを出力';
 				document.getElementById("errpostname").style.display = "block";
 				errflug = 1;
 			}	else if (postname.val().length > 40 ) {
-				document.getElementById("errpostname").innerText = '*エラーメッセージを出力';
+				document.getElementById("errpostname").innerText = '※エラーメッセージを出力';
 				document.getElementById("errpostname").style.display = "block";
 				errflug = 1;
 			} 	
@@ -58,11 +58,11 @@ $(function() {
 						
 			/** 組織名* */
 			if (companyname.val() == "") {
-				document.getElementById("errcompname").innerText = '*エラーメッセージを出力';
+				document.getElementById("errcompname").innerText = '※エラーメッセージを出力';
 				document.getElementById("errcompname").style.display = "block";
 				errflug = 1;
 			} else if (companyname.val().length > 40 ) {
-				document.getElementById("errcompname").innerText = '*エラーメッセージを出力';
+				document.getElementById("errcompname").innerText = '※エラーメッセージを出力';
 				document.getElementById("errcompname").style.display = "block";
 				errflug = 1;
 			} 	
@@ -71,7 +71,6 @@ $(function() {
 		if(errflug == 0){
 			$(this).submit();
 			event.preventdefault();
-			//return true;
 		}else{
 			return false;
 		}	

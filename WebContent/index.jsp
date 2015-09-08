@@ -14,7 +14,7 @@
         <h2>TOPページ</h2>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                在席情報
+                	在席情報
             </div>
             <div class="panel-body">
                 <form class="input-group">
