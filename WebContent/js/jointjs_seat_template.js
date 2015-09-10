@@ -5,7 +5,6 @@ $(function() {
 
 	/* 保存したデータの送り先 */
 	graph.url = "/Project-K/SeatTemplate";
-	console.log(graph.url);
 
     graph.on('remove', function(cell) {
         var rmIdx = _.indexOf(cells, cell);
@@ -156,13 +155,6 @@ $(function() {
             }
         });
 
-		var graphJSON = graph.toJSON();
-		console.log(graphJSON);
-
-		var jsonString = JSON.stringify(graph)
-		console.log(jsonString);
-
-		graph.fromJSON(JSON.parse(jsonString));
 	}
 
 });
