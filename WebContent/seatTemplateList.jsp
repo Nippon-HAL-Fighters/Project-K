@@ -82,7 +82,7 @@
 
 	<div class="header_box">
 		<h2>座席表一覧</h2>
-		<form action="BackupServlet" name="form" method="post">
+		<form action="BackupTemplateServlet" name="form" method="post">
 			<select id="select" name="area" onchange="changeSelect()">
 				<option value="東京">東京</option>
 				<option value="大阪">大阪</option>

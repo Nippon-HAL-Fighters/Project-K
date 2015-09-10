@@ -33,7 +33,7 @@ public class BackupDao {
 	}
 
 	public ArrayList<BackupBean> fileSelect(int backupId) throws SQLException {
-		String selectSQL = "SELECT backup_id,backup_file,backup_img,title FROM seat_backups where backup_id=?";
+		String selectSQL = "SELECT backup_id,backup_file,title FROM seat_backups where backup_id=?";
 		PreparedStatement select = con.prepareStatement(selectSQL);
 
 		select.setInt(1, backupId);
@@ -45,7 +45,6 @@ public class BackupDao {
 			BackupBean backupBean = new BackupBean();
 			backupBean.setBackupId(selectResult.getInt("backup_id"));
 			backupBean.setBackupFile(selectResult.getString("backup_file"));
-			backupBean.setBackupImg(selectResult.getByte("backup_img"));
 			backupBean.setTitle(selectResult.getString("title"));
 
 			BackupList.add(backupBean);
@@ -69,7 +68,7 @@ public class BackupDao {
 			BackupBean backupBean = new BackupBean();
 			backupBean.setBackupId(selectResult.getInt("backup_id"));
 			backupBean.setTitle(selectResult.getString("title"));
-			backupBean.setResetDate(selectResult.getDate("reset_date"));
+			backupBean.setResetDate(selectResult.getString("reset_date"));
 			backupBean.setImplementor(selectResult.getString("implementor"));
 
 			BackupList.add(backupBean);
@@ -93,13 +92,89 @@ public class BackupDao {
 			BackupBean backupBean = new BackupBean();
 			backupBean.setBackupId(selectResult.getInt("backup_id"));
 			backupBean.setTitle(selectResult.getString("title"));
-			backupBean.setResetDate(selectResult.getDate("reset_date"));
+			backupBean.setResetDate(selectResult.getString("reset_date"));
 			backupBean.setImplementor(selectResult.getString("implementor"));
 
 			BackupList.add(backupBean);
 		}
 
 		return BackupList;
+
+	}
+
+	// 東京テンプレ
+	public ArrayList<BackupBean> tokyoTemplateSelect() throws SQLException {
+		String selectSQL = "SELECT backup_id,title,reset_date,implementor FROM seat_template_backups where company_place = ?";
+		PreparedStatement select = con.prepareStatement(selectSQL);
+
+		select.setInt(1, 0);
+
+		ResultSet selectResult = select.executeQuery();
+
+		ArrayList<BackupBean> BackupList = new ArrayList<BackupBean>();
+		while (selectResult.next()) {
+			BackupBean backupBean = new BackupBean();
+			backupBean.setBackupId(selectResult.getInt("backup_id"));
+			backupBean.setTitle(selectResult.getString("title"));
+			backupBean.setResetDate(selectResult.getString("reset_date"));
+			backupBean.setImplementor(selectResult.getString("implementor"));
+
+			BackupList.add(backupBean);
+		}
+
+		return BackupList;
+
+	}
+
+	// 大阪テンプレ
+	public ArrayList<BackupBean> osakaTemplateSelect() throws SQLException {
+		String selectSQL = "SELECT backup_id,title,reset_date,implementor FROM seat_template_backups where company_place = ?";
+		PreparedStatement select = con.prepareStatement(selectSQL);
+
+		select.setInt(1, 1);
+
+		ResultSet selectResult = select.executeQuery();
+
+		ArrayList<BackupBean> BackupList = new ArrayList<BackupBean>();
+		while (selectResult.next()) {
+			BackupBean backupBean = new BackupBean();
+			backupBean.setBackupId(selectResult.getInt("backup_id"));
+			backupBean.setTitle(selectResult.getString("title"));
+			backupBean.setResetDate(selectResult.getString("reset_date"));
+			backupBean.setImplementor(selectResult.getString("implementor"));
+
+			BackupList.add(backupBean);
+		}
+
+		return BackupList;
+
+	}
+
+	public int insertBuckup(BackupBean backupBean) throws SQLException {
+		String insertSQL = "INSERT INTO ham.seat_template_backups ("
+				+ "backup_file," + "backup_img," + "title," + "reset_date,"
+				+ "implementor," + "company_place"
+
+				+ ") VALUES ("
+
+				+ "?," // JSON
+				+ "NULL," + "?," // タイトル
+				+ "?," // 更新日
+				+ "?," // 更新者
+				+ "?" // 会社
+				+ ")";
+
+		PreparedStatement insert = con.prepareStatement(insertSQL);
+
+		insert.setString(1, backupBean.getBackupFile());
+		insert.setString(2, backupBean.getTitle());
+		insert.setString(3, backupBean.getResetDate());
+		insert.setString(4, backupBean.getImplementor());
+		insert.setString(5, backupBean.getCompanyPlace());
+
+		int success = insert.executeUpdate();
+
+		return success;
 
 	}
 

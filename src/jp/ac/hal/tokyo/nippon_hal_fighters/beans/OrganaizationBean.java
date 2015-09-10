@@ -5,28 +5,24 @@ package jp.ac.hal.tokyo.nippon_hal_fighters.beans;
  *
  * String organaizationId; String organaizationName;
  *
- * @author s.kato
+ * @author s.kage
  *
  */
-public class OrganaiationBean {
+public class OrganaizationBean {
 
 	private String organaizationId;
 	private String organaizationName;
-
+	
 	public String getOrganaizationId() {
 		return organaizationId;
 	}
-
 	public void setOrganaizationId(String organaizationId) {
 		this.organaizationId = organaizationId;
 	}
-
 	public String getOrganaizationName() {
 		return organaizationName;
 	}
-
 	public void setOrganaizationName(String organaizationName) {
 		this.organaizationName = organaizationName;
 	}
-
 }

@@ -15,25 +15,24 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.beans.BackupBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.dao.BackupDao;
 
 /**
- * Servlet implementation class seatList
+ * Servlet implementation class BackupTemplateServlet
  */
-@WebServlet("/BackupServlet")
-public class BackupServlet extends HttpServlet {
+@WebServlet("/BackupTemplateServlet")
+public class BackupTemplateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public BackupServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public BackupTemplateServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request,
+    protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
@@ -57,7 +56,7 @@ public class BackupServlet extends HttpServlet {
 		String choice = request.getParameter("choices");
 		String area = request.getParameter("area");
 		String change = "東京";
-		String backPage = "./DisplayServlet";
+		String backPage = "./DisplayTemplateServlet";
 
 		String[] BackupId = title.split(",", 0);
 
@@ -74,7 +73,7 @@ public class BackupServlet extends HttpServlet {
 			break;
 
 		case "新規":
-			backPage = "seatEdit.jsp";
+			backPage = "seat_template_edit.jsp";
 			System.out.println(backPage);
 			response.setContentType("text/html; charset=utf-8");
 			response.sendRedirect(backPage);
@@ -158,15 +157,15 @@ public class BackupServlet extends HttpServlet {
 				try {
 					int backupId = Integer.parseInt(BackupId[1]);
 					selectData = backupDao.fileSelect(backupId);
-					int selectId = selectData.get(0).getBackupId();
+					//int selectId = selectData.get(0).getBackupId();
 
-					System.out.println(selectId);
+					//System.out.println(selectId);
 					// バックアップファイルは表示できない
 					// System.out.println(selectData.get(1).getBackupFile());
 
-					request.setAttribute("area", area);
-					request.setAttribute("selectId", selectId);
-					backPage = "./GetBackupData";
+					//request.setAttribute("area", area);
+					//request.setAttribute("selectId", selectId);
+					backPage = "seat_template_edit.jsp";
 
 					RequestDispatcher dispatcher2 = request
 							.getRequestDispatcher(backPage);

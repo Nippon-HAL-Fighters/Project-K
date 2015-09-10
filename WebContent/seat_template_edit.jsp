@@ -1,30 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.io.*,java.util.*,java.text.*"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>テンプレート</title>
+<title>座席表テンプレート作成ページ</title>
 <meta charset="UTF-8" />
 <link rel="stylesheet" href="./css/styles.css" type="text/css" />
 <link rel="stylesheet" href="./css/font-awesome/font-awesome.css"
 	type="text/css" />
-<link rel="stylesheet" href="./css/seatEdit.css" type="text/css" />
-<link rel="stylesheet" href="./css/joint.css" type="text/css" />
-<link rel="stylesheet" href="./css/print.css" type="text/css"
-	media="print" />
 <link rel="stylesheet" href="./css/joint.all.min.css" type="text/css" />
 <link rel="stylesheet" href="./css/jointjs_seatEdit.css" type="text/css" />
+<link rel="stylesheet" href="./css/seatEdit.css" type="text/css" />
+<link rel="stylesheet" href="./css/print.css" type="text/css"
+	media="print" />
 
 <script src="./js/jquery-2.1.4.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
-<script src="./js/script.js"></script>
 <script src="./js/joint.all.min.js"></script>
-<script src="./js/jointjs_seatEdit.js"></script>
-<script src="./js/change.js"></script>
-<script src="./js/emp_DB.js"></script>
-<script src="./js/jointjs_seat_placement.js"></script>
+<script src="./js/script.js"></script>
+<script src="./js/jointjs_seat_template.js"></script>
 
 
 <style type="text/css">
@@ -97,10 +91,12 @@ input.dummy_text {
 		</ul>
 	</nav>
 	<!-- 共通部分ここまで -->
+
 	<main>
 	<div class="header_box">
 		<h2>座席表作成</h2>
 		<input type="text" id="sample" value="" />
+
 		<button type="button" class="item btn btn-primary headerbtn"
 			value="保存">保存</button>
 		<button type="button" class="item btn btn-primary headerbtn"
@@ -112,32 +108,14 @@ input.dummy_text {
 			value="undo">戻る</button>
 
 	</div>
-	<div id="main_box">
+	<div class="main_box">
 		<div class="edit_area"></div>
 	</div>
 
 	<div class="sub_box">
-		<div class="tabbox">
-			<div id="0" class="tab">
-
-				<c:forEach items="${employeeNames}" var="employeeNames"
-					varStatus="status">
-					<button type="button" class="button btn btn-primary name"
-						value="${employeeNames.employeeName}">${employeeNames.employeeName}</button>
-
-				</c:forEach>
-
-			</div>
-
-		</div>
-		<script type="text/javascript">
-			// デフォルトのタブを選択
-			ChangeTab('0');
-		</script>
-
-
+		<div class="item_area"></div>
 	</div>
+
 	</main>
 </body>
 </html>
-

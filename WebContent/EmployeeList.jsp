@@ -17,8 +17,27 @@
 	<link rel="stylesheet" href="./css/jquery.dataTables.css" />
 	<script>
 	$(document).ready(function(){
-	    $('#myTable').DataTable({ "language": {
-	    	   "url": "//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Japanese.json"},});
+	    $('#myTable').DataTable({ 
+	    	"language": {
+	    		  "emptyTable" : "データが登録されていません。",
+	    		  "info" : "_TOTAL_ 件中 _START_ 件から _END_ 件までを表示",
+	    		  "infoEmpty" : "",
+	    		  "infoFiltered" : "(_MAX_ 件からの絞り込み表示)",
+	    		  "infoPostFix" : "",
+	    		  "thousands" : ",",
+	    		  "lengthMenu" : "1ページあたりの表示件数: _MENU_",
+	    		  "loadingRecords" : "ロード中",
+	    		  "processing" : "処理中...",
+	    		  "search" : "検索",
+	    		  "zeroRecords" : "該当するデータが見つかりませんでした。",
+	    		  "paginate" : {
+	    		    "first" : "先頭",
+	    		    "previous" : "前へ",
+	    		    "next" : "次へ",
+	    		    "last" : "末尾"
+	    		  }
+	    		}
+	    });
 	});
 	</script>
 </head>
@@ -134,7 +153,15 @@
 								+"<td>"+emp.getPhoneInside()+"</td>"			//内線番号
 								+"<td>"+emp.getPhoneOutside()+"</td>"			//外線番号
 								+"<td>"+emp.getCompanayName()+"</td>"			//所属会社
-								+"<td><input type=\"submit\" value=\"編集\" class=\"chengebutton\" style=\"width:100%\" /></td>"
+								+"<td><form action=\"SendUpdateEmployeeData\" method=\"post\">"
+								+"<input type=\"submit\" value=\"更新\" class=\"chengebutton\" style=\"width:100%\" />"
+								+"<input type=\"hidden\" name=\"updateempid\" value="+emp.getEmployeeId()+" />"
+								+"</form></td>"
+								+"<td><form action=\"DelEmployeeData\" method=\"post\">"
+								+"<input type=\"submit\" value=\"削除\" class=\"chengebutton\" style=\"width:100%\" />"
+								+"<input type=\"hidden\" name=\"delempid\" value="+emp.getEmployeeId()+" />"
+								+"<input type=\"hidden\" name=\"delphoneid\" value="+emp.getPhoneId()+" />"
+								+"</form></td>"
 								+"</tr>");
 					}
 				%>

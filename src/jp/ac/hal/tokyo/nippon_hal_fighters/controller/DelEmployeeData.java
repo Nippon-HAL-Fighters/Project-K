@@ -18,16 +18,16 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.dao.PhoneDao;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 
 /**
- * Servlet implementation class InsertEmployeeData
+ * Servlet implementation class DelEmployeeData
  */
-@WebServlet("/InsertEmployeeData")
-public class InsertEmployeeData extends HttpServlet {
+@WebServlet("/DelEmployeeData")
+public class DelEmployeeData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertEmployeeData() {
+    public DelEmployeeData() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,48 +47,21 @@ public class InsertEmployeeData extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		DBConnecter connecter = new DBConnecter();
-		Connection con = connecter.getConnection();
-		EmployeeBean insertBean = new EmployeeBean();
-		PhoneBean phoneBean = new PhoneBean();
-		EmployeeDao employeeDao = new EmployeeDao(con);
-		PhoneDao phoneDao = new PhoneDao(con);
+		Connection con = null;
+		EmployeeBean deleteempBean = new EmployeeBean();
+		PhoneBean delphoneBean = new PhoneBean();
 		
-		String employeeId = request.getParameter("employeeid");
-		String employeeName = request.getParameter("employeename"); 
-		String koyo = request.getParameter("koyo");
-		int admin = Integer.parseInt(request.getParameter("admin"));
-		String password = request.getParameter("pass");
-		int posts = Integer.parseInt(request.getParameter("posts"));
-		String org = request.getParameter("org");
-		int comp = Integer.parseInt(request.getParameter("comp"));
-		String phoneinside = request.getParameter("phoneinside");
-		String phoneout = request.getParameter("phoneout");	
-		int phoneId;
+		String employeeId = request.getParameter("delempid");
+		int phoneid = Integer.parseInt(request.getParameter("delphoneid"));
+		deleteempBean.setEmployeeId(employeeId);
+		delphoneBean.setPhoneId(phoneid);
 		
 		try {
-			phoneId = phoneDao.datacount();
-			phoneId = phoneId + 1;
-			
-			insertBean.setEmployeeId(employeeId);
-			insertBean.setEmployeeName(employeeName);
-			insertBean.setEmployeeStatus(koyo);
-			insertBean.setAdmin(admin);
-			insertBean.setPassword(password);
-			insertBean.setPostId(posts);
-			insertBean.setOrgnaizationId(org);
-			insertBean.setPhoneId(phoneId);
-			insertBean.setPhoneInside(phoneinside);
-			insertBean.setPhoneOutside(phoneout);
-			insertBean.setCompanyId(comp);
-			
-			phoneBean.setPhoneId(phoneId);
-			phoneBean.setPhoneInside(phoneinside);
-			phoneBean.setPhoneOutside(phoneout);
-			
-			System.out.println(phoneId);
-			
-			employeeDao.insertEmployee(insertBean);
-			phoneDao.insertPhone(phoneBean);			
+			con = connecter.getConnection();
+			EmployeeDao employeeDao = new EmployeeDao(con);
+			PhoneDao phoneDao = new PhoneDao(con);		
+			phoneDao.deletephone(delphoneBean);	
+			employeeDao.deleteEmployee(deleteempBean);		
 			employeeDao.commit();
 			phoneDao.commit();
 			System.out.print("OK!");
@@ -96,14 +69,16 @@ public class InsertEmployeeData extends HttpServlet {
 			e.printStackTrace();
 		}finally{
 			try {
-				con.close();
+				if(con != null){
+					con.close();
+				}
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 		}
 		
-		//データを登録したら一覧へ遷移する。
+		//データを削除したら一覧へ遷移する。
 		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
 		dispatcher.forward(request, response);
 	}
