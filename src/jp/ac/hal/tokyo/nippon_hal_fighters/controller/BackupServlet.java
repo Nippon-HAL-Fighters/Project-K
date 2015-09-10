@@ -66,7 +66,7 @@ public class BackupServlet extends HttpServlet {
 
 		switch (choice) {
 		case "テンプレート":
-			backPage = "seat_template_edit.jsp";
+			backPage = "./DisplayTemplateServlet";
 			System.out.println(backPage);
 			response.setContentType("text/html; charset=utf-8");
 			response.sendRedirect(backPage);

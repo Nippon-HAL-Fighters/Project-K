@@ -1,6 +1,4 @@
-/*! JointJS v0.9.3 - JavaScript diagramming library  2015-02-03 
-
-
+/*! JointJS v0.9.3 - JavaScript diagramming library  2015-02-03
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -13,7 +11,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 /*
 A complete list of SVG properties that can be set through CSS is here:
 http://www.w3.org/TR/SVG/styling.html
-
 Important note: Presentation attributes have a lower precedence over CSS style rules.
 */
 
@@ -29,11 +26,9 @@ Important note: Presentation attributes have a lower precedence over CSS style r
 1. IE can't handle paths without the `d` attribute for bounding box calculation
 2. IE can't even handle 'd' attribute as a css selector (e.g path[d]) so the following rule will
    break the links rendering.
-
 path:not([d]) {
     display: none;
 }
-
 */
 
 /* .magnet is an element that can be either source or a target of a link */
@@ -48,7 +43,6 @@ path:not([d]) {
    cursor: crosshair;
    vector-effect: non-scaling-stroke;
 }
-
 .magnet:hover {
    stroke-opacity: .5;
 }
@@ -62,11 +56,9 @@ path:not([d]) {
 }
 
 /*
-
 Elements have CSS classes named by their types. E.g. type: basic.Rect has a CSS class "element basic Rect".
 This makes it possible to easilly style elements in CSS and have generic CSS rules applying to
 the whole group of elements. Each plugin can provide its own stylesheet.
-
 */
 
 .element {
@@ -82,14 +74,12 @@ the whole group of elements. Each plugin can provide its own stylesheet.
 }
 
 
-/* 
-
+/*
 connection-wrap is a <path> element of the joint.dia.Link that follows the .connection <path> of that link.
 In other words, the `d` attribute of the .connection-wrap contains the same data as the `d` attribute of the
 .connection <path>. The advantage of using .connection-wrap is to be able to catch pointer events
-in the neighborhood of the .connection <path>. This is especially handy if the .connection <path> is 
+in the neighborhood of the .connection <path>. This is especially handy if the .connection <path> is
 very thin.
-
 */
 
 .connection-wrap {
@@ -124,10 +114,8 @@ very thin.
    vector-effect: non-scaling-stroke;
 }
 
-/* 
-
+/*
 Vertex markers are `<circle>` elements that appear at connection vertex positions.
-
 */
 
 /* <g> element wrapping .marker-vertex-group. */
@@ -220,7 +208,6 @@ text.highlighted {
 
 /*
 Example of custom changes (in pure CSS only!):
-
 Do not show marker vertices at all:  .marker-vertices { display: none; }
 Do not allow adding new vertices: .connection-wrap { pointer-events: none; }
 */

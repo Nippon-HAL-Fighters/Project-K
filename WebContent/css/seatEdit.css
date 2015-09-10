@@ -22,7 +22,7 @@ h3 {
 	float: right;
 }
 
-#main_box {
+.main_box {
 	position: absolute;
 	margin-top: 10px;
 	width: 900px;
@@ -51,6 +51,12 @@ h3 {
 	-moz-box-shadow: 5px 5px 10px #000;
 }
 
+.edit_area{
+	position: absolute;
+	width:1000px;
+	height:600px;
+}
+
 .user-input {
 	margin: 10px 10px 0px 10px;
 	width: 90%;
@@ -66,4 +72,3 @@ h3 {
 	padding: 15px 0px 15px 0px;
 	width: 90%;
 }
-

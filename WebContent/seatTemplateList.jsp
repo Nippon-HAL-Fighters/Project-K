@@ -95,6 +95,8 @@
 				name="choices">印刷</button>
 			<button type="submit" class="btn btn-primary headerbtn" value="新規"
 				name="choices">新規作成</button>
+				<button type="submit" class="btn btn-primary headerbtn" value="人員配置"
+				name="choices">人員配置</button>
 		</form>
 	</div>
 

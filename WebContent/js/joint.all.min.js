@@ -4702,7 +4702,7 @@ if (function(a, b) {
             s = +new Date + "",
             t = 75,
             u = 40,
-            v = "  \fÂ ï»¿\n\r\u2028\u2029áš€á Žâ€€â€â€‚â€ƒâ€„â€…â€†â€‡â€ˆâ€‰â€Šâ€¯âŸã€€",
+            v = "  \fA i≫?\n\r\u2028\u2029a??a ?a??a??a??a??a??a?…a?†a?‡a??a?‰a??a?￣a??a??",
             w = /\b__p \+= '';/g,
             x = /\b(__p \+=) '' \+/g,
             y = /(__e\(.*?\)|\b__t\)) \+\n'';/g,
@@ -6679,7 +6679,7 @@ var joint = {
                 return b - (a ? Math.ceil(Math.log(a) / Math.LN10) : 1)
             },
             prefix: function(a, b) {
-                var c = _.map(["y", "z", "a", "f", "p", "n", "Âµ", "m", "", "k", "M", "G", "T", "P", "E", "Z", "Y"], function(a, b) {
+                var c = _.map(["y", "z", "a", "f", "p", "n", "Aμ", "m", "", "k", "M", "G", "T", "P", "E", "Z", "Y"], function(a, b) {
                         var c = Math.pow(10, 3 * abs(8 - b));
                         return {
                             scale: b > 8 ? function(a) {

@@ -17,7 +17,7 @@ import jp.ac.hal.tokyo.nippon_hal_fighters.dao.BackupDao;
 /**
  * Servlet implementation class DisplayTmplateServlet
  */
-@WebServlet("/DisplayTmplateServlet")
+@WebServlet("/DisplayTemplateServlet")
 public class DisplayTemplateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
