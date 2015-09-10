@@ -1,6 +1,5 @@
 package jp.ac.hal.tokyo.nippon_hal_fighters.beans;
 
-import java.sql.Date;
 
 /**
  * バックアップテーブル用のBean
@@ -15,12 +14,22 @@ import java.sql.Date;
 public class BackupBean {
 
 	private int backupId;
+
 	private String backupFile;
 	private byte backupImg;
 	private String title;
 	private int fileId;
-	private Date resetDate;
+	private String resetDate;
 	private String implementor;
+	private String companyPlace;
+
+	public String getCompanyPlace() {
+		return companyPlace;
+	}
+
+	public void setCompanyPlace(String companyPlace) {
+		this.companyPlace = companyPlace;
+	}
 
 	public int getBackupId() {
 		return backupId;
@@ -46,12 +55,12 @@ public class BackupBean {
 		this.backupFile = backupFile;
 	}
 
-	public Date getResetDate() {
+	public String getResetDate() {
 		return resetDate;
 	}
 
-	public void setResetDate(Date resetDate) {
-		this.resetDate = resetDate;
+	public void setResetDate(String string) {
+		this.resetDate = string;
 	}
 
 	public String getImplementor() {
