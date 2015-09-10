@@ -16,7 +16,7 @@
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/joint.all.min.js"></script>
 <script src="./js/script.js"></script>
-<script src="./js/jointjs_seat_tamplate.js"></script>
+<script src="./js/jointjs_seat_template.js"></script>
 
 
 <style type="text/css">
