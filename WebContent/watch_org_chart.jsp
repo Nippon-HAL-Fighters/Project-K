@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,7 +8,6 @@
     <link rel="stylesheet" href="./css/font-awesome/font-awesome.css" type="text/css" />
     <link rel="stylesheet" href="./css/joint.all.min.css" type="text/css" />
     <link rel="stylesheet" href="./css/make_org_chart.css" type="text/css" />
-	<link rel="stylesheet" href="./css/seatEdit.css" type="text/css" />
     <script src="./js/jquery-2.1.4.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/joint.all.min.js"></script>
@@ -90,37 +90,14 @@
                     <button type="button" class="btn btn-default box-submit" disabled="true">
                         作成
                     </button>
-                    <button type="button" class="btn btn-info save-btn new_save">
-                        名前をつけて保存
-                    </button>
-                    <button type="button" class="btn btn-info save-btn mod_save">
-                        上書き保存
+                    <button type="button" class="btn btn-info save-btn">
+                        保存
                     </button>
                 </div><!-- /.sosikizu-menu -->
         </div><!-- .panel -->
-
-        <div class="sosikizu">
+        <div class="sosikizu" style="height: 800px; width: 1100px;">
 
         </div>
-		<div class="sub_box" style="position: absolute; left: 1100px;">
-			<form class="input-group">
-				<input type="text" class="form-control_text user-input"
-					placeholder="キーワード"> <input type="submit"
-					class="btn btn-success" value="検索" />
-			</form>
-
-			<div class="btn btn-primary name">田中 タロウ</div>
-			<div class="btn btn-primary name">田中 タロウ</div>
-			<div class="btn btn-primary name">田中 タロウ</div>
-			<div class="btn btn-primary name">田中 タロウ</div>
-			<div class="btn btn-primary name">田中 タロウ</div>
-			<div class="btn btn-primary name">田中 タロウ</div>
-			<div class="btn btn-primary name">田中 タロウ</div>
-			<div class="btn btn-primary name">田中 タロウ</div>
-			<div class="btn btn-primary name">田中 タロウ</div>
-			<div class="btn btn-primary name">田中 タロウ</div>
-
-		</div>
     </main>
 </body>
 </html>

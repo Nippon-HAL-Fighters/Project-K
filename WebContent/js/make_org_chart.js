@@ -168,9 +168,13 @@ $(function() {
         ]
     });
 
-    $('.save-btn').click(function() {
+    $('.new_save').click(function() {
         saveDialog.close();
         saveDialog.open();
+    });
+
+    $('.mod_save').click(function() {
+        saveDialog.trigger('action:save');
     });
 
     /* 永続化 */
@@ -182,9 +186,10 @@ $(function() {
     var isSaved = true;
 
     saveDialog.on('action:save', function() {
-        var title = $('input[name="title"]').val();
-
-        graph.set('title', title);
+        if (graph.get('title') === undefined) {
+            var title = $('input[name="title"]').val();
+            graph.set('title', title);
+        }
 
         try {
             graph.save(null, {
@@ -212,6 +217,7 @@ $(function() {
         })).open();
 
         graph.set('id', res.orgChartID);
+        graph.set('title', res.title);
 
         graph.save();//TODO:これいる？
 
