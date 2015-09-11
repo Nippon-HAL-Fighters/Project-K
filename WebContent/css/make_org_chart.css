@@ -41,6 +41,7 @@ main {
 }
 .sosikizu-menu .save-btn {
   float: right;
+  margin-right: 10px;
 }
 
 /* JointJS */

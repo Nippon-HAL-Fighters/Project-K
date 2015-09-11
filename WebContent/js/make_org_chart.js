@@ -4,6 +4,12 @@ $(function() {
 
     /* 組織図メニュー */
 
+    var isModify = false;
+
+    if (location.href.match(/org_chart_id=\d*/) !== null) {
+        isModify = true;
+    }
+
     var boxSubmit = {
         status: false,
         el: $('.box-submit'),
@@ -65,10 +71,10 @@ $(function() {
 
     var cells = [];
 
-    var graph = new joint.dia.Graph;
+    var graph = new joint.dia.Graph();
 
     graph.url = function() {
-        return '/Project-K/OrgChartController';
+        return '/Project-K/OrgChartServlet';
     };
 
     graph.on('remove', function(cell) {
@@ -80,6 +86,7 @@ $(function() {
         isSaved = false;
     });
 
+    //TODO: これ使う?
     var graphLayout = new joint.layout.TreeLayout({
         graph: graph,
         verticalGap: 20,
@@ -140,6 +147,32 @@ $(function() {
         }
     };
 
+    /* Dialog */
+
+    var BasicDialog = joint.ui.Dialog.extend({
+        options: {
+            width: 400,
+            modal: false,
+            draggable: true,
+            closeButton: true,
+            closeButtonContent: '<i class="fa fa-close"></i>'
+        }
+    });
+
+    var saveDialog = new BasicDialog({
+        title: '保存確認',
+        content: '保存タイトル<input type="text" name="title" class="form-control" />',
+        buttons: [
+            {action: 'save', content: '保存する', position: 'right'},
+            {action: 'close', content: 'キャンセル', position: 'left'}
+        ]
+    });
+
+    $('.save-btn').click(function() {
+        saveDialog.close();
+        saveDialog.open();
+    });
+
     /* 永続化 */
 
     /**
@@ -148,18 +181,76 @@ $(function() {
      */
     var isSaved = true;
 
-    $('.save-btn').click(function() {
-        var res = graph.save(null, {
-            dataType: 'text',
-            success: function() {
-                alert('保存しました');
-                isSaved = true;
-            },
-            error: function() {
-                alert('保存に失敗しました');
-            }
-        });
+    saveDialog.on('action:save', function() {
+        var title = $('input[name="title"]').val();
+
+        graph.set('title', title);
+
+        try {
+            graph.save(null, {
+                success: function(model, res) {
+                    saveSuccess(res);
+                },
+                error: function() {
+                    saveError();
+                    return;
+                }
+            });
+        } finally {
+            saveDialog.close();
+        }
+
     });
+
+    function saveSuccess(res) {
+        (new BasicDialog({
+            title: '保存完了',
+            content: '保存しました',
+            buttons: [
+                {action: 'close', content: 'OK', position: 'right'}
+            ]
+        })).open();
+
+        graph.set('id', res.orgChartID);
+
+        graph.save();//TODO:これいる？
+
+        isSaved = true;
+    }
+
+    function saveError() {
+        (new BasicDialog({
+            type: 'alert',
+            title: 'エラー',
+            content: '保存に失敗しました'
+        })).open();
+    }
+
+    /* 読み込み */
+
+    (function () {
+        var urlMatch = location.href.match(/org_chart_id=\d*/);
+
+        if (urlMatch === null) {
+            return;
+        }
+
+        var id = urlMatch[0].replace(/org_chart_id=/, '');
+
+        fetchGraph(id);
+    })();
+
+    function fetchGraph(id) {
+        $.ajax({
+            url: '/Project-K/OrgChartServlet/' + id,
+            dataType: 'json'
+        }).done(function(data) {
+            graph.fromJSON(data);
+
+            graph.set('orgChartID',id);
+            graph.set('id', id);
+        });
+    }
 
     /* 終了処理 */
 
@@ -175,10 +266,10 @@ $(function() {
 
     /* Debug */
 
-    $('.jinin').click(function() {
-        graphLayout.prepare();
-        graphLayout.layout();
-    });
+//    $('.jinin').click(function() {
+//        graphLayout.prepare();
+//        graphLayout.layout();
+//    });
 
 });
 

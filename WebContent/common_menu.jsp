@@ -84,13 +84,13 @@
             <a href="./BackupServlet">
                 <li><i class="fa fa-pencil"></i>組織図作成</li>
             </a>
-            <a href="">
+            <a href="./watch_org_chart.jsp">
                 <li><i class="fa fa-sitemap"></i>組織図閲覧</li>
             </a>
             <a href="./BackupServlet">
                 <li><i class="fa fa-pencil"></i>座席表作成</li>
             </a>
-            <a href="">
+            <a href="./watch_seats.jsp">
                 <li><i class="fa fa-th"></i>座席表閲覧</li>
             </a>
             <a href="./LogoutServlet">
@@ -105,10 +105,10 @@
             <a href="./GetEmployeeData">
                 <li><i class="fa fa-list"></i>社員情報一覧</li>
             </a>
-            <a href="">
+            <a href="watch_org_chart.jsp">
                 <li><i class="fa fa-sitemap"></i>組織図閲覧</li>
 
-            <a href="">
+            <a href="./watch_seats.jsp">
                 <li><i class="fa fa-th"></i>座席表閲覧</li>
             </a>
             <%

@@ -5,3 +5,7 @@ WebContent/.sass-cache/
 .classpath
 .settings
 build/
+WebContent/nbproject/project.properties
+WebContent/nbproject/project.xml
+WebContent/nbproject/private/private.properties
+WebContent/nbproject/private/private.xml

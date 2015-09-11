@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -65,9 +66,10 @@ public class LoginServlet extends HttpServlet {
 		boolean isAdmin = false;
 
 		DBConnecter dbConn = new DBConnecter();
+		Connection conn = null;
 
 		try {
-			Connection conn = dbConn.getConnection();
+			conn = dbConn.getConnection();
 
 			PreparedStatement state = conn.prepareStatement(findEmployee);
 
@@ -90,6 +92,12 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 
 			return;
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		if (empCount != 1) {
