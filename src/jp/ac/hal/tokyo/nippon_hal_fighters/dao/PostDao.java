@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import jp.ac.hal.tokyo.nippon_hal_fighters.beans.OrganaizationBean;
-import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PostBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.service.DBConnecter;
 

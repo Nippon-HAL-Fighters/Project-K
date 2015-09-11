@@ -116,7 +116,6 @@
     <main>
     	<%
     		ArrayList<EmployeeBean> recode = null;
-			//EmployeeBean employeeBean = new EmployeeBean();
 			recode = (ArrayList<EmployeeBean>)request.getAttribute("recode");
 			
 			if(recode == null){
