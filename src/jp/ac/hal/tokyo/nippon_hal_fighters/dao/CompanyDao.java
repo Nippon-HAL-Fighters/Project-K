@@ -62,8 +62,28 @@ public class CompanyDao {
 		return CompanyList;
 	}
 	
-	
-	
+	/**
+	 * 特定の会社名取得
+	 * @return CompanyBean compname
+	 * @throws SQLException
+	 **/
+	public String compname(int compid) throws SQLException {
+		
+		String retcompname = null;
+		String selectid = String.valueOf(compid);
+		String selectSQL = "SELECT compnay_name FROM companies where company_id = ?";
+
+		PreparedStatement select = con.prepareStatement(selectSQL);
+		select.setString(1, selectid);
+
+		ResultSet selectResult = select.executeQuery();
+
+		while (selectResult.next()) {
+			retcompname = selectResult.getString("compnay_name");
+		}
+		return retcompname;
+	}
+
 	/**
 	 * 登録データの件数を取得
 	 * @return int datacount

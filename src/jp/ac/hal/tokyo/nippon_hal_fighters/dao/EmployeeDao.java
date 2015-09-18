@@ -106,7 +106,7 @@ public class EmployeeDao {
 	 */
 	public EmployeeBean selectListEmployees(String empid) throws SQLException {
 		
-		String selectSQL = "SELECT emp.employee_id, emp.employee_name, emp.employee_status, emp.admin, emp.password, emp.organaization_id, org.organaization_name, pos.post_name , phone.phone_inside, phone.phone_outside,emp.company_id ,comp.compnay_name "
+		String selectSQL = "SELECT emp.employee_id, emp.employee_name, emp.employee_status, emp.admin, emp.password, emp.organaization_id, org.organaization_name,emp.phone_id, pos.post_name , phone.phone_inside, phone.phone_outside,emp.company_id ,comp.compnay_name "
 				+ "FROM employees AS emp JOIN organaizations AS org ON emp.organaization_id = org.organaization_id JOIN phones AS phone ON emp.phone_id = phone.phone_id JOIN posts AS pos ON emp.post_id = pos.post_id JOIN companies AS comp ON emp.company_id = comp.company_id "
 				+ "WHERE employee_id = ?";
 		
@@ -126,6 +126,7 @@ public class EmployeeDao {
 			employeeBean.setOrgnaizationId(selectResult.getString("organaization_id"));
 			employeeBean.setOrgnaizationName(selectResult.getString("org.organaization_name"));
 			employeeBean.setPostName(selectResult.getString("pos.post_name"));
+			employeeBean.setPhoneId(selectResult.getInt("emp.phone_id"));
 			employeeBean.setPhoneInside(selectResult.getString("phone.phone_inside"));
 			employeeBean.setPhoneOutside(selectResult.getString("phone.phone_outside"));
 			employeeBean.setCompanyId(selectResult.getInt("emp.company_id"));

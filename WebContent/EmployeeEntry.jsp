@@ -90,7 +90,8 @@
         %>
     	<div id="main-form">
 	        <h2>社員情報登録</h2>
-	       <form action="InsertEmployeeData" method="post" class="form-inline text-left">
+	       <!-- <form action="InsertEmployeeData" method="post" class="form-inline text-left">-->
+	       <form action="SendConfirmationEmployee" method="post" class="form-inline text-left">
 	        	<div class="forms">
 	        	<label id="errid" style="display:none;color:red;"></label>
 	        		社員番号:
@@ -108,7 +109,7 @@
 	        	雇用状態:
 	        		<select name="koyo" class="form-control">
 						<option value="none">選択してください</option>
-						<option value="社員">社員</option>
+						<option value="プロパー">プロパー</option>
 						<option value="協力会社">協力会社</option>
 						<option value="派遣">派遣</option>
 					</select>
@@ -131,8 +132,8 @@
 						<option value="none">選択してください</option>
 						<%
 							for(PostBean post : postrecode){
-												out.print("<option value="+post.getPostId()+">"+post.getPostName()+"</option>");
-											}
+								out.print("<option value="+post.getPostId()+">"+post.getPostName()+"</option>");
+							}
 						%>
 					</select>
 				</div>
@@ -174,7 +175,6 @@
 						%>
 					</select>
 				</div>
-				<input type="hidden" name="pass" value="0000" />
 	        	
 	        	<div class="forms">
 	        		<input type="submit" value="登録" class="btn btn-primary" />

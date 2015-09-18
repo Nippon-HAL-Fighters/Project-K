@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sun.misc.Request;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.CompanieBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.EmployeeBean;
 import jp.ac.hal.tokyo.nippon_hal_fighters.beans.PhoneBean;
@@ -62,53 +63,59 @@ public class UpdateEmployeeData extends HttpServlet {
 		String employeeId = request.getParameter("employeeid");
 		String ordemployeeId = request.getParameter("ordempid");
 		String employeeName = request.getParameter("employeename"); 
-		String koyo = request.getParameter("koyo");
+		String password = request.getParameter("password");
+		String koyo = request.getParameter("employeestatus");
 		int admin = Integer.parseInt(request.getParameter("admin"));
-		String password = request.getParameter("pass");
 		int posts = Integer.parseInt(request.getParameter("posts"));
 		String org = request.getParameter("org");
 		int comp = Integer.parseInt(request.getParameter("comp"));
 		String phoneinside = request.getParameter("phoneinside");
-		String phoneout = request.getParameter("phoneout");	
-		int phoneId;
+		String phoneout = request.getParameter("phoneoutside");	
+		int phoneId = Integer.parseInt(request.getParameter("phoneid"));
 		
-		try {
-			phoneId = phoneDao.datacount();
-			
-			updateBean.setEmployeeId(employeeId);
-			updateBean.setEmployeeName(employeeName);
-			updateBean.setEmployeeStatus(koyo);
-			updateBean.setAdmin(admin);
-			updateBean.setPassword(password);
-			updateBean.setPostId(posts);
-			updateBean.setOrgnaizationId(org);
-			updateBean.setPhoneId(phoneId);
-			updateBean.setPhoneInside(phoneinside);
-			updateBean.setPhoneOutside(phoneout);
-			updateBean.setCompanyId(comp);
-			phoneBean.setPhoneId(phoneId);
-			phoneBean.setPhoneInside(phoneinside);
-			phoneBean.setPhoneOutside(phoneout);
-			
-			employeeDao.updateEmployee(updateBean , ordemployeeId);
-			phoneDao.upodatePhone(phoneBean);			
-			employeeDao.commit();
-			phoneDao.commit();
-			System.out.print("OK!");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			try {
-				con.close();
-			} catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
+		String submit = request.getParameter("submit");
+		
+		if(submit.equals("更新")){			
+			try {				
+				updateBean.setEmployeeId(employeeId);
+				updateBean.setEmployeeName(employeeName);
+				updateBean.setEmployeeStatus(koyo);
+				updateBean.setAdmin(admin);
+				updateBean.setPassword(password);
+				updateBean.setPostId(posts);
+				updateBean.setOrgnaizationId(org);
+				updateBean.setPhoneId(phoneId);
+				updateBean.setPhoneInside(phoneinside);
+				updateBean.setPhoneOutside(phoneout);
+				updateBean.setCompanyId(comp);
+				phoneBean.setPhoneId(phoneId);
+				phoneBean.setPhoneInside(phoneinside);
+				phoneBean.setPhoneOutside(phoneout);
+				
+				employeeDao.updateEmployee(updateBean , ordemployeeId);
+				phoneDao.upodatePhone(phoneBean);			
+				employeeDao.commit();
+				phoneDao.commit();
+				System.out.print("OK!");
+			} catch (Exception e) {
 				e.printStackTrace();
+			}finally{
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
 			}
+			
+			//データを更新したら一覧へ遷移する。
+			RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
+			dispatcher.forward(request, response);
+		}else{
+			//データを更新したら一覧へ遷移する。
+			RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
+			dispatcher.forward(request, response);
 		}
-		
-		//データを更新したら一覧へ遷移する。
-		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
-		dispatcher.forward(request, response);
 	}
 
 }

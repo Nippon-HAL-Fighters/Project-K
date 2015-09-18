@@ -102,7 +102,7 @@
     <main>
     	<div id="main-form">
 	        <h2>社員情報更新</h2>
-	       <form action="UpdateEmployeeData" method="post" class="form-inline text-left">
+	       <form action="SendConfirmationUpdateEmployee" method="post" class="form-inline text-left">
 	        	<div class="forms">
 	        		<label id="errid" style="display:none;color:red;"></label>
 	        		社員番号:<input type="text" name="employeeid" class="form-control" value="<%=emprecode.getEmployeeId()%>" />
@@ -115,12 +115,15 @@
 	        	</div>
 	        	
 	        	<div class="forms">
+	        		<label id="errpass" style="display:none;color:red;"></label>
+	        		パスワード:<input type="text" name="password" class="form-control" value="<%=emprecode.getPassword()%>" />
+	        	</div>
+	        	
+	        	<div class="forms">
 	        	<label id="errstatus" style="display:none;color:red;"></label>
 	        	雇用状態:<select name="koyo" id="koyo" class="form-control">
 						<option value="none">選択してください</option>
-						<option value="会長">会長</option>
-						<option value="社長">社長</option>
-						<option value="社員">社員</option>
+						<option value="プロパー">プロパー</option>
 						<option value="協力会社">協力会社</option>
 						<option value="派遣">派遣</option>
 					</select>
@@ -192,7 +195,6 @@
 						%>
 					</select>
 				</div>
-				<input type="hidden" name="pass" value="0000" />
 				<input type="hidden" name="phoneid" value="<%= emprecode.getPhoneId() %>" />
 	        	
 	        	<div class="forms">

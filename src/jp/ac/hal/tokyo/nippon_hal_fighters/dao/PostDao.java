@@ -77,6 +77,26 @@ public class PostDao {
 	}
 	
 	/**
+	 *　役職名　@return ArrayList PostList
+	 * @throws SQLException
+	 **/
+	public String selectPostName(int postid) throws SQLException {
+		
+		String retpostname = null;
+		
+		String selectSQL = "SELECT post_name FROM posts where post_id = ?";
+		PreparedStatement select = con.prepareStatement(selectSQL);
+		select.setString(1, String.valueOf(postid));
+		ResultSet selectResult = select.executeQuery();
+		ArrayList<PostBean> PostList = new ArrayList<PostBean>();
+
+		while (selectResult.next()) {
+			retpostname = selectResult.getString("post_name");
+		}
+		return retpostname;
+	}
+	
+	/**
 	 * インサート 
 	 * @param PostBean
 	 * @throws SQLException	

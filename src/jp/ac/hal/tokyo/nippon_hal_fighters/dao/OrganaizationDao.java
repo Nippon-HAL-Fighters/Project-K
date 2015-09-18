@@ -80,6 +80,27 @@ public class OrganaizationDao {
 		}
 		return organaizationBean;
 	}
+	
+	
+	/**
+	 * 特定の組織名取得
+	 * @return String retOrgName
+	 * @throws SQLException
+	 */
+	public String selectOrgName(String org) throws SQLException {	
+		String retOrgName = null;
+		String selectSQL = "SELECT organaization_name FROM organaizations WHERE organaization_id = ?";
+		PreparedStatement select = con.prepareStatement(selectSQL);
+		select.setString(1, String.valueOf(org));
+		ResultSet selectResult = select.executeQuery();
+	
+		while (selectResult.next()) {
+			retOrgName = selectResult.getString("organaization_name");	
+		}
+		return retOrgName;
+	}
+	
+	
 
 	/**
 	 * 組織情報を登録するためのメソッド

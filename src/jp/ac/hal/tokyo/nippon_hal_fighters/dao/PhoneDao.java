@@ -111,7 +111,7 @@ public class PhoneDao {
 		update.setString(2, updatephone.getPhoneOutside());
 		update.setInt(3, updatephone.getPhoneId());
 		
-		System.out.println(updateSQL);
+		System.out.println("!!!!!!!"+update);
 		
 		return update.executeUpdate();
 	}

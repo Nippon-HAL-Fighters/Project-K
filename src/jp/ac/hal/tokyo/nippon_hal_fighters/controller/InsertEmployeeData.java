@@ -55,57 +55,63 @@ public class InsertEmployeeData extends HttpServlet {
 		
 		String employeeId = request.getParameter("employeeid");
 		String employeeName = request.getParameter("employeename"); 
-		String koyo = request.getParameter("koyo");
+		String employeestatus = request.getParameter("employeestatus");
 		int admin = Integer.parseInt(request.getParameter("admin"));
-		String password = request.getParameter("pass");
+		String password = "0000";
 		int posts = Integer.parseInt(request.getParameter("posts"));
 		String org = request.getParameter("org");
 		int comp = Integer.parseInt(request.getParameter("comp"));
 		String phoneinside = request.getParameter("phoneinside");
-		String phoneout = request.getParameter("phoneout");	
+		String phoneout = request.getParameter("phoneoutside");	
 		int phoneId;
+		String submit = request.getParameter("submit");
 		
-		try {
-			phoneId = phoneDao.datacount();
-			phoneId = phoneId + 1;
-			
-			insertBean.setEmployeeId(employeeId);
-			insertBean.setEmployeeName(employeeName);
-			insertBean.setEmployeeStatus(koyo);
-			insertBean.setAdmin(admin);
-			insertBean.setPassword(password);
-			insertBean.setPostId(posts);
-			insertBean.setOrgnaizationId(org);
-			insertBean.setPhoneId(phoneId);
-			insertBean.setPhoneInside(phoneinside);
-			insertBean.setPhoneOutside(phoneout);
-			insertBean.setCompanyId(comp);
-			
-			phoneBean.setPhoneId(phoneId);
-			phoneBean.setPhoneInside(phoneinside);
-			phoneBean.setPhoneOutside(phoneout);
-			
-			System.out.println(phoneId);
-			
-			employeeDao.insertEmployee(insertBean);
-			phoneDao.insertPhone(phoneBean);			
-			employeeDao.commit();
-			phoneDao.commit();
-			System.out.print("OK!");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
+		if(submit.equals("登録")){
 			try {
-				con.close();
-			} catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
+				phoneId = phoneDao.datacount();
+				phoneId = phoneId + 1;
+				
+				insertBean.setEmployeeId(employeeId);
+				insertBean.setEmployeeName(employeeName);
+				insertBean.setEmployeeStatus(employeestatus);
+				insertBean.setAdmin(admin);
+				insertBean.setPassword(password);
+				insertBean.setPostId(posts);
+				insertBean.setOrgnaizationId(org);
+				insertBean.setPhoneId(phoneId);
+				insertBean.setPhoneInside(phoneinside);
+				insertBean.setPhoneOutside(phoneout);
+				insertBean.setCompanyId(comp);
+				
+				phoneBean.setPhoneId(phoneId);
+				phoneBean.setPhoneInside(phoneinside);
+				phoneBean.setPhoneOutside(phoneout);
+				
+				System.out.println(phoneId);
+				
+				employeeDao.insertEmployee(insertBean);
+				phoneDao.insertPhone(phoneBean);			
+				employeeDao.commit();
+				phoneDao.commit();
+				System.out.print("OK!");
+			} catch (Exception e) {
 				e.printStackTrace();
+			}finally{
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
 			}
+			
+			//データを登録したら一覧へ遷移する。
+			RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
+			dispatcher.forward(request, response);
+		}else{
+			RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeEntry.jsp");
+			dispatcher.forward(request, response);
 		}
-		
-		//データを登録したら一覧へ遷移する。
-		RequestDispatcher dispatcher = request.getRequestDispatcher("EmployeeList.jsp");
-		dispatcher.forward(request, response);
 	}
 
 }
