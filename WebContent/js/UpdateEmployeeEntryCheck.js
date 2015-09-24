@@ -40,6 +40,17 @@ $(function(){
 			errflug = 1;
 		}	
 		
+		/**パスワード**/
+		if(password.val() == ""){
+			document.getElementById("errpass").innerText = 'パスワードが入力されていません';
+			document.getElementById("errpass").style.display="block";
+			errflug = 1;
+		}else if(password.val().length > 30){
+			document.getElementById("errpass").innerText = 'パスワードは30文字以内で入力してください';
+			document.getElementById("errpass").style.display="block";
+			errflug = 1;
+		}	
+		
 		/**雇用状態**/
 		if(employeestatus == "none"){
 			document.getElementById("errstatus").innerText = '雇用状態が選択されていません';
