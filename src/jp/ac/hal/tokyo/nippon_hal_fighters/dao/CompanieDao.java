@@ -53,7 +53,7 @@ public class CompanieDao {
 	}	
 	
 	/**
-	 * 会社情報の更新 
+	 * アップデート
 	 * @param CompanieBean
 	 * @return update
 	 * @throws SQLException
@@ -71,7 +71,7 @@ public class CompanieDao {
 	
 	
 	/**
-	 * 会社情報の削除
+	 * デリート
 	 * @param  CompanyBean 削除データ
 	 * @return delete 情報追加成功数 1なら成功
 	 * @throws SQLException

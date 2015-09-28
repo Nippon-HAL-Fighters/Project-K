@@ -17,7 +17,6 @@ public class OrganaizationDao {
 
 	/**
 	 * コンストラクタ
-	 * 
 	 * @param Connection
 	 **/
 	public OrganaizationDao(Connection con) {
@@ -36,7 +35,6 @@ public class OrganaizationDao {
 
 	/**
 	 * 全件取得
-	 * 
 	 * @return ArrayList OrganazationList
 	 * @throws SQLException
 	 */
@@ -61,8 +59,7 @@ public class OrganaizationDao {
 	
 
 	/**
-	 * 特定取得
-	 * 
+	 * 特定データの取得
 	 * @return ArrayList OrganazationList
 	 * @throws SQLException
 	 */
@@ -82,8 +79,7 @@ public class OrganaizationDao {
 	}
 
 	/**
-	 * 組織情報を登録するためのメソッド
-	 * 
+	 * インサート
 	 * @param organaizationBean
 	 * @return
 	 * @throws SQLException
@@ -99,8 +95,7 @@ public class OrganaizationDao {
 	
 
 	/**
-	 * 組織情報を更新するためのメソッド
-	 * 
+	 * アップデート
 	 * @param organaizationBean
 	 * @return update
 	 * @throws SQLException
@@ -117,7 +112,7 @@ public class OrganaizationDao {
 	}
 	
 	/**
-	 * 組織情報の削除
+	 * デリート
 	 * @param  organaizationBean 削除データ
 	 * @return deleteResult 情報追加成功数 1なら成功
 	 * @throws SQLException
@@ -134,7 +129,6 @@ public class OrganaizationDao {
 
 	/**
 	 * コミット
-	 * 
 	 * @throws SQLException
 	 **/
 	public void commit() throws SQLException {
@@ -143,7 +137,6 @@ public class OrganaizationDao {
 
 	/**
 	 * ロールバック
-	 * 
 	 * @throws SQLException
 	 **/
 	public void rollback() throws SQLException {
@@ -152,7 +145,6 @@ public class OrganaizationDao {
 
 	/**
 	 * クローズ
-	 * 
 	 * @throws SQLException
 	 **/
 	public void close() throws SQLException {

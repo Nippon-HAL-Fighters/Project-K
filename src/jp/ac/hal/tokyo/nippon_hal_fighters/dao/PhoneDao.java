@@ -37,7 +37,7 @@ public class PhoneDao {
 	}
 
 	/**
-	 * 　全件取得 　@return ArrayList PhoneList
+	 *　全件取得 　@return ArrayList PhoneList
 	 * 
 	 * @throws SQLException
 	 **/
@@ -61,7 +61,7 @@ public class PhoneDao {
 	}
 	
 	/**
-	 * 登録データの件数を取得
+	 * データの件数を取得
 	 * @return int datacount
 	 * @throws SQLException	 
 	 */

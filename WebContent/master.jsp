@@ -164,7 +164,7 @@ function delcheck(){
 					%>
 			
 			
-				<form action="AddDataServlet" method="post" class="form-inline text-right">
+				<form action="AddDataCheck" method="post" class="form-inline text-right">
 					<td id="left">
 					<%
 						if(num == 1){

@@ -59,7 +59,7 @@ public class PostDao {
 	}
 	
 	/**
-	 * 登録データの件数を取得
+	 * 登録データの件数の取得
 	 * @return int datacount
 	 * @throws SQLException	 
 	 */
@@ -93,8 +93,7 @@ public class PostDao {
 	}
 	
 	/**
-	 * 更新するためのメソッド
-	 * 
+	 * アップデート
 	 * @param PostBean
 	 * @return update
 	 * @throws SQLException
@@ -112,7 +111,7 @@ public class PostDao {
 	
 	
 	/**
-	 * 役職情報の削除
+	 * デリート
 	 * @param  PostBean 削除データ
 	 * @return delete 情報追加成功数 1なら成功
 	 * @throws SQLException
@@ -149,6 +148,4 @@ public class PostDao {
 	public void close() throws SQLException {
 		con.close();
 	}
-	
-
 }

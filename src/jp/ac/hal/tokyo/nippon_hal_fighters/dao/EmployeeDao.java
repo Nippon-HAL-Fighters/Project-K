@@ -32,7 +32,6 @@ public class EmployeeDao {
 
 	/**
 	 * 全件取得
-	 *
 	 * @return ArrayList EmployeeList
 	 * @throws SQLException
 	 */
@@ -62,8 +61,7 @@ public class EmployeeDao {
 	}
 
 	/**
-	 * 全件取得 一覧取得用SQL
-	 *
+	 * 全件取得用SQL
 	 * @return ArrayList EmployeeList
 	 * @throws SQLException
 	 * @author kikuhara
@@ -99,7 +97,6 @@ public class EmployeeDao {
 	
 	/**
 	 * 特定社員情報取得用SQL
-	 *
 	 * @return ArrayList EmployeeList
 	 * @throws SQLException
 	 * @author kikuhara
@@ -137,8 +134,7 @@ public class EmployeeDao {
 	
 	
 	/**
-	 * 社員情報追加
-	 *
+	 * インサート
 	 * @param insertData
 	 *            登録する社員情報のBean
 	 *
@@ -173,8 +169,7 @@ public class EmployeeDao {
 	
 	
 	/**
-	 * 社員情報更新
-	 *
+	 * アップデート
 	 * @param EmployeeBean 更新データ
 	 * @return insertResult 情報追加成功数 1なら成功
 	 * @throws SQLException
@@ -204,8 +199,7 @@ public class EmployeeDao {
 	}
 	
 	/**
-	 * 社員情報削除
-	 *
+	 * デリート
 	 * @param  EmployeeBean 削除データ
 	 * @return deleteResult 情報追加成功数 1なら成功
 	 * @throws SQLException
@@ -218,15 +212,24 @@ public class EmployeeDao {
 		
 		return delete.executeUpdate();
 	}
-
+	
+	/**
+	 * コミット
+	 **/
 	public void commit() throws SQLException {
 		con.commit();
 	}
-
+	
+	/**
+	 * ロールバック
+	 **/
 	public void rollback() throws SQLException {
 		con.rollback();
 	}
 
+	/**
+	 * クローズ
+	 **/
 	public void close() throws SQLException {
 		con.close();
 	}

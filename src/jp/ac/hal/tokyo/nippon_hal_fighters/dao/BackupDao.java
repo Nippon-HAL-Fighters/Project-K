@@ -75,14 +75,26 @@ public class BackupDao {
 
 	}
 
+	/**
+	 * コミット
+	 * @throws SQLException
+	 */
 	public void commit() throws SQLException {
 		con.commit();
 	}
 
+	/**
+	 * ロールバック
+	 * @throws SQLException
+	 */
 	public void rollback() throws SQLException {
 		con.rollback();
 	}
 
+	/**
+	 * クローズ
+	 * @throws SQLException
+	 */
 	public void close() throws SQLException {
 		con.close();
 	}

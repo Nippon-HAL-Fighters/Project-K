@@ -86,10 +86,8 @@ public class AddDataServlet extends HttpServlet {
 		// 判別用の数字
 		int num;
 
-		String keyword = request.getParameter("category");
+		//String keyword = request.getParameter("category");
 		int hanbetu = Integer.parseInt(request.getParameter("addtype"));
-		//System.out.print(hanbetu);
-		// System.out.print(keyword);
 
 		switch (hanbetu) {
 		// 組織の場合ここから
@@ -101,9 +99,8 @@ public class AddDataServlet extends HttpServlet {
 					orgrecode.setOrganaizationId(orgId);
 					orgrecode.setOrganaizationName(addData);
 					organaizationDao.insertOrganaiation(orgrecode);
-					postDao.commit();
+					organaizationDao.commit();
 					organaizationList = organaizationDao.selectAllOrganaiation();
-					//}
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
