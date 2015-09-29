@@ -46,7 +46,7 @@ public class SendUpdateMaster extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		String updatetype = request.getParameter("updateType");		
 		OrganaizationBean orgBean = null;

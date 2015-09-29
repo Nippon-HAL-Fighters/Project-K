@@ -116,28 +116,28 @@
    		    if(num == 2){
    		 		out.print("<h1>役職情報追加確認画面</h1>"
    	   		  	+"<form action =\"AddDataServlet\" method=\"post\">"
-   				+"役職名："+postBean.getPostName()+"<br>"
+   				+"<tr><td>役職名："+postBean.getPostName()+"</td></tr>"
    				+"<input type=\"hidden\" name=\"addtype\" value="+num+" />"
    				+"<input type=\"hidden\" name=\"postaddtext\" value="+postBean.getPostName()+" />"
-   				+"この内容で登録しますか？"
-   				+"<input type=\"submit\" name=\"add\" value=\"登録\" class=\"btn btn-info\">"
+   				+"<tr><td>この内容で登録しますか？</td></tr>"
+   				+"<tr><td><input type=\"submit\" name=\"add\" value=\"登録\" class=\"btn btn-info\">"
    	   			+"</form>"
    	   			+"<form action =\"master.jsp\" method=\"post\">"
-	   	  		+"<input type=\"submit\" name=\"cancel\" value=\"修正\" class=\"btn btn-info\">"
+	   	  		+"<input type=\"submit\" name=\"cancel\" value=\"修正\" class=\"btn btn-info\"></td></tr>"
 	   	  		+"</form>"
    	   		    );
    		    }
    		    if(num == 3){
    		    	out.print("<h1>所属会社情報追加確認画面</h1>"
    	   	   		+"<form action =\"AddDataServlet\" method=\"post\">"
-   	   			+"役職名："+compBean.getCompanyName()+"<br>"
+   	   			+"<tr><td>役職名："+compBean.getCompanyName()+"</td></tr>"
    	   			+"<input type=\"hidden\" name=\"addtype\" value="+num+" />"
    	   			+"<input type=\"hidden\" name=\"compaddtext\" value="+compBean.getCompanyName()+" />"
-   	   			+"この内容で登録しますか？"
-   	   			+"<input type=\"submit\" name=\"add\" value=\"登録\" class=\"btn btn-info\">"
+   	   			+"<tr><td>この内容で登録しますか？</td></tr>"
+   	   			+"<tr><td><input type=\"submit\" name=\"add\" value=\"登録\" class=\"btn btn-info\">"
    	   	   		+"</form>"
    	   	  		+"<form action =\"master.jsp\" method=\"post\">"
-   	   	  		+"<input type=\"submit\" name=\"cancel\" value=\"修正\" class=\"btn btn-info\">"
+   	   	  		+"<input type=\"submit\" name=\"cancel\" value=\"修正\" class=\"btn btn-info\"></td></tr>"
    	   	  		+"</form>"
    	   	   		);
    		    }
