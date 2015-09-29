@@ -95,7 +95,7 @@
    			OrganaizationBean orgBean = (OrganaizationBean)request.getAttribute("orgBean");
    			//Postの中身を取得
    		    PostBean postBean = (PostBean)request.getAttribute("postBean");
-   			//companyの中身を取得
+   			//companyの中身を取得h
    		  	CompanieBean compBean = (CompanieBean)request.getAttribute("compBean");	   
  
    		   if(updatetype.equals("org")){
@@ -109,11 +109,11 @@
 				+"<input type=\"hidden\" name=\"ordid\" value="+ordid+" />"
 				+"<input type=\"hidden\" name=\"orgid\" value="+orgBean.getOrganaizationId()+" />"
 				+"<input type=\"hidden\" name=\"orgname\" value="+orgBean.getOrganaizationName()+" /></td></tr>"
-				+"<tr><td>上記の内容に更新します。よろしいですか？<td></tr>"
-				+"<tr><td><input type=\"submit\" name=\"add\" value=\"更新\" class=\"btn btn-info\"></td>"
+				+"<tr><td>上記の内容に更新します。よろしいですか？</td></tr>"
+				+"<tr><td><input type=\"submit\" name=\"add\" value=\"更新\" class=\"btn btn-info\">"
    		    	+"</form>"
    		    	+"<form action =\"master.jsp\" method=\"post\">"
-   	   	  		+"<td><input type=\"submit\" name=\"cancel\" value=\"取消\" class=\"btn btn-info\"></td></tr>"
+   	   	  		+"<input type=\"submit\" name=\"cancel\" value=\"取消\" class=\"btn btn-info\"></td></tr>"
    	   	  		+"</form>"
    		    	);
    		    }
@@ -125,25 +125,25 @@
    				+"<input type=\"hidden\" name=\"postid\" value="+postBean.getPostId()+" />"
    				+"<input type=\"hidden\" name=\"postname\" value="+postBean.getPostName()+" />"
    				+"<tr><td>上記の内容に更新します。よろしいですか？</td></tr>"
-   				+"<tr><td><input type=\"submit\" name=\"add\" value=\"更新\" class=\"btn btn-info\"></td>"
+   				+"<tr><td><input type=\"submit\" name=\"add\" value=\"更新\" class=\"btn btn-info\">"
    	   			+"</form>"
    	   			+"<form action =\"master.jsp\" method=\"post\">"
-	   	  		+"<td><input type=\"submit\" name=\"cancel\" value=\"取消\" class=\"btn btn-info\"></td></tr>"
+	   	  		+"<input type=\"submit\" name=\"cancel\" value=\"取消\" class=\"btn btn-info\"></td></tr>"
 	   	  		+"</form>"
    	   		    );
    		    }
    		    if(updatetype.equals("comp")){
    		    	out.print("<h1>所属会社情報更新確認画面</h1>"
    	   	   		+"<form action =\"UpdateMaster\" method=\"post\">"
-   	   			+"役職名："+compBean.getCompanyName()+"<br>"
+   	   			+"<tr><td>役職名："+compBean.getCompanyName()+"</td></tr>"
    	   			+"<input type=\"hidden\" name=\"updatetype\" value="+updatetype+" />"
    	   			+"<input type=\"hidden\" name=\"compid\" value="+compBean.getCompanyId()+" />"
    	   			+"<input type=\"hidden\" name=\"compname\" value="+compBean.getCompanyName()+" />"
-   	   			+"上記の内容に更新します。よろしいですか？"
-   	   			+"<input type=\"submit\" name=\"add\" value=\"更新\" class=\"btn btn-info\">"
+   	   			+"<tr><td>上記の内容に更新します。よろしいですか？</td></tr>"
+   	   			+"<tr><td><input type=\"submit\" name=\"add\" value=\"更新\" class=\"btn btn-info\">"
    	   	   		+"</form>"
    	   	  		+"<form action =\"master.jsp\" method=\"post\">"
-   	   	  		+"<input type=\"submit\" name=\"cancel\" value=\"取消\" class=\"btn btn-info\">"
+   	   	  		+"<input type=\"submit\" name=\"cancel\" value=\"取消\" class=\"btn btn-info\"></td></tr>"
    	   	  		+"</form>"
    	   	   		);
    		    }
